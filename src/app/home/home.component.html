@@ -1,0 +1,214 @@
+<div class="home-page">
+  <!-- Hero Section -->
+  <section class="hero-section position-relative">
+    <!-- Bouton Praticien en haut à droite -->
+    <div class="practitioner-top-right">
+      <a routerLink="/auth/practitioner-register" class="btn btn-light">
+        <i class="bi bi-briefcase me-2"></i> Vous êtes praticien ?
+      </a>
+    </div>
+
+    <div class="container">
+      <div class="row align-items-center">
+        <!-- Texte à gauche -->
+        <div class="col-lg-6 mb-5 mb-lg-0">
+          <h1 class="hero-title">Prenez soin de vous,<br>en toute simplicité</h1>
+          <p class="hero-subtitle">Trouvez en quelques clics le spécialiste qu'il vous faut dans les domaines de la santé, du droit, de l’esthétique et bien plus.</p>
+          <div class="hero-buttons">
+            <button class="btn btn-primary btn-lg px-5 py-3 rounded-pill shadow" routerLink="/auth/register">
+              <i class="bi bi-person-plus me-2"></i> Inscrivez-vous
+            </button>
+          </div>
+        </div>
+
+        <!-- Image à droite -->
+        <div class="col-lg-6">
+          <div class="hero-image-wrapper position-relative">
+            <img src="assets/images/hero-image.png" alt="Téléconsultation" class="img-fluid rounded-3 shadow-lg">
+            <div class="floating-badge bg-primary text-white p-3 rounded-pill shadow">
+              <i class="bi bi-check-circle-fill me-2"></i>+30 000 consultations
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  
+
+  <!-- Domaines Section -->
+  <section class="domains-section py-5 bg-light">
+    <div class="container py-4">
+      <div class="text-center mb-5">
+        <h2 class="section-title display-5 fw-bold mb-3">Domaines pris en charge</h2>
+        <p class="lead text-muted mx-auto" style="max-width: 700px;">Notre plateforme réunit des professionnels dans plusieurs spécialités pour répondre à tous vos besoins.</p>
+      </div>
+      
+      <div class="row g-4">
+        <div class="col-md-4" *ngFor="let domain of domains">
+          <div class="domain-card card h-100 border-0 shadow-sm hover-shadow transition-all" (click)="navigateToDomain(domain.id)">
+            <div class="card-body text-center p-4">
+              <div class="domain-icon bg-soft-primary rounded-circle p-3 mb-3 mx-auto">
+                <i [class]="domain.icon + ' fs-3 text-primary'"></i>
+              </div>
+              <h3 class="h5 fw-bold mb-2">{{domain.name}}</h3>
+              <p class="text-muted mb-0">{{domain.description}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Fonctionnement -->
+  <section class="how-it-works py-5">
+    <div class="container py-4">
+      <div class="text-center mb-5">
+        <h2 class="section-title display-5 fw-bold mb-3">Comment ça marche ?</h2>
+        <p class="lead text-muted mx-auto" style="max-width: 700px;">Trois étapes simples pour trouver le professionnel qu'il vous faut</p>
+      </div>
+      
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="step card border-0 bg-transparent">
+            <div class="step-number card-img-top bg-primary text-white rounded-circle mx-auto mb-3">1</div>
+            <div class="card-body text-center">
+              <h3 class="h4 fw-bold mb-3">Recherche intuitive</h3>
+              <p class="text-muted mb-0">Recherchez par domaine, ville ou nom du praticien.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="step card border-0 bg-transparent">
+            <div class="step-number card-img-top bg-primary text-white rounded-circle mx-auto mb-3">2</div>
+            <div class="card-body text-center">
+              <h3 class="h4 fw-bold mb-3">Rendez-vous instantané</h3>
+              <p class="text-muted mb-0">Choisissez un créneau et confirmez en ligne.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="step card border-0 bg-transparent">
+            <div class="step-number card-img-top bg-primary text-white rounded-circle mx-auto mb-3">3</div>
+            <div class="card-body text-center">
+              <h3 class="h4 fw-bold mb-3">Consultation sécurisée</h3>
+              <p class="text-muted mb-0">Rencontrez le praticien à distance ou en cabinet.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Statistiques clés -->
+  <section class="stats-section py-5 bg-primary text-white">
+    <div class="container py-4">
+      <div class="text-center mb-5">
+        <h2 class="section-title display-5 fw-bold mb-3">Des chiffres qui parlent</h2>
+      </div>
+      
+      <div class="row g-4">
+        <div class="col-md-3 col-6">
+          <div class="stat-card">
+            <h3 class="display-4 fw-bold mb-2">+1 500</h3>
+            <p class="mb-0 opacity-75">Professionnels actifs</p>
+          </div>
+        </div>
+        <div class="col-md-3 col-6">
+          <div class="stat-card">
+            <h3 class="display-4 fw-bold mb-2">+30 000</h3>
+            <p class="mb-0 opacity-75">Consultations</p>
+          </div>
+        </div>
+        <div class="col-md-3 col-6">
+          <div class="stat-card">
+            <h3 class="display-4 fw-bold mb-2">12</h3>
+            <p class="mb-0 opacity-75">Domaines spécialisés</p>
+          </div>
+        </div>
+        <div class="col-md-3 col-6">
+          <div class="stat-card">
+            <h3 class="display-4 fw-bold mb-2">4.9<span class="fs-3">/5</span></h3>
+            <p class="mb-0 opacity-75">Satisfaction utilisateur</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Témoignages -->
+  <section class="testimonials py-5 bg-light">
+    <div class="container py-4">
+      <div class="text-center mb-5">
+        <h2 class="section-title display-5 fw-bold mb-3">Ils nous font confiance</h2>
+        <p class="lead text-muted mx-auto" style="max-width: 700px;">Découvrez ce que nos utilisateurs disent de notre plateforme</p>
+      </div>
+      
+      <div class="row g-4">
+        <div class="col-lg-4" *ngFor="let testimonial of testimonials">
+          <div class="testimonial-card card h-100 border-0 shadow-sm">
+            <div class="card-body p-4">
+              <div class="mb-4">
+                <i class="bi bi-quote fs-1 text-muted opacity-25"></i>
+              </div>
+              <p class="lead mb-4">"{{testimonial.text}}"</p>
+              <div class="d-flex align-items-center">
+                <img [src]="testimonial.avatar" alt="User" class="avatar rounded-circle me-3">
+                <div>
+                  <h5 class="mb-1 fw-bold">{{testimonial.name}}</h5>
+                  <small class="text-muted">{{testimonial.role}}</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Équipe visuelle -->
+  <section class="team-section py-5">
+    <div class="container py-4">
+      <div class="text-center mb-5">
+        <h2 class="section-title display-5 fw-bold mb-3">Des experts à votre écoute</h2>
+        <p class="lead text-muted mx-auto" style="max-width: 700px;">Notre réseau regroupe des praticiens expérimentés dans plusieurs domaines.</p>
+      </div>
+      
+      <div class="team-image-wrapper rounded-3 overflow-hidden shadow-lg">
+        <img src="assets/images/team.jpg" alt="Équipe multidisciplinaire" class="img-fluid w-100">
+      </div>
+    </div>
+  </section>
+
+  <!-- Appel à l'action final -->
+  <section class="cta-section py-5 bg-dark text-white">
+    <div class="container py-5 text-center">
+      <h2 class="display-5 fw-bold mb-3">Découvrez nos spécialistes</h2>
+      <p class="lead mb-4 mx-auto" style="max-width: 600px;">Trouvez le professionnel qu'il vous faut en quelques clics.</p>
+      <button class="btn btn-light btn-lg px-5 py-3 rounded-pill fw-bold shadow" routerLink="/domains">
+        <i class="bi bi-search me-2"></i> Explorer les domaines
+      </button>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer py-4 bg-dark">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-md-6 text-center text-md-start">
+          <small>© 2025 Tous droits réservés.</small>
+
+        </div>
+        <div class="col-md-6 text-center text-md-end">
+          <div class="social-links">
+            <a href="#" class="text-white me-3"><i class="bi bi-facebook"></i></a>
+            <a href="#" class="text-white me-3"><i class="bi bi-twitter-x"></i></a>
+            <a href="#" class="text-white me-3"><i class="bi bi-instagram"></i></a>
+            <a href="#" class="text-white"><i class="bi bi-linkedin"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+</div>

@@ -1,0 +1,53 @@
+.container {
+  background-color: #ffffff;
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  margin-top: 3rem;
+}
+
+h2 {
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+form {
+  .form-control,
+  .form-select {
+    border-radius: 0.5rem;
+    border: 1px solid #ced4da;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+
+    &:focus {
+      border-color: #007bff;
+      box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.2);
+    }
+  }
+
+  label {
+    font-weight: 500;
+    margin-bottom: 0.25rem;
+    color: #34495e;
+  }
+
+  .mb-3 {
+    margin-bottom: 1.25rem;
+  }
+
+  .btn {
+    padding: 0.75rem 2rem;
+    font-size: 1.1rem;
+    border-radius: 2rem;
+  }
+
+  .btn-primary {
+    background-color: #007bff;
+    border: none;
+
+    &:hover {
+      background-color: #0056b3;
+    }
+  }
+}

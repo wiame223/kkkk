@@ -13,10 +13,9 @@ export const routes: Routes = [
   },
   { path: 'auth/register', component: RegisterPatientComponent },
   { path: 'auth/verify-email', component: VerifyEmailComponent },
-   {
-    path: 'domains/health-domain',
-    loadComponent: () => import('./domains/health-domain/health-domain.component').then(m => m.HealthDomainComponent)
-  },
+   { path: 'domains/:id', component: HealthDomainComponent }
+
+
   
 
 

@@ -15,42 +15,42 @@ export class HomeComponent {
 
   domains = [
     {
-      id: 1,
+      id: 'health-domain',
       name: 'Santé',
       icon: 'fa fa-heartbeat',
       description: 'Médecins généralistes et spécialistes pour vos besoins de santé',
       image: '/images/team.jpg'
     },
     {
-      id: 2,
+      id: 'law-domain',
       name: 'Droit',
       icon: 'fa fa-balance-scale',
       description: 'Avocats et juristes pour vos questions légales',
       image: '/images/khalid.jpg'
     },
     {
-      id: 3,
+      id: 'aesthetic-domain',
       name: 'Esthétique',
       icon: 'fa fa-scissors',
       description: 'Professionnels de beauté et bien-être',
       image: '/images/team.jpg'
     },
     {
-      id: 4,
+      id: 'education-domain',
       name: 'Éducation',
       icon: 'fa fa-graduation-cap',
       description: 'Professeurs, coachs scolaires et accompagnement pédagogique.',
       image: '/images/domaines/education.jpg'
     },
     {
-      id: 5,
+      id: 'wellbeing-domain',
       name: 'Bien-être',
       icon: 'fa fa-leaf',
       description: 'Sophrologues, naturopathes, hypnothérapeutes, etc.',
       image: '/images/domaines/bien-etre.jpg'
     },
     {
-      id: 6,
+      id: 'interior-architecture-domain',
       name: 'Architecture d\'intérieur',
       icon: 'fa fa-home',
       description: 'Experts en design et aménagement intérieur pour vos espaces de vie',
@@ -81,11 +81,12 @@ export class HomeComponent {
 
   constructor(private router: Router) {}
 
+
   toggleDomains() {
     this.showDomains = !this.showDomains;
   }
 
-  navigateToDomain(domainId: number): void {
+  navigateToDomain(domainId: string): void {
     this.router.navigate(['/domain', domainId]);
     this.showDomains = false;
   }

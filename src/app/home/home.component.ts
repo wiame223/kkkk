@@ -87,7 +87,9 @@ export class HomeComponent {
   }
 
   navigateToDomain(domainId: string): void {
-    this.router.navigate(['/domain', domainId]);
-    this.showDomains = false;
+  if (domainId === 'health-domain') {
+    this.router.navigate(['/domains', domainId]);
   }
+  this.showDomains = false;
+}
 }

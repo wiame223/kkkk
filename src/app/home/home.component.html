@@ -206,11 +206,12 @@
     <div *ngIf="showDomains" class="card shadow-sm p-3 mx-auto mt-2" style="max-width: 500px;">
       <ul class="list-group list-group-flush">
         <li *ngFor="let domain of domains" 
-            class="domain-card" (click)="navigateToDomain(domain.id)">
-            class="list-group-item list-group-item-action d-flex align-items-center" 
-            style="cursor:pointer;">
-          <i [class]="domain.icon + ' text-primary me-2'"></i> {{ domain.name }}
-        </li>
+    class="list-group-item list-group-item-action d-flex align-items-center domain-card" 
+    style="cursor:pointer;"
+    (click)="navigateToDomain(domain.id)">
+  <i [class]="domain.icon + ' text-primary me-2'"></i> {{ domain.name }}
+</li>
+
       </ul>
     </div>
   </div>

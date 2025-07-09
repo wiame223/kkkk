@@ -1,65 +1,124 @@
-<div class="container py-5">
-  <h2 class="text-center mb-4">Inscription Patient</h2>
+<div class="container">
+  <h2><i class="fas fa-user-plus"></i> Inscription Patient</h2>
 
-  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="mx-auto" style="max-width: 600px;">
-    <div class="mb-3">
-      <label>Nom</label>
-      <input type="text" class="form-control" formControlName="lastName" required />
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <div class="mb-3 input-icon">
+      <label><i class="fas fa-user"></i> Nom</label>
+      <div class="input-wrapper">
+        <i class="fas fa-user"></i>
+        <input type="text" class="form-control" formControlName="lastName" required />
+      </div>
     </div>
 
-    <div class="mb-3">
-      <label>Prénom</label>
-      <input type="text" class="form-control" formControlName="firstName" required />
+    <div class="mb-3 input-icon">
+      <label><i class="fas fa-user"></i> Prénom</label>
+      <div class="input-wrapper">
+        <i class="fas fa-user"></i>
+        <input type="text" class="form-control" formControlName="firstName" required />
+      </div>
     </div>
 
-    <div class="mb-3">
-      <label>Email</label>
-      <input type="email" class="form-control" formControlName="email" required />
+    <div class="mb-3 input-icon">
+      <label><i class="fas fa-envelope"></i> Email</label>
+      <div class="input-wrapper">
+        <i class="fas fa-envelope"></i>
+        <input type="email" class="form-control" formControlName="email" required />
+      </div>
     </div>
 
-
-    <div class="mb-3">
-      <label>Téléphone</label>
-      <input type="tel" class="form-control" formControlName="phone" required />
+    <div class="mb-3 input-icon">
+      <label><i class="fas fa-phone"></i> Téléphone</label>
+      <div class="input-wrapper phone-wrapper">
+        <span class="prefix">+212</span>
+        <input
+          type="text"
+          class="form-control"
+          formControlName="phone"
+          maxlength="9"
+          pattern="\d{9}"
+          required
+          placeholder="612345678"
+          oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0,9);"
+        />
+      </div>
     </div>
 
-    <div class="mb-3">
-      <label>Date de naissance</label>
-      <input type="date" class="form-control" formControlName="birthDate" required />
+    <div class="mb-3 input-icon">
+      <label><i class="fas fa-calendar-alt"></i> Date de naissance</label>
+      <div class="input-wrapper">
+        <i class="fas fa-calendar-alt"></i>
+        <input type="date" class="form-control" formControlName="birthDate" required />
+      </div>
     </div>
 
-    <div class="mb-3">
-      <label>Ville de naissance</label>
-      <input type="text" class="form-control" formControlName="birthCity" required />
+    <div class="mb-3 input-icon">
+      <label><i class="fas fa-city"></i> Ville de naissance</label>
+      <div class="input-wrapper">
+        <i class="fas fa-location-dot"></i>
+        <input type="text" class="form-control" formControlName="birthCity" required />
+      </div>
     </div>
 
-    <div class="mb-3">
-      <label>Sexe</label>
-      <select class="form-select" formControlName="gender" required>
-        <option value="" disabled>Choisir</option>
-
-        <option value="F">Femme</option>
-        <option value="H">Homme</option>
-      </select>
+    <div class="mb-3 input-icon">
+      <label><i class="fas fa-venus-mars"></i> Sexe</label>
+      <div class="input-wrapper">
+        <i class="fas fa-venus-mars"></i>
+        <select class="form-select" formControlName="gender" required>
+          <option value="" disabled selected>Choisir</option>
+          <option value="F">Femme</option>
+          <option value="H">Homme</option>
+        </select>
+      </div>
     </div>
 
-    <div class="mb-3">
-      <label>Remarque</label>
-      <textarea class="form-control" rows="3" formControlName="note"></textarea>
+    <div class="mb-3 input-icon">
+      <label><i class="fas fa-comment"></i> Remarque</label>
+      <div class="input-wrapper">
+        <i class="fas fa-pencil-alt"></i>
+        <textarea class="form-control" rows="3" formControlName="note"></textarea>
+      </div>
     </div>
 
-    <div class="mb-3">
-      <label>Provenance</label>
-      <input type="text" class="form-control" formControlName="source" />
+    <div class="mb-3 input-icon">
+      <label><i class="fas fa-signs-post"></i> Provenance</label>
+      <div class="input-wrapper">
+        <i class="fas fa-signs-post"></i>
+        <select class="form-select" formControlName="source" required>
+          <option value="" disabled selected>Choisir votre région</option>
+          <option value="Tanger-Tétouan-Al Hoceïma">Tanger-Tétouan-Al Hoceïma</option>
+          <option value="L'Oriental">L'Oriental</option>
+          <option value="Fès-Meknès">Fès-Meknès</option>
+          <option value="Rabat-Salé-Kénitra">Rabat-Salé-Kénitra</option>
+          <option value="Béni Mellal-Khénifra">Béni Mellal-Khénifra</option>
+          <option value="Casablanca-Settat">Casablanca-Settat</option>
+          <option value="Marrakech-Safi">Marrakech-Safi</option>
+          <option value="Drâa-Tafilalet">Drâa-Tafilalet</option>
+          <option value="Souss-Massa">Souss-Massa</option>
+          <option value="Guelmim-Oued Noun">Guelmim-Oued Noun</option>
+          <option value="Laâyoune-Sakia El Hamra">Laâyoune-Sakia El Hamra</option>
+          <option value="Dakhla-Oued Ed-Dahab">Dakhla-Oued Ed-Dahab</option>
+        </select>
+      </div>
     </div>
 
-    <div class="mb-3">
-      <label>Assurance</label>
-      <input type="text" class="form-control" formControlName="insurance" />
+    <div class="mb-3 input-icon">
+      <label><i class="fas fa-shield-alt"></i> Assurance</label>
+      <div class="input-wrapper">
+        <i class="fas fa-shield-alt"></i>
+        <select class="form-select" formControlName="insurance">
+          <option value="" selected>Aucune assurance</option>
+          <option value="CNSS">CNSS</option>
+          <option value="AMO">AMO</option>
+          <option value="CNOPS">CNOPS</option>
+          <option value="Assurance privée">Assurance privée</option>
+        </select>
+      </div>
     </div>
 
-    <div class="text-center">
-      <button class="btn btn-primary btn-lg" type="submit">Créer mon compte</button>
+    <div class="text-center mt-4">
+      <button type="submit" class="btn btn-primary">
+        <i class="fas fa-paper-plane"></i> Créer mon compte
+      </button>
     </div>
   </form>
 </div>

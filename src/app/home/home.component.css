@@ -1,296 +1,448 @@
 :host {
-  font-family: 'Poppins', sans-serif;
-  color: #004D40;
-  background-color: #fff;
-  line-height: 1.6;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  color: #0a2540;
+  background-color: #f8f9fc;
+  line-height: 1.7;
+  --primary: #635bff;
+  --primary-light: #7b73ff;
+  --primary-dark: #4a42d6;
+  --secondary: #00d4ff;
+  --accent: #ff6b6b;
+  --dark: #0a2540;
+  --light: #f8f9fc;
+  --white: #ffffff;
+  --transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  --shadow-sm: 0 2px 8px rgba(10, 37, 64, 0.08);
+  --shadow-md: 0 4px 24px rgba(10, 37, 64, 0.12);
+  --shadow-lg: 0 8px 48px rgba(10, 37, 64, 0.16);
+  --border-radius: 16px;
+  --section-padding: 8rem;
 }
 
-/* Section Hero claire */
+/* Hero Section - Design Luxe */
 .hero-section {
-  background: linear-gradient(135deg, #E0F7FA 0%, #B2EBF2 100%);
-  color: #004D40;
-  padding: 6rem 0;
+  background: linear-gradient(135deg, #f8f9fc 0%, #e6e9f4 100%);
+  padding: var(--section-padding) 0;
   position: relative;
+  overflow: hidden;
 }
 
-/* Bouton en haut à droite */
+.hero-section::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -30%;
+  width: 80%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(99, 91, 255, 0.08) 0%, transparent 70%);
+  z-index: 0;
+  animation: pulse 15s infinite alternate;
+}
+
+@keyframes pulse {
+  0% { transform: scale(0.8); opacity: 0.5; }
+  100% { transform: scale(1.2); opacity: 0.8; }
+}
+
+.hero-title {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+  background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  position: relative;
+  z-index: 2;
+}
+
+.hero-subtitle {
+  font-size: 1.25rem;
+  color: rgba(10, 37, 64, 0.7);
+  margin-bottom: 2.5rem;
+  max-width: 36rem;
+  position: relative;
+  z-index: 2;
+}
+
+/* Bouton Praticien Flottant */
 .practitioner-top-right {
   position: absolute;
-  top: 2rem;
-  right: 2rem;
+  top: 2.5rem;
+  right: 2.5rem;
   z-index: 10;
 }
 
 .practitioner-top-right .btn {
-  padding: 0.6rem 1.3rem;
+  padding: 0.75rem 1.75rem;
   font-weight: 600;
-  font-size: 0.9rem;
-  border-radius: 30px;
-  transition: all 0.3s ease;
+  font-size: 0.95rem;
+  border-radius: 50px;
+  transition: var(--transition);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  background-color: rgba(255, 255, 255, 0.9);
+  color: var(--primary);
+  border: 1px solid rgba(99, 91, 255, 0.2);
+  box-shadow: var(--shadow-sm);
 }
 
 .practitioner-top-right .btn:hover {
-  transform: translateY(-2px);
+  transform: translateY(-3px);
+  background-color: var(--primary);
+  color: var(--white);
+  box-shadow: var(--shadow-md);
 }
 
-/* Titres & texte */
-.hero-title {
-  font-size: 3.2rem;
-  font-weight: 800;
-  margin-bottom: 1.5rem;
-}
-
-.hero-subtitle {
-  font-size: 1.2rem;
-  color: #00695C;
-  margin-bottom: 2rem;
-  max-width: 90%;
-}
-
-/* Bouton principal */
+/* Bouton Principal - Effet Glassmorphisme */
 .hero-buttons .btn-primary {
-  background-color: #00ACC1;
+  background: linear-gradient(90deg, var(--primary) 0%, var(--primary-light) 100%);
   border: none;
-  color: white;
-  padding: 1rem 2rem;
+  color: var(--white);
+  padding: 1.25rem 3rem;
   font-weight: 600;
-  font-size: 1rem;
+  font-size: 1.1rem;
   border-radius: 50px;
-  box-shadow: 0 4px 12px rgba(0, 172, 193, 0.4);
-  transition: all 0.3s ease;
+  box-shadow: var(--shadow-md);
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+  z-index: 2;
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+}
+
+.hero-buttons .btn-primary::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, 
+    rgba(255, 255, 255, 0.2) 0%, 
+    rgba(255, 255, 255, 0) 50%, 
+    rgba(255, 255, 255, 0.2) 100%);
+  transform: translateX(-100%);
+  transition: transform 0.6s ease;
 }
 
 .hero-buttons .btn-primary:hover {
-  background-color: #00838F;
-  box-shadow: 0 8px 24px rgba(0, 131, 143, 0.5);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lg);
 }
 
-/* Image & badge */
+.hero-buttons .btn-primary:hover::after {
+  transform: translateX(100%);
+}
+
+/* Image Hero avec Effet 3D */
 .hero-image-wrapper {
   position: relative;
-  max-width: 550px;
+  max-width: 600px;
   margin-left: auto;
+  perspective: 1000px;
 }
 
 .hero-image-wrapper img {
-  border-radius: 20px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-lg);
+  border: 12px solid var(--white);
+  transform-style: preserve-3d;
+  transition: transform 1s ease, box-shadow 1s ease;
+  will-change: transform;
 }
 
+.hero-image-wrapper:hover img {
+  transform: rotateY(-10deg) rotateX(5deg) translateY(-10px);
+  box-shadow: 0 25px 50px rgba(10, 37, 64, 0.2);
+}
+
+/* Badge Flottant Animé */
 .floating-badge {
   position: absolute;
-  top: -10px;
-  right: -10px;
-  background: #00ACC1;
-  color: white;
-  padding: 0.6rem 1.4rem;
-  border-radius: 30px;
-  font-weight: 600;
-  font-size: 0.85rem;
-  box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+  top: -1.5rem;
+  right: -1.5rem;
+  background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+  color: var(--white);
+  padding: 0.75rem 1.75rem;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  box-shadow: var(--shadow-md);
+  animation: float 6s ease-in-out infinite;
+  z-index: 3;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-  .hero-title {
-    font-size: 2.5rem;
-  }
-
-  .practitioner-top-right {
-    top: 1rem;
-    right: 1rem;
-  }
+/* Sections - Design Élégant */
+.section {
+  padding: var(--section-padding) 0;
+  position: relative;
 }
 
-@media (max-width: 576px) {
-  .hero-title {
-    font-size: 2rem;
-  }
-
-  .hero-subtitle {
-    font-size: 1rem;
-  }
+.section-title {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 800;
+  margin-bottom: 1.5rem;
+  position: relative;
+  display: inline-block;
 }
 
-/* Domains Section */
-.domains-section {
-  padding: 6rem 0;
-  background-color: #FAFAFA;
+.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: -0.75rem;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+  border-radius: 2px;
 }
 
+/* Cartes de Domaines - Effet Parallaxe */
 .domain-card {
-  background: white;
-  border-radius: 16px;
-  border: 1px solid #e0f2f1;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  box-shadow: 0 8px 24px rgba(0, 172, 193, 0.05);
+  background: var(--white);
+  border-radius: var(--border-radius);
+  padding: 2.5rem;
+  transition: var(--transition);
+  box-shadow: var(--shadow-sm);
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  transform-style: preserve-3d;
+}
+
+.domain-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(99, 91, 255, 0.05) 0%, transparent 100%);
+  z-index: 0;
 }
 
 .domain-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 16px 32px rgba(0, 172, 193, 0.15);
+  transform: translateY(-10px) translateZ(20px);
+  box-shadow: var(--shadow-lg);
 }
 
 .domain-icon {
   width: 80px;
   height: 80px;
-  background-color: rgba(0, 172, 193, 0.1);
+  background: rgba(99, 91, 255, 0.1);
   border-radius: 50%;
   display: flex;
-  justify-content: center;
   align-items: center;
-  margin: 0 auto 1rem;
-  transition: all 0.3s ease;
+  justify-content: center;
+  margin: 0 auto 1.5rem;
+  transition: var(--transition);
+  position: relative;
+  z-index: 1;
 }
 
 .domain-card:hover .domain-icon {
-  background-color: rgba(0, 172, 193, 0.2);
+  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+  transform: scale(1.1) rotate(15deg);
 }
 
 .domain-icon i {
   font-size: 2rem;
-  color: #00ACC1;
+  color: var(--primary);
+  transition: var(--transition);
 }
 
-/* ========== Comment ça marche ========== */
+.domain-card:hover .domain-icon i {
+  color: var(--white);
+}
+
+/* Section Fonctionnement - Timeline Moderne */
 .how-it-works {
-  background-color: white;
-  padding: 5rem 0;
+  background: var(--light);
 }
 
-/* --- Cercles numérotés décorés --- */
+.step {
+  position: relative;
+  z-index: 1;
+}
+
 .step-number {
-  width: 60px;
-  height: 60px;
-  background: linear-gradient(135deg, #E0F7FA 0%, #B2EBF2 100%);
-  color: #004D40;
-  font-size: 1.8rem;
-  font-weight: 900;
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+  color: var(--white);
+  font-size: 2rem;
+  font-weight: 800;
   border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 0 auto 1rem;
-  box-shadow: 0 6px 12px rgba(0, 77, 64, 0.3);
-  user-select: none;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  margin: 0 auto 1.5rem;
+  box-shadow: var(--shadow-md);
+  transition: var(--transition);
+  position: relative;
 }
 
-.step-number:hover {
+.step-number::after {
+  content: '';
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  right: -5px;
+  bottom: -5px;
+  border: 2px solid var(--primary);
+  border-radius: 50%;
+  opacity: 0;
+  transition: var(--transition);
+  animation: pulse-border 2s infinite;
+}
+
+@keyframes pulse-border {
+  0% { transform: scale(1); opacity: 0.7; }
+  70% { transform: scale(1.3); opacity: 0; }
+  100% { opacity: 0; }
+}
+
+.step:hover .step-number {
   transform: scale(1.1);
-  box-shadow: 0 8px 16px rgba(0, 77, 64, 0.5);
 }
 
-/* ========== Statistiques ========== */
+.step:hover .step-number::after {
+  opacity: 0.7;
+  animation: none;
+}
+
+/* Statistiques - Design Data Visuel */
 .stats-section {
-  background: linear-gradient(135deg, #B2EBF2 0%, #E0F7FA 100%);
-  padding: 5rem 0;
-  color: #004D40;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+  color: var(--white);
 }
 
 .stat-card {
-  background-color: white;
-  border-radius: 12px;
-  padding: 2rem;
+  background: rgba(255, 255, 255, 0.1);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border-radius: var(--border-radius);
+  padding: 2.5rem;
   text-align: center;
-  box-shadow: 0 10px 30px rgba(0, 172, 193, 0.1);
-  transition: transform 0.3s ease;
-  color: #004D40;
+  transition: var(--transition);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .stat-card:hover {
-  transform: translateY(-5px);
+  transform: translateY(-8px);
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: var(--shadow-md);
 }
 
-/* ========== Témoignages ========== */
-.testimonials {
-  background-color: #FAFAFA;
-  padding: 5rem 0;
+.stat-card h3 {
+  font-size: 3rem;
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(90deg, var(--white) 0%, #e0f7ff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
-.testimonial-card {
-  border-radius: 16px;
-  background-color: white;
-  box-shadow: 0 10px 20px rgba(0, 172, 193, 0.1);
-  transition: transform 0.3s ease;
+/* Responsive Design */
+@media (max-width: 992px) {
+  :root {
+    --section-padding: 6rem;
+  }
 }
 
-.testimonial-card:hover {
-  transform: translateY(-6px);
+@media (max-width: 768px) {
+  :root {
+    --section-padding: 4rem;
+  }
+  
+  .hero-section {
+    text-align: center;
+  }
+  
+  .hero-subtitle {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .practitioner-top-right {
+    position: relative;
+    top: auto;
+    right: auto;
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+  
+  .hero-image-wrapper {
+    margin: 3rem auto 0;
+  }
+  
+  .floating-badge {
+    right: 50%;
+    transform: translateX(50%);
+  }
 }
 
+
+@media (max-width: 576px) {
+  :root {
+    --section-padding: 3rem;
+  }
+  
+  .section-title::after {
+    bottom: -0.5rem;
+    height: 3px;
+  }
+}
+
+/* New CSS for testimonial avatars */
 .avatar {
-  width: 50px;
-  height: 50px;
+  width: 60px;
+  height: 60px;
   object-fit: cover;
   border-radius: 50%;
-  border: 2px solid #00ACC1;
+  border: 2px solid var(--primary);
 }
 
-/* ========== Équipe ========== */
-.team-section {
-  background-color: white;
-  padding: 5rem 0;
+/* New CSS for domain images if used */
+.domain-image {
+  width: 100%;
+  height: auto;
+  border-radius: var(--border-radius);
+  object-fit: cover;
 }
 
-.team-image-wrapper img {
-  border-radius: 16px;
-  box-shadow: 0 12px 24px rgba(0, 172, 193, 0.15);
-}
-
-/* ========== Appel à l'action final ========== */
-.cta-section {
-  background: linear-gradient(135deg, #00ACC1 0%, #0097A7 100%);
-  color: white;
-  padding: 5rem 0;
-  text-align: center;
-}
-
-.cta-section .btn-light {
-  background: white;
-  color: #00ACC1;
-  padding: 0.8rem 2rem;
-  font-weight: 600;
-  border-radius: 50px;
-  box-shadow: 0 6px 18px rgba(255, 255, 255, 0.3);
-  transition: all 0.3s ease;
-}
-
-.cta-section .btn-light:hover {
-  transform: translateY(-3px);
-  background-color: #f0fdfa;
-}
-
-/* ========== Footer ========== */
+/* Footer styling */
 .footer {
-  background-color: #004D40; /* fond vert foncé */
-  padding: 2rem 0;
+  background-color: #635bff;
+  color: var(--white);
+  padding: 1.5rem 0;
   font-size: 0.9rem;
-  color: #B2EBF2; /* couleur claire globale pour texte */
 }
 
-.footer small {
-  background-color: #E0F7FA; /* fond clair, bleu très pâle */
-  padding: 0.2rem 0.6rem;
-  border-radius: 6px;
-  color: #004D40 !important; /* texte foncé pour contraster */
-  font-weight: 600;
-  display: inline-block; /* pour appliquer padding et border-radius */
+/* Override background color for "Découvrez nos spécialistes" section */
+.cta-section {
+  background-color: #635bff !important;
 }
 
-
-.footer a.text-white {
-  color: white;
+.footer a {
+  color: var(--white);
   transition: color 0.3s ease;
 }
 
-.footer a.text-white:hover {
-  color: #B2EBF2; /* bleu clair au survol */
+.footer a:hover {
+  color: var(--primary);
 }
 
 .social-links a {
-  font-size: 1.3rem;
-  margin-left: 0.5rem;
-  margin-right: 0.5rem;
-  display: inline-block;
+  font-size: 1.25rem;
+  margin-left: 0.75rem;
+  transition: color 0.3s ease;
+}
+
+.social-links a:first-child {
+  margin-left: 0;
 }

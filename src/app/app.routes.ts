@@ -2,6 +2,8 @@ import { Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { RegisterPatientComponent } from './auth/register/register-patient.component';
 import { VerifyEmailComponent } from './auth/verify-email/verify-email.component';
+import { HealthDomainComponent } from './domains/health-domain/health-domain.component';
+
 
 export const routes: Routes = [
   { 
@@ -10,6 +12,12 @@ export const routes: Routes = [
     title: 'Accueil - Téléconsultation'
   },
   { path: 'auth/register', component: RegisterPatientComponent },
-  { path: 'auth/verify-email', component: VerifyEmailComponent }
+  { path: 'auth/verify-email', component: VerifyEmailComponent },
+   {
+    path: 'domains/health-domain',
+    loadComponent: () => import('./domains/health-domain/health-domain.component').then(m => m.HealthDomainComponent)
+  },
+  
+
 
 ];

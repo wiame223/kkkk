@@ -1,0 +1,13 @@
+<div class="domain-container">
+  <h2 class="domain-title">Spécialités en Santé</h2>
+
+  <div class="specialties-grid">
+    <div class="specialty-card" *ngFor="let specialty of specialties">
+      <div class="specialty-icon">
+        <i [class]="specialty.icon"></i>
+      </div>
+      <div class="specialty-title">{{ specialty.name }}</div>
+      <div class="specialty-description">{{ specialty.description }}</div>
+    </div>
+  </div>
+</div>

@@ -181,16 +181,38 @@
     </div>
   </section>
 
-  <!-- Appel à l'action final -->
-  <section class="cta-section py-5 text-white">
-    <div class="container py-5 text-center">
-      <h2 class="display-5 fw-bold mb-3">Découvrez nos spécialistes</h2>
-      <p class="lead mb-4 mx-auto" style="max-width: 600px;">Trouvez le professionnel qu'il vous faut en quelques clics.</p>
-      <button class="btn btn-light btn-lg px-5 py-3 rounded-pill fw-bold shadow" routerLink="/domains">
-        <i class="bi bi-search me-2"></i> Explorer les domaines
-      </button>
+  
+
+
+<!-- Explorer nos domaines -->
+<section class="explore-domains py-5 text-center">
+  <div class="container">
+    <h2 class="section-title display-5 fw-bold mb-4">Explorer nos domaines</h2>
+    <p class="lead text-muted mx-auto" style="max-width: 700px;">
+      Choisissez parmi plusieurs domaines pour trouver facilement le professionnel adapté à vos besoins.
+    </p>
+
+    <button class="btn btn-outline-primary btn-lg mt-4 mb-3" (click)="toggleDomains()">
+      Rechercher par domaines
+      <i class="fa" [ngClass]="{'fa-chevron-down': !showDomains, 'fa-chevron-up': showDomains}"></i>
+    </button>
+
+    <div *ngIf="showDomains" class="card shadow-sm p-3 mx-auto mt-2" style="max-width: 500px;">
+      <ul class="list-group list-group-flush">
+        <li *ngFor="let domain of domains" 
+            (click)="navigateToDomain(domain.id)" 
+            class="list-group-item list-group-item-action d-flex align-items-center" 
+            style="cursor:pointer;">
+          <i [class]="domain.icon + ' text-primary me-2'"></i> {{ domain.name }}
+        </li>
+      </ul>
     </div>
-  </section>
+  </div>
+</section>
+
+
+
+ 
 
   <!-- Footer -->
   <footer class="footer py-4">

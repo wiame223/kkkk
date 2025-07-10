@@ -1,0 +1,67 @@
+<div class="esthetic-container">
+  <!-- Section Spécialités -->
+  <section class="specialties-section">
+    <h2 class="section-title">Nos Spécialités Esthétiques</h2>
+    <div class="specialty-grid">
+      <div class="specialty-card" *ngFor="let specialty of specialties" (click)="selectSpecialty(specialty.name)">
+        <div class="specialty-icon">
+          <i [class]="specialty.icon"></i>
+        </div>
+        <h3>{{ specialty.name }}</h3>
+        <p>{{ specialty.description }}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Filtre -->
+  <div class="filter-container">
+    <label for="specialtyFilter">Filtrer par spécialité :</label>
+    <select id="specialtyFilter" class="filter-select" [(ngModel)]="selectedSpecialty">
+      <option value="">Toutes les spécialités</option>
+      <option *ngFor="let specialty of specialties" [value]="specialty.name">
+        {{ specialty.name }}
+      </option>
+    </select>
+  </div>
+
+  <!-- Section Esthéticiens -->
+  <section class="professionals-section">
+    <h2 class="section-title">Esthéticiennes {{ selectedSpecialty ? 'en ' + selectedSpecialty : 'disponibles' }}</h2>
+    
+    <div class="professional-grid">
+      <div class="professional-card" *ngFor="let esthetician of filteredEstheticians">
+        <div class="image-container">
+          <img [src]="esthetician.avatar" alt="{{ esthetician.firstName }} {{ esthetician.lastName }}">
+          <div class="specialty-badge">{{ esthetician.specialty }}</div>
+        </div>
+        
+        <div class="professional-info">
+          <h3>{{ esthetician.firstName }} {{ esthetician.lastName }}</h3>
+          
+          <div class="detail">
+            <i class="bi bi-geo-alt"></i>
+            <span>{{ esthetician.location }}</span>
+          </div>
+          
+          <div class="detail">
+            <i class="bi bi-laptop"></i>
+            <span>{{ esthetician.mode }}</span>
+          </div>
+          
+          <div class="availability">
+            <h4>Disponibilités :</h4>
+            <ul>
+              <li *ngFor="let slot of esthetician.availableSlots">
+                <i class="bi bi-calendar-check"></i> {{ slot }}
+              </li>
+            </ul>
+          </div>
+          
+          <button class="rdv-button">
+            <i class="bi bi-calendar-plus"></i> Prendre RDV
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

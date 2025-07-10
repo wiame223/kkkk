@@ -4,6 +4,7 @@ import { RegisterPatientComponent } from './auth/register/register-patient.compo
 import { VerifyEmailComponent } from './auth/verify-email/verify-email.component';
 import { HealthDomainComponent } from './domains/health-domain/health-domain.component';
 import { LawDomainComponent } from './domains/law-domain/law-domain.component';
+import { PatientDashboardComponent } from './pages/patient-dashboard';
 
 export const routes: Routes = [
   { 
@@ -15,7 +16,12 @@ export const routes: Routes = [
   { path: 'auth/verify-email', component: VerifyEmailComponent },
     { path: 'domains/health-domain', component: HealthDomainComponent },
   { path: 'domains/law-domain', component: LawDomainComponent },
-  // autres domaines...
-  { path: '**', redirectTo: 'domains/health-domain' }  // route fallback
+   {
+  path: 'dashboard-patient',
+  loadComponent: () => import('./pages/patient-dashboard').then(m => m.PatientDashboardComponent)
+},
+
+  { path: '', redirectTo: '/auth/verify-email', pathMatch: 'full' }
+
 ];
 

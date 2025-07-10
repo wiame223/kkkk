@@ -12,6 +12,6 @@
   <p *ngIf="message" style="color:green">{{ message }}</p>
   <p *ngIf="error" style="color:red">{{ error }}</p>
 
-  <button (click)="checkVerification()" *ngIf="!verified">J'ai cliqué sur le lien dans l'email</button>
+  <button (click)="checkVerification()" *ngIf="!verified">Vérifier Activation</button>
   <p *ngIf="verified" style="color:green">Email activé ! Redirection vers dashboard...</p>
 </div>

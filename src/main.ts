@@ -5,6 +5,7 @@ import { routes } from './app/app.routes';
 import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
 import { provideAuth, getAuth } from '@angular/fire/auth';
 
+
 const firebaseConfig = {
   apiKey: "AIzaSyAuGatN1GHCG5qZZIJULCKXgoJtDerdxzk",
   authDomain: "j2ee-project-935e9.firebaseapp.com",
@@ -15,10 +16,12 @@ const firebaseConfig = {
   // complète avec les infos dans ta console Firebase
 };
 
-bootstrapApplication(appComponent, {
+bootstrapApplication(appComponent, 
+ {
   providers: [
      provideFirebaseApp(() => initializeApp(firebaseConfig)),
      provideAuth(() => getAuth()),
+
     provideRouter(routes)
   ]
 }).catch(err => console.error(err));

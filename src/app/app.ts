@@ -12,7 +12,8 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [
        CommonModule,
-    RouterModule,  
+    RouterModule,
+       
     ReactiveFormsModule
   ],
   template: `

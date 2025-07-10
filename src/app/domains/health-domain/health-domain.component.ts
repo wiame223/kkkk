@@ -1,14 +1,16 @@
+
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-health-domain',
   templateUrl: './health-domain.component.html',
   styleUrls: ['./health-domain.component.css'],
-  imports: [CommonModule], 
+  standalone: true,
+   imports: [CommonModule, FormsModule],
 })
 export class HealthDomainComponent {
-
   specialties = [
     {
       name: 'Cardiologie',
@@ -31,7 +33,9 @@ export class HealthDomainComponent {
       icon: 'bi bi-brain'
     }
   ];
-selectedSpecialty: string | null = null;
+
+
+  selectedSpecialty: string | null = null;
 
 get filteredDoctors() {
   return this.selectedSpecialty
@@ -42,6 +46,7 @@ get filteredDoctors() {
 selectSpecialty(name: string) {
   this.selectedSpecialty = name;
 }
+
 
 doctors = [
   {
@@ -100,4 +105,3 @@ doctors = [
   }
 ];
 }
-

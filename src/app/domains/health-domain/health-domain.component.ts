@@ -1,4 +1,3 @@
-
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -7,8 +6,8 @@ import { FormsModule } from '@angular/forms';
   selector: 'app-health-domain',
   templateUrl: './health-domain.component.html',
   styleUrls: ['./health-domain.component.css'],
-  standalone: true,
-   imports: [CommonModule, FormsModule],
+    standalone: true,
+  imports: [CommonModule, FormsModule], 
 })
 export class HealthDomainComponent {
   specialties = [

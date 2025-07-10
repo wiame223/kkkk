@@ -1,45 +1,48 @@
 <div class="domain-container">
   <h2 class="domain-title">Spécialités en Santé</h2>
 
- <div class="specialties-grid">
-  <div class="specialty-card" *ngFor="let specialty of specialties">
-    <div class="specialty-icon">
-      <i [class]="specialty.icon"></i>
-    </div>
-    <div class="specialty-title">{{ specialty.name }}</div>
-    <div class="specialty-description">{{ specialty.description }}</div>
-    <div class="text-center mt-2">
-      <button class="btn btn-outline-primary btn-sm" (click)="selectSpecialty(specialty.name)">
-        Voir les {{ specialty.name | lowercase }}s
-      </button>
+  <div class="specialties-grid">
+    <div class="specialty-card" *ngFor="let specialty of specialties">
+      <div class="specialty-icon">
+        <i [class]="specialty.icon"></i>
+      </div>
+      <div class="specialty-title">{{ specialty.name }}</div>
+      <div class="specialty-description">{{ specialty.description }}</div>
     </div>
   </div>
 </div>
 
+<div class="text-center mb-4">
+  <label for="specialtyFilter" class="form-label fw-bold">Filtrer par spécialité :</label>
+  <select id="specialtyFilter" class="form-select w-auto mx-auto"
+          [(ngModel)]="selectedSpecialty">
+    <option value="">-- Toutes les spécialités --</option>
+    <option *ngFor="let specialty of specialties" [value]="specialty.name">
+      {{ specialty.name }}
+    </option>
+  </select>
+</div>
 
+<h2 class="domain-title mb-4">Médecins en {{ selectedSpecialty || 'toutes les spécialités' }}</h2>
 
-<div class="doctors-section mt-5" *ngIf="filteredDoctors.length > 0">
-  <h2 class="domain-title mb-4">Médecins en {{ selectedSpecialty }}</h2>
-
-  <div class="row g-4">
-    <div class="col-md-4" *ngFor="let doctor of filteredDoctors">
-      <div class="card shadow-sm h-100">
-        <img [src]="doctor.avatar" class="card-img-top" alt="{{ doctor.firstName }} {{ doctor.lastName }}">
-        <div class="card-body">
-          <h5 class="card-title">{{ doctor.firstName }} {{ doctor.lastName }}</h5>
-          <p class="card-text mb-1"><strong>Spécialité :</strong> {{ doctor.specialty }}</p>
-          <p class="card-text mb-1"><strong>Lieu :</strong> {{ doctor.location }}</p>
-          <p class="card-text mb-1"><strong>Consultation :</strong> {{ doctor.mode }}</p>
-          <p class="card-text"><strong>Disponibilités :</strong></p>
-          <ul class="list-unstyled">
-            <li *ngFor="let slot of doctor.availableSlots">
-              <i class="bi bi-calendar-event me-1 text-primary"></i> {{ slot }}
-            </li>
-          </ul>
-        </div>
-        <div class="card-footer bg-white border-top-0 text-center">
-          <button class="btn btn-outline-primary w-100">Prendre RDV</button>
-        </div>
+<div class="row g-4">
+  <div class="col-md-4" *ngFor="let doctor of filteredDoctors">
+    <div class="card shadow-sm h-100">
+      <img [src]="doctor.avatar" class="card-img-top" alt="{{ doctor.firstName }} {{ doctor.lastName }}">
+      <div class="card-body">
+        <h5 class="card-title">{{ doctor.firstName }} {{ doctor.lastName }}</h5>
+        <p class="card-text mb-1"><strong>Spécialité :</strong> {{ doctor.specialty }}</p>
+        <p class="card-text mb-1"><strong>Lieu :</strong> {{ doctor.location }}</p>
+        <p class="card-text mb-1"><strong>Consultation :</strong> {{ doctor.mode }}</p>
+        <p class="card-text"><strong>Disponibilités :</strong></p>
+        <ul class="list-unstyled">
+          <li *ngFor="let slot of doctor.availableSlots">
+            <i class="bi bi-calendar-event me-1 text-primary"></i> {{ slot }}
+          </li>
+        </ul>
+      </div>
+      <div class="card-footer bg-white border-top-0 text-center">
+        <button class="btn btn-outline-primary w-100">Prendre RDV</button>
       </div>
     </div>
   </div>

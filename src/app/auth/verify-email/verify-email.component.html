@@ -1,0 +1,17 @@
+<div class="container">
+  <h2>Vérifiez votre adresse email</h2>
+  <p>Un email de vérification vous a été envoyé après votre inscription.</p>
+  
+  <form [formGroup]="verifyForm" (ngSubmit)="onSubmit()">
+    <label>Entrez votre email et mot de passe pour renvoyer le mail de vérification :</label>
+    <input type="email" formControlName="email" placeholder="Email" required />
+    <input type="password" formControlName="password" placeholder="Mot de passe" required />
+    <button type="submit" [disabled]="verifyForm.invalid">Renvoyer email de vérification</button>
+  </form>
+
+  <p *ngIf="message" style="color:green">{{ message }}</p>
+  <p *ngIf="error" style="color:red">{{ error }}</p>
+
+  <button (click)="checkVerification()" *ngIf="!verified">J'ai cliqué sur le lien dans l'email</button>
+  <p *ngIf="verified" style="color:green">Email activé ! Redirection vers dashboard...</p>
+</div>

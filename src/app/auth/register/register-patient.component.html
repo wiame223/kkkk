@@ -2,30 +2,45 @@
   <h2><i class="fas fa-user-plus"></i> Inscription Patient</h2>
 
   <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+
+    <!-- Nom -->
     <div class="mb-3 input-icon">
       <label><i class="fas fa-user"></i> Nom</label>
       <div class="input-wrapper">
         <i class="fas fa-user"></i>
-        <input type="text" class="form-control" formControlName="lastName" required />
+        <input type="text" class="form-control" formControlName="lastName" />
+      </div>
+      <div *ngIf="registerForm.get('lastName')?.touched && registerForm.get('lastName')?.invalid" class="error">
+        <small>Le nom est requis.</small>
       </div>
     </div>
 
+    <!-- Prénom -->
     <div class="mb-3 input-icon">
       <label><i class="fas fa-user"></i> Prénom</label>
       <div class="input-wrapper">
         <i class="fas fa-user"></i>
-        <input type="text" class="form-control" formControlName="firstName" required />
+        <input type="text" class="form-control" formControlName="firstName" />
+      </div>
+      <div *ngIf="registerForm.get('firstName')?.touched && registerForm.get('firstName')?.invalid" class="error">
+        <small>Le prénom est requis.</small>
       </div>
     </div>
 
+    <!-- Email -->
     <div class="mb-3 input-icon">
       <label><i class="fas fa-envelope"></i> Email</label>
       <div class="input-wrapper">
         <i class="fas fa-envelope"></i>
-        <input type="email" class="form-control" formControlName="email" required />
+        <input type="email" class="form-control" formControlName="email" />
+      </div>
+      <div *ngIf="registerForm.get('email')?.touched && registerForm.get('email')?.invalid" class="error">
+        <small *ngIf="registerForm.get('email')?.errors?.['required']">L'email est requis.</small>
+        <small *ngIf="registerForm.get('email')?.errors?.['email']">L'email est invalide.</small>
       </div>
     </div>
 
+    <!-- Téléphone -->
     <div class="mb-3 input-icon">
       <label><i class="fas fa-phone"></i> Téléphone</label>
       <div class="input-wrapper phone-wrapper">
@@ -35,42 +50,57 @@
           class="form-control"
           formControlName="phone"
           maxlength="9"
-          pattern="\d{9}"
-          required
           placeholder="612345678"
           oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0,9);"
         />
       </div>
+      <div *ngIf="registerForm.get('phone')?.touched && registerForm.get('phone')?.invalid" class="error">
+        <small *ngIf="registerForm.get('phone')?.errors?.['required']">Le téléphone est requis.</small>
+        <small *ngIf="registerForm.get('phone')?.errors?.['pattern']">Le téléphone doit contenir 9 chiffres.</small>
+      </div>
     </div>
 
+    <!-- Date de naissance -->
     <div class="mb-3 input-icon">
       <label><i class="fas fa-calendar-alt"></i> Date de naissance</label>
       <div class="input-wrapper">
         <i class="fas fa-calendar-alt"></i>
-        <input type="date" class="form-control" formControlName="birthDate" required />
+        <input type="date" class="form-control" formControlName="birthDate" />
+      </div>
+      <div *ngIf="registerForm.get('birthDate')?.touched && registerForm.get('birthDate')?.invalid" class="error">
+        <small>La date de naissance est requise.</small>
       </div>
     </div>
 
+    <!-- Ville de naissance -->
     <div class="mb-3 input-icon">
       <label><i class="fas fa-city"></i> Ville de naissance</label>
       <div class="input-wrapper">
         <i class="fas fa-location-dot"></i>
-        <input type="text" class="form-control" formControlName="birthCity" required />
+        <input type="text" class="form-control" formControlName="birthCity" />
+      </div>
+      <div *ngIf="registerForm.get('birthCity')?.touched && registerForm.get('birthCity')?.invalid" class="error">
+        <small>La ville de naissance est requise.</small>
       </div>
     </div>
 
+    <!-- Sexe -->
     <div class="mb-3 input-icon">
       <label><i class="fas fa-venus-mars"></i> Sexe</label>
       <div class="input-wrapper">
         <i class="fas fa-venus-mars"></i>
-        <select class="form-select" formControlName="gender" required>
-          <option value="" disabled selected>Choisir</option>
+        <select class="form-select" formControlName="gender">
+          <option value="" disabled>Choisir</option>
           <option value="F">Femme</option>
           <option value="H">Homme</option>
         </select>
       </div>
+      <div *ngIf="registerForm.get('gender')?.touched && registerForm.get('gender')?.invalid" class="error">
+        <small>Le sexe est requis.</small>
+      </div>
     </div>
 
+    <!-- Remarque -->
     <div class="mb-3 input-icon">
       <label><i class="fas fa-comment"></i> Remarque</label>
       <div class="input-wrapper">
@@ -79,12 +109,13 @@
       </div>
     </div>
 
+    <!-- Region -->
     <div class="mb-3 input-icon">
-      <label><i class="fas fa-signs-post"></i> Region </label>
+      <label><i class="fas fa-signs-post"></i> Region</label>
       <div class="input-wrapper">
         <i class="fas fa-signs-post"></i>
-        <select class="form-select" formControlName="source" required>
-          <option value="" disabled selected>Choisir votre région</option>
+        <select class="form-select" formControlName="source">
+          <option value="" disabled>Choisir votre région</option>
           <option value="Tanger-Tétouan-Al Hoceïma">Tanger-Tétouan-Al Hoceïma</option>
           <option value="L'Oriental">L'Oriental</option>
           <option value="Fès-Meknès">Fès-Meknès</option>
@@ -99,14 +130,18 @@
           <option value="Dakhla-Oued Ed-Dahab">Dakhla-Oued Ed-Dahab</option>
         </select>
       </div>
+      <div *ngIf="registerForm.get('source')?.touched && registerForm.get('source')?.invalid" class="error">
+        <small>La région est requise.</small>
+      </div>
     </div>
 
+    <!-- Assurance -->
     <div class="mb-3 input-icon">
       <label><i class="fas fa-shield-alt"></i> Assurance</label>
       <div class="input-wrapper">
         <i class="fas fa-shield-alt"></i>
         <select class="form-select" formControlName="insurance">
-          <option value="" selected>Aucune assurance</option>
+          <option value="">Aucune assurance</option>
           <option value="CNSS">CNSS</option>
           <option value="AMO">AMO</option>
           <option value="CNOPS">CNOPS</option>
@@ -115,10 +150,31 @@
       </div>
     </div>
 
+    <!-- Mot de passe -->
+    <div class="mb-3 input-icon">
+      <label><i class="fas fa-lock"></i> Mot de passe</label>
+      <div class="input-wrapper">
+        <i class="fas fa-lock"></i>
+        <input type="password" class="form-control" formControlName="password" />
+      </div>
+      <div *ngIf="registerForm.get('password')?.touched && registerForm.get('password')?.invalid" class="error">
+        <small *ngIf="registerForm.get('password')?.errors?.['required']">Le mot de passe est requis.</small>
+        <small *ngIf="registerForm.get('password')?.errors?.['minlength']">
+          Le mot de passe doit contenir au moins 6 caractères.
+        </small>
+      </div>
+    </div>
+
+    <!-- Message d'erreur générale -->
+    <div *ngIf="errorMessage" class="alert alert-danger">
+      {{ errorMessage }}
+    </div>
+
     <div class="text-center mt-4">
       <button type="submit" class="btn btn-primary">
         <i class="fas fa-paper-plane"></i> Créer mon compte
       </button>
     </div>
+
   </form>
 </div>

@@ -12,7 +12,7 @@ const firebaseConfig = {
   projectId: "j2ee-project-935e9",
   storageBucket: "j2ee-project-935e9.appspot.com",
   messagingSenderId: "635289259299",
-  appId: "1:635289259299:web:ton_app_id"
+  appId: "1:635289259299:web:cfbdf60029a5908d2ed096"
   // complète avec les infos dans ta console Firebase
 };
 

@@ -86,10 +86,10 @@ export class HomeComponent {
     this.showDomains = !this.showDomains;
   }
 
-  navigateToDomain(domainId: string): void {
-  if (domainId === 'health-domain') {
-    this.router.navigate(['/domains', domainId]);
-  }
+ navigateToDomain(domainId: string): void {
+  this.router.navigate(['/domains', domainId]);
   this.showDomains = false;
 }
+
+
 }

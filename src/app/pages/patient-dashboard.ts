@@ -14,4 +14,7 @@ export class PatientDashboardComponent {
   showSection(section: string) {
     this.activeSection = section;
   }
+ 
+
 }
+

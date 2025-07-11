@@ -34,9 +34,7 @@ export const routes: Routes = [
 {
   path: 'register-practitioner',
   loadComponent: () => import('./auth/register/practitioner-register.component').then(m => m.PractitionerRegisterComponent)
-},
-
-  { path: '', redirectTo: '/auth/verify-email', pathMatch: 'full' }
+}
 
 ];
 

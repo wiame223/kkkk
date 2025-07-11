@@ -45,7 +45,7 @@ export class DecoDomainComponent {
       experience: '8 ans',
       location: 'Casablanca',
       availableSlots: ['Lun 10h-12h', 'Mer 14h-16h', 'Ven 9h-11h'],
-      avatar: 'assets/images/decorators/leila1.jpg',
+      avatar: '/images/leila1.jpg',
       portfolio: '12 projets résidentiels'
     },
     {
@@ -56,7 +56,7 @@ export class DecoDomainComponent {
       experience: '5 ans',
       location: 'Rabat',
       availableSlots: ['Mar 15h-17h', 'Jeu 10h-12h'],
-      avatar: 'assets/images/decorators/sopihie.jpg',
+      avatar: '/images/sopihie.jpeg',
       portfolio: '8 villas haut de gamme'
     },
 
@@ -69,7 +69,7 @@ export class DecoDomainComponent {
       experience: '10 ans',
       location: 'Marrakech',
       availableSlots: ['Lun 14h-17h', 'Mer 9h-12h'],
-      avatar: 'assets/images/decorators/sopihie.jpeg',
+      avatar: '/images/sopihie.jpeg',
       portfolio: '50+ événements'
     },
 
@@ -82,7 +82,7 @@ export class DecoDomainComponent {
       experience: '6 ans',
       location: 'Tanger',
       availableSlots: ['Mar 9h-12h', 'Sam 10h-13h'],
-      avatar: 'assets/images/decorators/sopihie.jpeg',
+      avatar: '/images/sopihie.jpeg',
       portfolio: '15 commerces'
     },
 
@@ -95,7 +95,7 @@ export class DecoDomainComponent {
       experience: '7 ans',
       location: 'Agadir',
       availableSlots: ['Jeu 14h-18h', 'Ven 10h-15h'],
-      avatar: 'assets/images/decorators/sopihie.jpeg',
+      avatar: '/images/sopihie.jpeg',
       portfolio: '30+ biens valorisés'
     }
   ];

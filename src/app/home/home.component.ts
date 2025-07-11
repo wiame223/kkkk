@@ -29,7 +29,7 @@ export class HomeComponent {
       image: '/images/khalid.jpg'
     },
     {
-      id: 'aesthetic-domain',
+      id: 'esthetic-domain',
       name: 'Esthétique',
       icon: 'fa fa-scissors',
       description: 'Professionnels de beauté et bien-être',
@@ -43,14 +43,14 @@ export class HomeComponent {
       image: '/images/domaines/education.jpg'
     },
     {
-      id: 'wellbeing-domain',
+      id: 'bienetre-domain',
       name: 'Bien-être',
       icon: 'fa fa-leaf',
       description: 'Sophrologues, naturopathes, hypnothérapeutes, etc.',
       image: '/images/domaines/bien-etre.jpg'
     },
     {
-      id: 'interior-architecture-domain',
+      id: 'decor-domain',
       name: 'Architecture d\'intérieur',
       icon: 'fa fa-home',
       description: 'Experts en design et aménagement intérieur pour vos espaces de vie',

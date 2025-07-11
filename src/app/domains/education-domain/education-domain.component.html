@@ -1,0 +1,73 @@
+<div class="education-container">
+  <!-- Section Spécialités Éducatives -->
+  <section class="specialties-section">
+    <h2 class="section-title">Les Domaines d'Enseignement</h2>
+    <div class="specialty-grid">
+      <div class="specialty-item" *ngFor="let specialty of specialties" (click)="selectSpecialty(specialty.name)">
+        <div class="specialty-icon-wrapper">
+          <i [class]="specialty.icon"></i>
+        </div>
+        <h3 class="specialty-name">{{ specialty.name }}</h3>
+        <p class="specialty-desc">{{ specialty.description }}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Filtre -->
+  <div class="filter-wrapper">
+    <div class="filter-container">
+      <label for="specialtyFilter" class="filter-label">Filtrer par spécialité :</label>
+      <select id="specialtyFilter" class="filter-select" [(ngModel)]="selectedSpecialty">
+        <option value="">Toutes les matières</option>
+        <option *ngFor="let specialty of specialties" [value]="specialty.name">
+          {{ specialty.name }}
+        </option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Section Enseignants -->
+  <section class="teachers-section">
+    <h2 class="section-title">Enseignants {{ selectedSpecialty ? 'en ' + selectedSpecialty : 'disponibles' }}</h2>
+    <div class="teacher-grid">
+      <div class="teacher-card" *ngFor="let teacher of filteredTeachers">
+        <div class="teacher-image-container">
+          <img [src]="teacher.avatar" class="teacher-image" alt="{{ teacher.firstName }} {{ teacher.lastName }}">
+          <div class="teacher-specialty-badge">{{ teacher.specialty }}</div>
+        </div>
+        <div class="teacher-info">
+          <h3 class="teacher-name">{{ teacher.firstName }} {{ teacher.lastName }}</h3>
+          
+          <div class="teacher-detail">
+            <i class="bi bi-journal-bookmark-fill"></i>
+            <span>{{ teacher.subject }}</span>
+          </div>
+          
+          <div class="teacher-detail">
+            <i class="bi bi-mortarboard-fill"></i>
+            <span>Niveau: {{ teacher.level }}</span>
+          </div>
+          
+          <div class="teacher-detail">
+            <i class="bi bi-laptop-fill"></i>
+            <span>{{ teacher.mode }}</span>
+          </div>
+          
+          <div class="availability-section">
+            <h4 class="availability-title">Créneaux disponibles :</h4>
+            <ul class="availability-list">
+              <li *ngFor="let slot of teacher.availableSlots">
+                <i class="bi bi-clock-fill"></i>
+                <span>{{ slot }}</span>
+              </li>
+            </ul>
+          </div>
+          
+          <button class="contact-btn">
+            <i class="bi bi-envelope-fill"></i> Contacter
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

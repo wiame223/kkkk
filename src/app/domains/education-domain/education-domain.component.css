@@ -1,0 +1,255 @@
+/* ----------- Conteneur principal ----------- */
+.education-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+  color: #2c3e50;
+}
+
+/* ----------- Titres des sections ----------- */
+.section-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #2c3e50;
+  text-align: center;
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+.section-title::after {
+  content: '';
+  display: block;
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(to right, #3498db, #2ecc71);
+  margin: 0.5rem auto 0;
+  border-radius: 2px;
+}
+
+/* ----------- Grille de spécialités ----------- */
+.specialty-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin: 3rem 0;
+}
+
+.specialty-item {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem 1.5rem;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  cursor: pointer;
+}
+
+.specialty-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.specialty-icon-wrapper i {
+  font-size: 2.5rem;
+  color: #3498db;
+  margin-bottom: 1rem;
+}
+
+.specialty-name {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #2c3e50;
+  margin-bottom: 0.75rem;
+}
+
+.specialty-desc {
+  color: #7f8c8d;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+/* ----------- Filtrage ----------- */
+.filter-wrapper {
+  max-width: 500px;
+  margin: 3rem auto;
+  text-align: center;
+}
+
+.filter-label {
+  font-weight: 600;
+  color: #2c3e50;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.filter-select {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: all 0.3s;
+}
+
+.filter-select:focus {
+  border-color: #3498db;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+}
+
+/* ----------- Grille des enseignants ----------- */
+.teacher-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.teacher-card {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  padding: 1rem 1.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.teacher-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.teacher-image-container {
+  position: relative;
+}
+
+.teacher-image {
+  width: 100%;
+  max-height: 250px;
+  object-fit: cover;
+  border-radius: 12px;
+  transition: transform 0.5s ease;
+}
+
+.teacher-card:hover .teacher-image {
+  transform: scale(1.05);
+}
+
+.teacher-specialty-badge {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background: #2ecc71;
+  color: white;
+  padding: 0.3rem 0.6rem;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* ----------- Infos enseignants ----------- */
+.teacher-name {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #2c3e50;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.teacher-detail {
+  color: #34495e;
+  margin: 0.25rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.teacher-detail i {
+  color: #3498db;
+  font-size: 1rem;
+}
+
+/* ----------- Créneaux ----------- */
+.availability-section {
+  margin-top: 1rem;
+}
+
+.availability-title {
+  font-size: 1rem;
+  color: #2c3e50;
+  margin-bottom: 0.5rem;
+}
+
+.availability-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  color: #7f8c8d;
+}
+
+.availability-list li {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.3rem;
+  gap: 0.5rem;
+}
+
+.availability-list i {
+  color: #3498db;
+}
+
+/* ----------- Bouton Contact ----------- */
+.contact-btn {
+  margin-top: auto;
+  width: 100%;
+  padding: 0.75rem;
+  background: linear-gradient(to right, #3498db, #2ecc71);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.contact-btn i {
+  margin-right: 0.5rem;
+  font-size: 1.1rem;
+}
+
+.contact-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+  background: linear-gradient(to right, #2ecc71, #3498db);
+}
+
+/* ----------- Responsive ----------- */
+@media (max-width: 768px) {
+  .specialty-grid,
+  .teacher-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .section-title {
+    font-size: 1.75rem;
+  }
+
+  .teacher-card {
+    padding: 1rem;
+  }
+
+  .contact-btn {
+    padding: 0.6rem;
+    font-size: 0.95rem;
+  }
+}

@@ -509,3 +509,53 @@ html {
   transform: none !important;
 }
 
+
+
+
+.payment-methods-section {
+  background-color: var(--white);
+  padding: var(--section-padding) 0;
+  text-align: center;
+}
+
+.payment-methods-section h2 {
+  font-size: clamp(2rem, 4vw, 2.5rem);
+  font-weight: 800;
+  margin-bottom: 1rem;
+  position: relative;
+}
+
+.payment-methods-section h2::after {
+  content: '';
+  display: block;
+  margin: 0.75rem auto 0;
+  width: 60px;
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+  border-radius: 2px;
+}
+
+.payment-methods-section p {
+  color: rgba(10, 37, 64, 0.7);
+  max-width: 700px;
+  margin: 0 auto 2rem;
+  font-size: 1.1rem;
+}
+
+.payment-methods-section img {
+  max-height: 50px;
+  margin-bottom: 0.5rem;
+  transition: transform 0.3s ease;
+}
+
+.payment-methods-section img:hover {
+  transform: scale(1.1);
+}
+
+.payment-methods-section .col-md-3 p {
+  margin-top: 0.5rem;
+  font-weight: 600;
+  color: var(--dark);
+}
+
+

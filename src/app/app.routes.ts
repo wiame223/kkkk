@@ -4,9 +4,12 @@ import { RegisterPatientComponent } from './auth/register/register-patient.compo
 import { VerifyEmailComponent } from './auth/verify-email/verify-email.component';
 import { HealthDomainComponent } from './domains/health-domain/health-domain.component';
 import { LawDomainComponent } from './domains/law-domain/law-domain.component';
-import { EstheticDomainComponent } from './domains/esthetic-domain/esthetic-domain.component';
+import { PatientDashboardComponent } from './pages/patient-dashboard';
 import { DecoDomainComponent } from './domains/decor-domain/deco-domain.component';
+import { EducationDomainComponent } from './domains/education-domain/education-domain.component';
 import { BienetreDomainComponent } from './domains/bienetre-domain/bienetre-domain.component';
+import { EstheticDomainComponent } from './domains/esthetic-domain/esthetic-domain.component';
+
 
 export const routes: Routes = [
   { 
@@ -18,24 +21,16 @@ export const routes: Routes = [
   { path: 'auth/verify-email', component: VerifyEmailComponent },
     { path: 'domains/health-domain', component: HealthDomainComponent },
   { path: 'domains/law-domain', component: LawDomainComponent },
-   { path: 'domains/esthetic-domain', component: EstheticDomainComponent },
-   { path: 'domains/deco-domain', component: DecoDomainComponent},
-   { path: 'domains/bienetre-domain', component: BienetreDomainComponent},
-   
+  { path: 'domains/decor-domain', component: DecoDomainComponent },
+  { path: 'domains/education-domain', component: EducationDomainComponent },
+  { path: 'domains/bienetre-domain', component: BienetreDomainComponent },
+  { path: 'domains/esthetic-domain', component: EstheticDomainComponent },
+ {
+  path: 'dashboard-patient',
+  loadComponent: () => import('./pages/patient-dashboard').then(m => m.PatientDashboardComponent)
+},
 
+  { path: '', redirectTo: '/auth/verify-email', pathMatch: 'full' }
 
-
-   
-
-   
-  // autres domaines...
-  { path: '**', redirectTo: 'domains/health-domain' }  
- , { path: '**', redirectTo: 'domains/esthetic-domain' } ,
- { path: '**', redirectTo: 'domains/deco-domain' },
- { path: '**', redirectTo: 'domains/bienetre-domain' },
- 
-
-  
-  // route fallback
 ];
 

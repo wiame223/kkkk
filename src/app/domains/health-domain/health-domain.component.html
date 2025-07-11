@@ -3,7 +3,8 @@
   <section class="specialties-section">
     <h2 class="section-title">Nos Spécialités Médicales</h2>
     <div class="specialty-grid">
-      <div class="specialty-item" *ngFor="let specialty of specialties">
+      <div class="specialty-item" *ngFor="let specialty of specialties" (click)="selectSpecialty(specialty.name)">
+
         <div class="specialty-icon-wrapper">
           <i [class]="specialty.icon"></i>
         </div>

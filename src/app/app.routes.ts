@@ -9,6 +9,7 @@ import { DecoDomainComponent } from './domains/decor-domain/deco-domain.componen
 import { EducationDomainComponent } from './domains/education-domain/education-domain.component';
 import { BienetreDomainComponent } from './domains/bienetre-domain/bienetre-domain.component';
 import { EstheticDomainComponent } from './domains/esthetic-domain/esthetic-domain.component';
+import { PractitionerRegisterComponent } from './auth/register/practitioner-register.component';
 
 
 export const routes: Routes = [
@@ -28,6 +29,11 @@ export const routes: Routes = [
  {
   path: 'dashboard-patient',
   loadComponent: () => import('./pages/patient-dashboard').then(m => m.PatientDashboardComponent)
+},
+
+{
+  path: 'register-practitioner',
+  loadComponent: () => import('./auth/register/practitioner-register.component').then(m => m.PractitionerRegisterComponent)
 },
 
   { path: '', redirectTo: '/auth/verify-email', pathMatch: 'full' }

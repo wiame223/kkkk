@@ -3,8 +3,6 @@ import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angula
 import { CommonModule } from '@angular/common';
 import { RouterModule, Router } from '@angular/router';
 
-
-
 @Component({
   selector: 'app-register-patient',
   standalone: true,
@@ -15,11 +13,12 @@ import { RouterModule, Router } from '@angular/router';
 export class RegisterPatientComponent implements OnInit {
   registerForm!: FormGroup;
   errorMessage = '';
+  fileError: string = '';
+  selectedFile: File | null = null;
 
   constructor(
     private fb: FormBuilder,
     private router: Router
-
   ) {}
 
   ngOnInit(): void {
@@ -38,18 +37,51 @@ export class RegisterPatientComponent implements OnInit {
     });
   }
 
-  onSubmit(): void {
-    console.log('Formulaire soumis');
-    if (this.registerForm.valid) {
-      const formData = this.registerForm.value;
-      console.log('✅ Données à envoyer au backend :', formData);
+  onFileSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
 
-      // ⚠️ Ici tu peux appeler ton propre backend via HttpClient, ex :
-      // this.http.post('/api/register', formData).subscribe(...)
-
-      // Temporaire : redirection manuelle
-      this.router.navigate(['/dashboard-patient']);
+    if (!input.files || input.files.length === 0) {
+      this.fileError = 'Aucun fichier sélectionné.';
+      this.selectedFile = null;
+      return;
     }
+
+    const file = input.files[0];
+    const allowedTypes = ['application/pdf', 'image/jpeg', 'image/png'];
+
+    if (!allowedTypes.includes(file.type)) {
+      this.fileError = 'Format invalide. Veuillez télécharger un fichier PDF, JPG ou PNG.';
+      this.selectedFile = null;
+      return;
+    }
+
+    this.fileError = '';
+    this.selectedFile = file;
   }
 
+  onSubmit(): void {
+  if (this.registerForm.valid) {
+    const formData = new FormData();
+
+    // Ajout des données du formulaire (conversion explicite)
+    Object.entries(this.registerForm.value).forEach(([key, value]) => {
+      formData.append(key, String(value));
+    });
+
+    // Ajout du fichier s’il existe
+    if (this.selectedFile) {
+      formData.append('file', this.selectedFile);
+    }
+
+    console.log('✅ Données prêtes à être envoyées au backend :', formData);
+
+    // TODO : appel API backend ici
+
+    this.router.navigate(['/dashboard-patient']);
+  } else {
+    if (!this.selectedFile) {
+      this.fileError = 'La carte professionnelle est requise.';
+    }
+  }
+}
 }

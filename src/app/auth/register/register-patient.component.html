@@ -165,6 +165,26 @@
       </div>
     </div>
 
+ <!-- Carte professionnelle avec description et bouton stylé -->
+   <div class="mb-3 input-icon">
+      <label><i class="fas fa-id-card"></i> Carte Nationale</label>
+      <small class="form-text text-muted d-block mb-2">
+        Veuillez télécharger votre carte nationale (PDF, JPG ou PNG).
+      </small>
+      <div class="input-wrapper">
+        <i class="fas fa-id-card"></i>
+        <input
+          type="file"
+          class="form-control"
+          (change)="onFileSelected($event)"
+          accept=".pdf,.jpg,.jpeg,.png"
+        />
+      </div>
+      <div *ngIf="fileError" class="error">
+        <small>{{ fileError }}</small>
+      </div>
+    </div>
+
     <!-- Message d'erreur générale -->
     <div *ngIf="errorMessage" class="alert alert-danger">
       {{ errorMessage }}

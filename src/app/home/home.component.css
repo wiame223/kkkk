@@ -614,3 +614,36 @@ html {
     font-size: 1.1rem;
   }
 }
+
+
+
+.site-header {
+  background: linear-gradient(135deg, #635bff, #7b73ff);
+  padding: 4rem 1rem;
+  box-shadow: 0 8px 24px rgba(99, 91, 255, 0.4);
+  user-select: none;
+}
+
+.site-header h1 {
+  font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: 900;
+  font-size: clamp(3rem, 10vw, 6rem);
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  text-shadow:
+    0 0 10px rgba(255, 255, 255, 0.7),
+    0 4px 15px rgba(99, 91, 255, 0.6);
+  margin: 0;
+  user-select: none;
+  transition: color 0.3s ease;
+}
+
+.site-header h1:hover {
+  color: #7bdaff; /* bleu clair */
+  text-shadow:
+    0 0 15px #7bdaff,
+    0 6px 20px #7bdaff;
+  cursor: pointer;
+}
+

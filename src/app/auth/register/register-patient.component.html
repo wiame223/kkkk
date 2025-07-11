@@ -1,7 +1,8 @@
 <div class="container">
   <h2><i class="fas fa-user-plus"></i> Inscription Patient</h2>
 
-  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+ <!-- Formulaire affiché seulement si registerForm est bien créé -->
+  <form *ngIf="registerForm" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
 
     <!-- Nom -->
     <div class="mb-3 input-icon">

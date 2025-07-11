@@ -141,30 +141,93 @@ body {
   color: #9d174d;
 }
 
-/* Déconnexion */
+
+
 .logout-container {
-  text-align: right;
-  margin-bottom: 1rem;
+  display: flex;
+  justify-content: flex-end; /* bouton à droite */
+  position: relative;
 }
 
+/* Bouton Déconnexion */
 .btn-logout {
-  background-color: #dc3545;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  border: 1px solid #d32f2f;
+  background-color: #f44336;
   color: white;
-  border: none;
-  padding: 10px 16px;
-  border-radius: 10px;
-  font-size: 14px;
   font-weight: 600;
   cursor: pointer;
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
-  box-shadow: 0 4px 12px rgba(220, 53, 69, 0.3);
-}
-
-.btn-logout i {
-  margin-right: 6px;
+  white-space: nowrap;
+  transition: background-color 0.3s ease;
+  position: relative;
+  z-index: 100;
 }
 
 .btn-logout:hover {
-  background-color: #c82333;
-  box-shadow: 0 6px 18px rgba(220, 53, 69, 0.4);
+  background-color: #b71c1c;
+}
+
+/* Popup confirmation sous le bouton */
+.logout-confirm-popup {
+  position: absolute;
+  top: 110%;  /* juste en dessous du bouton */
+  right: 0;   /* aligné à droite */
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 6px 20px rgba(211, 47, 47, 0.3);
+  padding: 1rem 1.2rem;
+  font-size: 0.9rem;
+  color: #0a2540;
+  user-select: none;
+  min-width: 230px;
+  z-index: 1000;
+}
+
+/* Flèche au-dessus du popup qui pointe vers bouton (optionnel) */
+.popup-arrow {
+  position: absolute;
+  top: -10px; /* au-dessus */
+  right: 15px; /* à droite, alignée avec bouton */
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 10px solid white; /* flèche vers le bas */
+}
+
+/* Boutons "Oui" et "Non" alignés horizontalement en bas */
+.popup-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.6rem;
+  margin-top: 0.8rem;
+}
+
+.popup-buttons button {
+  padding: 0.4rem 1rem;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  min-width: 60px;
+}
+
+.btn-yes {
+  background-color: #f44336;
+  color: white;
+}
+
+.btn-yes:hover {
+  background-color: #b71c1c;
+}
+
+.btn-no {
+  background-color: #eee;
+  color: #555;
+}
+
+.btn-no:hover {
+  background-color: #ccc;
 }

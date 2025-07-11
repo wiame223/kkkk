@@ -11,16 +11,25 @@ import { Router } from '@angular/router';
 })
 export class PatientDashboardComponent {
   activeSection: string = 'none';
+  showLogoutConfirm = false;
 
-   constructor(private router: Router) {}
+  constructor(private router: Router) {}
+
+  confirmLogout() {
+    this.showLogoutConfirm = true;
+  }
+
+  cancelLogout() {
+    this.showLogoutConfirm = false;
+  }
+
+  logout() {
+    console.log("Déconnexion confirmée");
+    this.showLogoutConfirm = false;
+    this.router.navigateByUrl(''); // ou '/' selon ton routing
+  }
+
   showSection(section: string) {
     this.activeSection = section;
   }
-   logout() {
-    // Optionnel : tu peux vider localStorage/sessionStorage ici si besoin
-    this.router.navigate(['/home']);
-  }
- 
-
 }
-

@@ -1,11 +1,21 @@
 <div class="dashboard-container">
  
- <div class="logout-container">
-  <button class="btn-logout" (click)="logout()">
-    <i class="fas fa-sign-out-alt"></i> Déconnexion
-  </button>
+<div class="logout-container">
+  <button (click)="confirmLogout()" class="btn-logout">Déconnexion</button>
+
+  <div *ngIf="showLogoutConfirm" class="logout-confirm-popup">
+    <div class="popup-arrow"></div>
+    <p>Êtes-vous sûr de vouloir quitter ?</p>
+    <div class="popup-buttons">
+      <button (click)="logout()" class="btn-yes">Oui</button>
+      <button (click)="cancelLogout()" class="btn-no">Non</button>
+    </div>
+  </div>
 </div>
- 
+
+
+
+
   <h1>Bienvenue <i class="fas fa-handshake"></i></h1>
   <p>Ceci est votre espace personnel patient.</p>
 

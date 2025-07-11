@@ -11,6 +11,7 @@ import { RouterModule } from '@angular/router';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
+
   showDomains = false;
 
   domains = [

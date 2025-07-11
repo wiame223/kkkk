@@ -3,9 +3,15 @@ import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-patient-dashboard',
+  standalone: true,
   imports: [CommonModule],
   templateUrl: './patient-dashboard.html',
-  styleUrl: './patient-dashboard.css'
+  styleUrls: ['./patient-dashboard.css']
 })
-export class PatientDashboardComponent {}
+export class PatientDashboardComponent {
+  activeSection: string = 'none';
 
+  showSection(section: string) {
+    this.activeSection = section;
+  }
+}

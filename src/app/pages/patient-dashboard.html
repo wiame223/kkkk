@@ -1,25 +1,29 @@
 <div class="dashboard-container">
-  <h1>Bienvenue 👋</h1>
+  <h1>Bienvenue <i class="fas fa-handshake"></i></h1>
   <p>Ceci est votre espace personnel patient.</p>
 
   <div class="card-grid">
     <div class="card" (click)="showSection('rendezvous')">
-      <h3>📅 Rendez-vous</h3>
+      <i class="fas fa-calendar-check card-icon"></i>
+      <h3>Rendez-vous</h3>
       <p>Voir et gérer vos rendez-vous à venir.</p>
     </div>
 
     <div class="card" (click)="showSection('documents')">
-      <h3>📄 Documents</h3>
+      <i class="fas fa-file-medical card-icon"></i>
+      <h3>Documents</h3>
       <p>Consulter vos ordonnances, résultats et factures.</p>
     </div>
 
     <div class="card" (click)="showSection('proches')">
-      <h3>👨‍👩‍👧‍👦 Proches</h3>
+      <i class="fas fa-user-friends card-icon"></i>
+      <h3>Proches</h3>
       <p>Ajouter ou gérer des proches sous votre compte.</p>
     </div>
 
     <div class="card" (click)="showSection('messagerie')">
-      <h3>💬 Messagerie</h3>
+      <i class="fas fa-comments card-icon"></i>
+      <h3>Messagerie</h3>
       <p>Discuter avec vos praticiens.</p>
     </div>
   </div>
@@ -28,28 +32,35 @@
   <div class="section-container mt-5">
     <ng-container [ngSwitch]="activeSection">
       <div *ngSwitchCase="'rendezvous'">
-        <h2>🗓️ Mon Agenda</h2>
-        <p>(Affichage placeholder de l’agenda)</p>
+        <h2><i class="fas fa-calendar-day section-icon"></i> Mon Agenda</h2>
+        <p>(Affichage placeholder de l'agenda)</p>
         <div class="calendar-placeholder">
-          <p>Ici s’affichera un calendrier avec vos rendez-vous.</p>
+          <i class="far fa-calendar-alt placeholder-icon"></i>
+          <p>Ici s'affichera un calendrier avec vos rendez-vous.</p>
         </div>
       </div>
 
       <div *ngSwitchCase="'documents'">
-        <h2>📁 Mes Documents</h2>
-        <p>Ici s’afficheront vos ordonnances, résultats, etc.</p>
+        <h2><i class="fas fa-folder-open section-icon"></i> Mes Documents</h2>
+        <p>Ici s'afficheront vos ordonnances, résultats, etc.</p>
       </div>
 
       <div *ngSwitchCase="'proches'">
-        <h2>👨‍👩‍👧‍👦 Gérer mes proches</h2>
+        <h2><i class="fas fa-users-cog section-icon"></i> Gérer mes proches</h2>
         <p>Liste ou formulaire pour ajouter/modifier un proche.</p>
       </div>
 
       <div *ngSwitchCase="'messagerie'">
-        <h2>💬 Messagerie</h2>
+        <h2><i class="fas fa-comment-dots section-icon"></i> Messagerie</h2>
         <div class="chat-box">
-          <div class="message from">Bonjour Docteur, j’ai une question.</div>
-          <div class="message to">Bonjour, je vous écoute 🙂</div>
+          <div class="message from">
+            <i class="fas fa-user-circle message-icon"></i>
+            <div class="message-content">Bonjour Docteur, j'ai une question.</div>
+          </div>
+          <div class="message to">
+            <i class="fas fa-user-md message-icon"></i>
+            <div class="message-content">Bonjour, je vous écoute</div>
+          </div>
         </div>
       </div>
 

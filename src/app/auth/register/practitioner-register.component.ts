@@ -16,6 +16,23 @@ export class PractitionerRegisterComponent {
   isLoading = false;
   errorMessage: string | null = null; // Propriété pour les messages d'erreur globaux
   successMessage: string | null = null;
+selectedFile: File | null = null;
+fileError: string | null = null;
+
+onFileSelected(event: Event) {
+  const fileInput = event.target as HTMLInputElement;
+  if (fileInput.files && fileInput.files.length > 0) {
+    const file = fileInput.files[0];
+    const validTypes = ['application/pdf', 'image/jpeg', 'image/png'];
+    if (!validTypes.includes(file.type)) {
+      this.fileError = 'Format de fichier non valide. Veuillez choisir un PDF, JPG ou PNG.';
+      this.selectedFile = null;
+    } else {
+      this.fileError = null;
+      this.selectedFile = file;
+    }
+  }
+}
 
   constructor(
     private fb: FormBuilder,

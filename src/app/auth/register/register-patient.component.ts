@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Router } from '@angular/router';
-import { AuthService } from '../auth.service';
+
+
 
 @Component({
   selector: 'app-register-patient',
@@ -17,8 +18,8 @@ export class RegisterPatientComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private authService: AuthService,
     private router: Router
+
   ) {}
 
   ngOnInit(): void {
@@ -26,7 +27,7 @@ export class RegisterPatientComponent implements OnInit {
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      phone: ['', [Validators.required, Validators.pattern(/^\d{9}$/)]],  // 9 chiffres exactement
+      phone: ['', [Validators.required, Validators.pattern(/^\d{9}$/)]],
       birthDate: ['', Validators.required],
       birthCity: ['', Validators.required],
       gender: ['', Validators.required],
@@ -37,23 +38,18 @@ export class RegisterPatientComponent implements OnInit {
     });
   }
 
-  async onSubmit(): Promise<void> {
-    console.log('Form submitted');
+  onSubmit(): void {
+    console.log('Formulaire soumis');
     if (this.registerForm.valid) {
-      try {
-        const { email, password } = this.registerForm.value;
-        console.log('onSubmit(): appel AuthService.register avec', email);
-        const user = await this.authService.register(email, password);
-        console.log('Utilisateur créé:', user);
-        // Redirection après inscription réussie
-        this.router.navigate(['/auth/verify-email']);
-      } catch (error: any) {
-        console.error('Erreur dans onSubmit():', error);
-        this.errorMessage = error.message || 'Une erreur est survenue';
-      }
-    } else {
-      this.registerForm.markAllAsTouched();  // Marque tous les champs comme touchés pour afficher erreurs
-      console.warn('Formulaire invalide');
+      const formData = this.registerForm.value;
+      console.log('✅ Données à envoyer au backend :', formData);
+
+      // ⚠️ Ici tu peux appeler ton propre backend via HttpClient, ex :
+      // this.http.post('/api/register', formData).subscribe(...)
+
+      // Temporaire : redirection manuelle
+      this.router.navigate(['/dashboard-patient']);
     }
   }
+
 }

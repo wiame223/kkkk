@@ -1,0 +1,63 @@
+<div class="container mt-5" style="max-width: 420px;">
+  <h2 class="text-center mb-4 fw-bold">Connectez-vous pour accéder à votre tableau de bord</h2>
+
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" novalidate>
+
+    <div class="profile-selection mb-4">
+      <label class="form-label d-block mb-2">Je suis :</label>
+      <div class="d-flex justify-content-between">
+        <label class="profile-option">
+          <input type="radio" formControlName="profile" value="admin" /> Admin
+        </label>
+        <label class="profile-option">
+          <input type="radio" formControlName="profile" value="patient" /> Patient
+        </label>
+        <label class="profile-option">
+          <input type="radio" formControlName="profile" value="praticien" /> Praticien
+        </label>
+      </div>
+      <div *ngIf="loginForm.get('profile')?.touched && loginForm.get('profile')?.invalid" class="text-danger small mt-1">
+        Veuillez sélectionner un profil.
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="email" class="form-label">Email</label>
+      <input
+        type="email"
+        id="email"
+        formControlName="email"
+        class="form-control"
+        placeholder="email@example.com"
+        required
+      />
+      <div *ngIf="loginForm.get('email')?.touched && loginForm.get('email')?.invalid" class="text-danger small">
+        <div *ngIf="loginForm.get('email')?.errors?.['required']">L'email est requis.</div>
+        <div *ngIf="loginForm.get('email')?.errors?.['email']">L'email est invalide.</div>
+      </div>
+    </div>
+
+    <div class="mb-4">
+      <label for="password" class="form-label">Mot de passe</label>
+      <input
+        type="password"
+        id="password"
+        formControlName="password"
+        class="form-control"
+        placeholder="Mot de passe"
+        required
+      />
+      <div *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.invalid" class="text-danger small">
+        <div *ngIf="loginForm.get('password')?.errors?.['required']">Le mot de passe est requis.</div>
+        <div *ngIf="loginForm.get('password')?.errors?.['minlength']">
+          Le mot de passe doit contenir au moins 6 caractères.
+        </div>
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary w-100" [disabled]="loginForm.invalid">
+      Se connecter
+    </button>
+
+  </form>
+</div>

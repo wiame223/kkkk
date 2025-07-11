@@ -9,7 +9,7 @@ import { EducationDomainComponent } from './domains/education-domain/education-d
 import { BienetreDomainComponent } from './domains/bienetre-domain/bienetre-domain.component';
 import { EstheticDomainComponent } from './domains/esthetic-domain/esthetic-domain.component';
 import { PractitionerRegisterComponent } from './auth/register/practitioner-register.component';
-
+import { LoginComponent } from './auth/login/login';
 
 export const routes: Routes = [
   { 
@@ -25,6 +25,7 @@ export const routes: Routes = [
   { path: 'domains/education-domain', component: EducationDomainComponent },
   { path: 'domains/bienetre-domain', component: BienetreDomainComponent },
   { path: 'domains/esthetic-domain', component: EstheticDomainComponent },
+  { path : 'auth/login' , component: LoginComponent},
  {
   path: 'dashboard-patient',
   loadComponent: () => import('./pages/patient-dashboard').then(m => m.PatientDashboardComponent)

@@ -34,14 +34,21 @@ onFileSelected(event: Event) {
   }
 }
 
-  constructor(
-    private fb: FormBuilder,
-    private router: Router
-  ) {
-    this.registerForm = this.fb.group({
-      // ... vos contrôles de formulaire existants ...
-    });
-  }
+ constructor(
+  private fb: FormBuilder,
+  private router: Router
+) {
+  this.registerForm = this.fb.group({
+    lastName: ['', Validators.required],
+    firstName: ['', Validators.required],
+    email: ['', [Validators.required, Validators.email]],
+    specialty: ['', Validators.required],
+    phone: ['', [Validators.required, Validators.pattern(/^[0-9]{9}$/)]],
+    gender: ['', Validators.required],
+    source: ['', Validators.required],
+    password: ['', [Validators.required, Validators.minLength(6)]],
+  });
+}
 
   onSubmit() {
     this.errorMessage = null; // Réinitialise le message d'erreur

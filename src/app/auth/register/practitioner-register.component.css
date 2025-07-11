@@ -1,194 +1,113 @@
-:root {
-  --primary-color: #007BFF;
-  --primary-dark: #0056b3;
-  --text-light: #e0f7fa;
-  --text-medium: #b0bec5;
-  --bg-dark: #001f2d;
-  --bg-input: #0d2b3a;
-  --border-color: #2c3e50;
-  --shadow-lg: 0 15px 30px rgba(0, 0, 0, 0.5);
-  --transition: all 0.3s ease;
-}
-
-body {
-  background: linear-gradient(to bottom right, #001f2d, #000c14);
-  font-family: 'Segoe UI', sans-serif;
-  color: var(--text-light);
-  margin: 0;
-  padding: 2rem;
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
 
 .container {
-  background-color: rgba(0, 0, 0, 0.2);
-  backdrop-filter: blur(14px);
-  padding: 3rem;
-  border-radius: 24px;
-  box-shadow: var(--shadow-lg);
-  max-width: 700px;
-  width: 100%;
-  color: var(--text-light);
+  background: #f9fafb;
+  padding: 3rem 2.5rem;
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(67, 56, 202, 0.15);
+  font-family: 'Poppins', sans-serif;
+  color: #1f2937;
+  max-width: 650px;
+  margin: 4rem auto;
 }
 
 h2 {
-  text-align: center;
+  color: #4338ca;
+  font-weight: 700;
   font-size: 2rem;
-  font-weight: bold;
   margin-bottom: 2rem;
-  color: var(--text-light);
+  text-align: center;
 }
 
 label {
   font-weight: 600;
-  margin-bottom: 0.5rem;
-  color: var(--text-medium);
+  color: #4338ca;
   display: block;
+  margin-bottom: 0.5rem;
 }
 
-/* Icones dans champs */
-.input-icon .input-wrapper {
+.input-wrapper {
   position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
-.input-icon .input-wrapper i {
-  position: absolute;
-  top: 50%;
-  left: 1rem;
-  transform: translateY(-50%);
-  color: #78909c;
-  font-size: 1rem;
-  pointer-events: none;
+.input-wrapper i {
+  color: #6366f1;
 }
 
-/* Style champs */
-.input-icon input,
-.input-icon select,
-.input-icon textarea {
-  width: 100%;
-  padding: 0.9rem 1.2rem 0.9rem 2.8rem;
+input.form-control,
+select.form-select,
+textarea.form-control {
+  border: 2px solid #e0e7ff;
   border-radius: 12px;
-  border: 1px solid var(--border-color);
-  background-color: var(--bg-input);
-  color: var(--text-light);
+  padding: 0.75rem 1rem;
   font-size: 1rem;
-  transition: var(--transition);
+  transition: border-color 0.3s ease;
+  width: 100%;
 }
 
-.input-icon input::placeholder {
-  color: #78909c;
-}
-
-.input-icon input:focus,
-.input-icon select:focus,
-.input-icon textarea:focus {
-  border-color: var(--primary-color);
+input.form-control:focus,
+select.form-select:focus,
+textarea.form-control:focus {
   outline: none;
-  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.2);
+  border-color: #ec4899;
+  box-shadow: 0 0 8px rgba(236, 72, 153, 0.5);
 }
 
-/* Champ téléphone */
 .phone-wrapper {
-  position: relative;
+  display: flex;
+  align-items: center;
 }
 
 .phone-wrapper .prefix {
-  position: absolute;
-  top: 50%;
-  left: 1rem;
-  transform: translateY(-50%);
-  color: #b0bec5;
-  font-size: 1rem;
-  pointer-events: none;
+  background-color: #e0e7ff;
+  padding: 0.6rem 0.9rem;
+  border-top-left-radius: 12px;
+  border-bottom-left-radius: 12px;
+  color: #4338ca;
+  font-weight: 500;
+  border: 2px solid #e0e7ff;
+  border-right: none;
 }
 
 .phone-wrapper input {
-  padding-left: 4.5rem !important;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
 }
 
-/* Bouton */
 .btn-primary {
-  background-color: var(--primary-color);
-  color: #ffffff;
-  padding: 0.9rem 2.2rem;
-  font-size: 1.1rem;
-  font-weight: 600;
+  background: linear-gradient(90deg, #4338ca 0%, #ec4899 100%);
   border: none;
-  border-radius: 50px;
+  font-weight: 700;
+  font-size: 1.1rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 14px;
   cursor: pointer;
-  box-shadow: 0 5px 15px rgba(0, 123, 255, 0.4);
-  transition: all 0.3s ease-in-out;
+  transition: background 0.4s ease, box-shadow 0.3s ease;
+  box-shadow: 0 10px 30px rgba(236, 72, 153, 0.4);
+  color: white;
 }
 
 .btn-primary:hover {
-  background-color: var(--primary-dark);
-  transform: translateY(-2px);
-  box-shadow: 0 10px 20px rgba(0, 86, 179, 0.4);
+  background: linear-gradient(90deg, #ec4899 0%, #4338ca 100%);
+  box-shadow: 0 14px 40px rgba(67, 56, 202, 0.6);
 }
 
-.btn-primary:active {
-  transform: translateY(1px);
+.error {
+  color: #db2777;
+  font-weight: 500;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
 }
 
-.btn-primary:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-  .container {
-    padding: 2rem;
-    margin: 2rem 1rem;
-  }
-
-  h2 {
-    font-size: 1.5rem;
-  }
-}
-
-
-
-/* =================== Carte Nationale Upload =================== */
-.input-icon input[type="file"] {
-  padding: 0.6rem 1rem;
-  background-color: rgba(13, 43, 58, 0.6);
-  border: 2px dashed var(--border-color);
-  border-radius: 12px;
-  color: var(--text-light);
-  cursor: pointer;
-  transition: var(--transition);
-}
-
-.input-icon input[type="file"]:hover {
-  border-color: var(--primary-color);
-  background-color: rgba(0, 123, 255, 0.1);
-  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.2);
-}
-
-.input-icon input[type="file"]::file-selector-button {
-  background-color: var(--primary-color);
-  color: #fff;
-  border: none;
-  padding: 0.5rem 1.2rem;
-  margin-right: 1rem;
-  border-radius: 8px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: var(--transition);
-}
-
-/* Corrige le décalage du champ file */
-.input-icon input[type="file"] {
-  padding-left: 2.8rem; /* comme les autres champs */
-}
-
-
-/* Texte d’aide */
-.form-text.text-muted {
-  color: #b0bec5;
-  font-style: italic;
-  margin-bottom: 0.5rem;
+.alert-danger {
+  background-color: #fee2e2;
+  color: #b91c1c;
+  border: 1px solid #fecaca;
+  border-radius: 10px;
+  padding: 0.75rem 1rem;
+  font-weight: 500;
+  margin-top: 1rem;
 }

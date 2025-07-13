@@ -49,54 +49,93 @@
     <i class="fas fa-comments card-icon"></i>
     <h3>Messagerie</h3>
     <p>Discuter avec vos praticiens.</p>
-  </div>
+ 
 </div>
 
+
+<!-- Carte Paiement intégrée ici -->
+  <div class="card" (click)="showSection('paiement')">
+    <i class="fas fa-credit-card card-icon"></i>
+    <h3>Paiement</h3>
+    <p>Effectuer un paiement en ligne</p>
+  </div>
+</div>
 
   <!-- Sections dynamiques -->
   <div class="section-container mt-5">
     <ng-container [ngSwitch]="activeSection">
 
       <!-- 📅 AGENDA -->
-   <!-- Section Agenda -->
-      <div *ngSwitchCase="'agenda'" class="agenda-section">
-        <div class="section-header">
-        <h2><i class="fas fa-calendar-week section-icon"></i> Agenda professionnel</h2>
+   <div *ngSwitchCase="'agenda'" class="agenda-section">
+  <div class="section-header">
+    <h2><i class="fas fa-calendar-week section-icon"></i> Agenda professionnel</h2>
 
-          <button class="btn-add" (click)="addAppointment()">
-            <i class="fas fa-plus"></i> Ajouter RDV
-          </button>
-        </div>
-        
-        <div class="calendar-view">
-          <div class="calendar-controls">
-            <button (click)="changeView('day')" [class.active]="calendarView === 'day'">Jour</button>
-            <button (click)="changeView('week')" [class.active]="calendarView === 'week'">Semaine</button>
-            <button (click)="changeView('month')" [class.active]="calendarView === 'month'">Mois</button>
-          </div>
-          
-          <div class="calendar-placeholder">
-            <div *ngIf="calendarView === 'day'">
-              <h4>Vue Jour</h4>
-              <p>Affichage des créneaux horaires pour aujourd'hui</p>
-            </div>
-            <div *ngIf="calendarView === 'week'">
-              <h4>Vue Semaine</h4>
-              <p>Affichage des rendez-vous sur 7 jours</p>
-            </div>
-            <div *ngIf="calendarView === 'month'">
-              <h4>Vue Mois</h4>
-              <p>Vue d'ensemble du mois avec indicateurs de disponibilité</p>
-            </div>
-          </div>
-        </div>
-      </div>
+    <button class="btn-add" (click)="addAppointment()">
+      <i class="fas fa-plus"></i> Ajouter RDV
+    </button>
+  </div>
+  
+ <div class="calendar-view">
+  <div class="calendar-controls">
+    <button (click)="changeView('day')" [class.active]="calendarView === 'day'">Jour</button>
+    <button (click)="changeView('week')" [class.active]="calendarView === 'week'">Semaine</button>
+    <button (click)="changeView('month')" [class.active]="calendarView === 'month'">Mois</button>
+  </div>
 
-      <!-- 📂 DOCUMENTS -->
-      <div *ngSwitchCase="'documents'">
-        <h2><i class="fas fa-folder-open section-icon"></i> Mes Documents</h2>
-        <p>Ici s'afficheront vos ordonnances, résultats, etc.</p>
-      </div>
+  <div class="calendar-placeholder">
+    <div *ngIf="calendarView === 'day'">
+      <h4>Vue Jour</h4>
+      <p>Affichage des créneaux horaires pour aujourd'hui</p>
+    </div>
+    <div *ngIf="calendarView === 'week'">
+      <h4>Vue Semaine</h4>
+      <p>Affichage des rendez-vous sur 7 jours</p>
+    </div>
+    <div *ngIf="calendarView === 'month'">
+      <h4>Vue Mois</h4>
+      <p>Vue d'ensemble du mois avec indicateurs de disponibilité</p>
+    </div>
+  </div>
+
+  <!-- Liste des rendez-vous **en dehors** de la zone calendrier -->
+  <div class="appointments-list mt-4">
+    <h3>Mes rendez-vous à venir</h3>
+    <ul>
+      <li *ngFor="let appt of appointments">
+        <strong>{{ appt.title }}</strong> — {{ appt.date | date:'fullDate' }} à {{ appt.date | date:'shortTime' }} — <em>{{ appt.status }}</em>
+        <button (click)="cancelAppointment(appt.id)" [disabled]="appt.status !== 'confirmé'" style="margin-left: 1rem;">Annuler</button>
+      </li>
+    </ul>
+  </div>
+</div>
+
+</div>
+
+     <!-- 📂 DOCUMENTS -->
+<div *ngSwitchCase="'documents'">
+  <h2><i class="fas fa-folder-open section-icon"></i> Mes Documents</h2>
+  <p>Ici s'afficheront vos ordonnances, résultats, etc.</p>
+
+  <!-- Upload fichiers -->
+  <input type="file" (change)="onFileSelected($event)" multiple accept=".pdf,.jpg,.jpeg,.png" />
+
+  <!-- Liste des documents -->
+  <div class="documents-list">
+   <div *ngFor="let doc of documents; let i = index" class="document-preview">
+  <ng-container *ngIf="doc.type === 'pdf'; else imageBlock">
+    <embed [src]="doc.url" type="application/pdf" width="100%" height="400px" />
+  </ng-container>
+  <ng-template #imageBlock>
+    <img [src]="doc.url" alt="document image" width="100%" />
+  </ng-template>
+  <div class="doc-info">
+    <p>{{ doc.name }}</p>
+    <button (click)="removeDocument(i)">Supprimer</button>
+  </div>
+</div>
+  </div>
+    </div>
+
 
       <!-- 👨‍👩‍👧 PROCHES -->
       <div *ngSwitchCase="'proches'">
@@ -141,6 +180,43 @@
         </div>
       </div>
 
+
+<!-- Dans la partie switch -->
+   
+<div *ngSwitchCase="'paiement'">
+  <h2><i class="fas fa-credit-card section-icon"></i> Paiement en ligne</h2>
+  <form (ngSubmit)="submitPayment()" #paymentForm="ngForm" class="payment-form">
+    <label>Montant (MAD) :</label>
+<input
+  type="number"
+  [(ngModel)]="paymentAmount"
+  name="amount"
+  required
+  min="1"
+  placeholder="Montant en dirhams marocains"
+/>
+
+
+    <label>Numéro de carte (simulation) :</label>
+    <input
+      type="text"
+      [(ngModel)]="cardNumber"
+      name="card"
+      required
+      minlength="16"
+      maxlength="16"
+      placeholder="16 chiffres"
+    />
+
+    <button type="submit" [disabled]="paymentForm.invalid">Payer</button>
+  </form>
+
+  <div *ngIf="paymentStatus" [ngClass]="{'success-msg': paymentStatus === 'success', 'error-msg': paymentStatus === 'error'}">
+    {{ paymentMessage }}
+  </div>
+</div>
+
+
       <!-- Vue par défaut -->
       <div *ngSwitchDefault>
         <div class="welcome-message">
@@ -150,8 +226,7 @@
           <p>Sélectionnez une section pour commencer</p>
         </div>
       </div>
-    </ng-container>
-  </div>
+</ng-container>
 
 
     

@@ -37,13 +37,28 @@ export class PatientDashboardComponent {
   activeSection: string = 'none';
   showLogoutConfirm = false;
 
- newMessage = '';
+  newMessage = '';
   activeContact = 1;
   calendarView = 'week';
 
+  // Documents upload
+  documents: { name: string; url: string; type: 'pdf' | 'image' }[] = [];
+
+  // Rendez-vous simulés
+  appointments: Appointment[] = [
+    { id: 1, title: 'Consultation générale', date: '2025-07-20T10:00:00Z', location: 'Cabinet A', status: 'confirmé' },
+    { id: 2, title: 'Suivi cardiologie', date: '2025-07-22T14:00:00Z', location: 'Cabinet B', status: 'en attente' }
+  ];
+
+  // PROPRIÉTÉS POUR LE PAIEMENT SIMULÉ
+  paymentAmount: number = 0;
+  cardNumber: string = '';
+  paymentStatus: 'success' | 'error' | null = null;
+  paymentMessage: string = '';
+
   constructor(private router: Router) {}
 
-  // 🔒 Déconnexion
+  // Déconnexion
   confirmLogout() {
     this.showLogoutConfirm = true;
   }
@@ -57,22 +72,26 @@ export class PatientDashboardComponent {
     this.router.navigateByUrl('');
   }
 
-  // 🔁 Navigation dynamique
   showSection(section: string) {
-    this.activeSection = section;
-    if (section === 'messagerie') {
-      this.activeContact = this.contacts[0]?.id;
-    }
-  }
+  this.activeSection = section;
 
-  // 🔵 Simuler les contacts
+  // Après changement de section, scroll vers la div .section-container
+  setTimeout(() => {
+    const container = document.querySelector('.section-container');
+    if (container) {
+      container.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, 0);
+}
+
+  // Contacts simulés
   contacts: Contact[] = [
     { id: 1, name: 'Dr. Dupont', avatar: '/assets/doctor1.jpg', specialty: 'Médecin généraliste' },
     { id: 2, name: 'Me. Legrand', avatar: '/assets/lawyer1.jpg', specialty: 'Avocat' },
     { id: 3, name: 'Mme. Durand', avatar: '/assets/architect.jpg', specialty: 'Architecte' }
   ];
 
-  // 📬 Messages simulés
+  // Messages simulés
   messages: Message[] = [
     { contactId: 1, text: 'Bonjour Docteur, j’ai une douleur.', sent: true, time: new Date() },
     { contactId: 1, text: 'Depuis combien de temps ?', sent: false, time: new Date() },
@@ -80,9 +99,44 @@ export class PatientDashboardComponent {
     { contactId: 2, text: 'Envoyez-la moi.', sent: false, time: new Date() }
   ];
 
- 
+  // Annulation d'un rendez-vous
+  cancelAppointment(id: number) {
+    const appt = this.appointments.find(a => a.id === id);
+    if (appt) {
+      appt.status = 'annulé';
+    }
+  }
 
-  // 📤 Envoi message
+  // Upload fichiers
+  onFileSelected(event: Event) {
+    const input = event.target as HTMLInputElement;
+    if (!input.files) return;
+
+    const files: FileList = input.files;
+
+    Array.from(files).forEach(file => {
+      const reader = new FileReader();
+
+      reader.onload = () => {
+        const url = reader.result as string;
+        const type = file.type.includes('pdf') ? 'pdf' : 'image';
+
+        this.documents.push({
+          name: file.name,
+          url,
+          type
+        });
+      };
+
+      reader.readAsDataURL(file);
+    });
+  }
+
+  removeDocument(index: number) {
+    this.documents.splice(index, 1);
+  }
+
+  // Envoi message
   sendMessage() {
     if (!this.newMessage.trim()) return;
 
@@ -117,22 +171,30 @@ export class PatientDashboardComponent {
     this.activeContact = id;
   }
 
-  // 🗓️ Agenda simulé (sera récupéré du backend plus tard)
-    // Gestion du calendrier
+  // Gestion calendrier
   changeView(view: string) {
     this.calendarView = view;
   }
 
   addAppointment() {
     console.log("Ouverture modal pour ajouter un rendez-vous");
-    // Implémentez l'ouverture d'un modal ou la navigation
+    // Implémenter ouverture modal ou navigation
+  }
+
+  // ============================
+  // Méthode pour simuler paiement
+  submitPayment() {
+    if (this.paymentAmount > 0 && this.cardNumber.length === 16) {
+      setTimeout(() => {
+        this.paymentStatus = 'success';
+        this.paymentMessage = `Paiement de ${this.paymentAmount} MAD effectué avec succès !`;
+
+        this.paymentAmount = 0;
+        this.cardNumber = '';
+      }, 1000);
+    } else {
+      this.paymentStatus = 'error';
+      this.paymentMessage = 'Erreur dans les informations de paiement.';
+    }
   }
 }
-  
-
-  // Méthodes futures à implémenter avec un vrai backend :
-  // - fetchMessages(): Observable<Message[]>
-  // - sendMessageToBackend(msg: Message): Observable<void>
-  // - getAppointments(): Observable<Appointment[]>
-  // - cancelAppointment(id: number): Observable<void>
-

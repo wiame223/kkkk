@@ -3,7 +3,11 @@
   <section class="specialties-section">
     <h2 class="section-title">Nos Domaines de Coaching</h2>
     <div class="specialty-grid">
-      <div class="specialty-item" *ngFor="let specialty of specialties" (click)="selectSpecialty(specialty.name)">
+      <div
+        class="specialty-item"
+        *ngFor="let specialty of specialties"
+        (click)="selectSpecialty(specialty.name)"
+      >
         <div class="specialty-icon-wrapper">
           <i [class]="specialty.icon"></i>
         </div>
@@ -16,54 +20,65 @@
   <!-- Filtre -->
   <div class="filter-wrapper">
     <div class="filter-container">
-      <label for="specialtyFilter" class="filter-label">Rechercher par spécialité :</label>
-      <select id="specialtyFilter" class="filter-select" [(ngModel)]="selectedSpecialty">
+      <label for="specialtyFilter" class="filter-label">Filtrer par spécialité :</label>
+      <select
+        id="specialtyFilter"
+        class="filter-select"
+        [(ngModel)]="selectedSpecialty"
+      >
         <option value="">Tous les domaines</option>
         <option *ngFor="let specialty of specialties" [value]="specialty.name">
           {{ specialty.name }}
         </option>
       </select>
+      <button class="reset-btn" (click)="resetFilter()">Réinitialiser</button>
     </div>
   </div>
 
   <!-- Section Coaches -->
   <section class="coaches-section">
-    <h2 class="section-title">Coaches {{ selectedSpecialty ? 'en ' + selectedSpecialty : 'disponibles' }}</h2>
+    <h2 class="section-title">
+      Coaches {{ selectedSpecialty ? 'en ' + selectedSpecialty : 'disponibles' }}
+    </h2>
     <div class="coach-grid">
       <div class="coach-card" *ngFor="let coach of filteredCoaches">
         <div class="coach-image-container">
-          <img [src]="coach.avatar" class="coach-image" alt="{{ coach.firstName }} {{ coach.lastName }}">
+          <img
+            [src]="coach.avatar"
+            class="coach-image"
+            alt="{{ coach.firstName }} {{ coach.lastName }}"
+          />
           <div class="coach-specialty-badge">{{ coach.specialty }}</div>
         </div>
         <div class="coach-info">
           <h3 class="coach-name">{{ coach.firstName }} {{ coach.lastName }}</h3>
-          
+
           <div class="coach-detail">
-            <i class="bi bi-award-fill"></i>
-            <span>{{ coach.expertise }} ({{ coach.experience }} d'expérience)</span>
+            <i class="bi bi-patch-check-fill"></i>
+            <span>Spécialité : {{ coach.style }}</span>
           </div>
-          
+
           <div class="coach-detail">
-            <i class="bi bi-geo-alt-fill"></i>
-            <span>{{ coach.mode }}</span>
+            <i class="bi bi-geo-alt"></i>
+            <span>Localisation : {{ coach.location }}</span>
           </div>
-          
-          <div class="availability-section">
-            <h4 class="availability-title">disponibilités :</h4>
-            <ul class="availability-list">
-              <li *ngFor="let slot of coach.availableSlots">
-                <i class="bi bi-clock-fill"></i>
-                <span>{{ slot }}</span>
-              </li>
-            </ul>
+
+          <div class="coach-detail">
+            <i class="bi bi-award"></i>
+            <span>Expérience : {{ coach.experience }}</span>
           </div>
-          
+
+          <div class="tarif-section">
+            <h4 class="tarif-title">Tarif:</h4>
+            <div class="tarif-value">
+              <i class="bi bi-currency-exchange"></i>
+              <span>{{ coach.tarif }}</span>
+            </div>
+          </div>
+
           <div class="coach-actions">
-            <button class="contact-btn">
-              <i class="bi bi-whatsapp"></i> Contacter
-            </button>
             <button class="appointment-btn">
-              <i class="bi bi-calendar-plus"></i> Réserver
+              <i class="bi bi-calendar-plus"></i> Prendre RDV
             </button>
           </div>
         </div>

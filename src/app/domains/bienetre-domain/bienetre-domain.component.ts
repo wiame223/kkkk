@@ -17,7 +17,7 @@ export class BienetreDomainComponent {
       icon: 'bi bi-person-heart'
     },
     {
-      name: 'Coaching Professionnel', 
+      name: 'Coaching Professionnel',
       description: 'Accompagnement carrière et leadership',
       icon: 'bi bi-briefcase-fill'
     },
@@ -33,142 +33,134 @@ export class BienetreDomainComponent {
     }
   ];
 
-  selectedSpecialty: string | null = null;
+  selectedSpecialty: string = '';
 
   coaches = [
-    // Coaching Personnel
     {
       firstName: 'Karima',
       lastName: 'Benbrahim',
       specialty: 'Coaching Personnel',
-      expertise: 'Confiance en soi',
+      style: 'Développement personnel',
       experience: '8 ans',
-      mode: 'En ligne/Présentiel (Casablanca)',
-      availableSlots: ['Lundi 16h', 'Mercredi 10h', 'Samedi 14h'],
+      location: 'Casablanca',
+      tarif: '400 - 600 Dh',
       avatar: '/images/karima.jpg'
     },
     {
       firstName: 'Mehdi',
       lastName: 'El Amrani',
       specialty: 'Coaching Personnel',
-      expertise: 'Gestion des émotions',
+      style: 'Gestion des émotions',
       experience: '5 ans',
-      mode: 'En ligne',
-      availableSlots: ['Mardi 17h', 'Jeudi 16h', 'Vendredi 18h'],
+      location: 'En ligne',
+      tarif: '400 - 500 Dh',
       avatar: '/images/mehdi.jpg'
     },
     {
       firstName: 'Amina',
       lastName: 'Zeroual',
       specialty: 'Coaching Personnel',
-      expertise: 'Relations interpersonnelles',
+      style: 'Relations humaines',
       experience: '6 ans',
-      mode: 'Présentiel (Rabat)',
-      availableSlots: ['Mercredi 14h', 'Samedi 10h'],
+      location: 'Rabat',
+      tarif: '300 - 600 Dh',
       avatar: '/images/amina.jpg'
     },
-
-    // Coaching Professionnel
     {
       firstName: 'Omar',
       lastName: 'Cherkaoui',
       specialty: 'Coaching Professionnel',
-      expertise: 'Leadership',
+      style: 'Leadership & motivation',
       experience: '10 ans',
-      mode: 'En ligne/Présentiel (Marrakech)',
-      availableSlots: ['Lundi 9h-12h', 'Jeudi 14h-17h'],
+      location: 'Marrakech',
+      tarif: '400 - 880 Dh',
       avatar: '/images/omar.jpg'
     },
     {
       firstName: 'Leila',
       lastName: 'Mansouri',
       specialty: 'Coaching Professionnel',
-      expertise: 'Gestion de carrière',
+      style: 'Bilan de compétences',
       experience: '7 ans',
-      mode: 'En ligne',
-      availableSlots: ['Mardi 18h-21h', 'Samedi 9h-12h'],
+      location: 'En ligne',
+      tarif: '270 - 700 Dh',
       avatar: '/images/leila.jpg'
     },
     {
       firstName: 'Youssef',
       lastName: 'Bennani',
       specialty: 'Coaching Professionnel',
-      expertise: 'Transition professionnelle',
+      style: 'Transition pro',
       experience: '9 ans',
-      mode: 'Présentiel (Casablanca)',
-      availableSlots: ['Mercredi 19h-21h', 'Vendredi 19h-21h'],
+      location: 'Casablanca',
+      tarif: '400 - 600 Dh',
       avatar: '/images/youssef.jpg'
     },
-
-    // Nutrition & Bien-être
     {
-      firstName: 'Fatima', 
+      firstName: 'Fatima',
       lastName: 'Alaoui',
       specialty: 'Nutrition & Bien-être',
-      expertise: 'Nutrition holistique',
+      style: 'Nutrition holistique',
       experience: '12 ans',
-      mode: 'En ligne/Présentiel (Tanger)',
-      availableSlots: ['Mardi 9h', 'Jeudi 15h'],
+      location: 'Tanger',
+      tarif: '340 - 600 Dh',
       avatar: '/images/fatima.jpg'
     },
     {
       firstName: 'Hicham',
       lastName: 'El Fassi',
       specialty: 'Nutrition & Bien-être',
-      expertise: 'Sport et alimentation',
+      style: 'Sport & alimentation',
       experience: '5 ans',
-      mode: 'Présentiel (Agadir)',
-      availableSlots: ['Lundi 13h', 'Mercredi 11h', 'Vendredi 10h'],
+      location: 'Agadir',
+      tarif: '300 - 600 Dh',
       avatar: '/images/hicham.jpg'
     },
     {
       firstName: 'Nadia',
       lastName: 'Bennis',
       specialty: 'Nutrition & Bien-être',
-      expertise: 'Régimes spécifiques',
+      style: 'Régimes personnalisés',
       experience: '8 ans',
-      mode: 'En ligne',
-      availableSlots: ['Mardi 14h', 'Jeudi 10h', 'Samedi 16h'],
+      location: 'En ligne',
+      tarif: '200 - 500 Dh',
       avatar: '/images/nadia.jpg'
     },
-
-    // Méditation & Pleine Conscience
     {
       firstName: 'Samir',
       lastName: 'Belhaj',
       specialty: 'Méditation & Pleine Conscience',
-      expertise: 'Réduction du stress',
+      style: 'Réduction du stress',
       experience: '20 ans',
-      mode: 'En ligne/Présentiel (Fès)',
-      availableSlots: ['Lundi 14h', 'Vendredi 16h'],
+      location: 'Fès',
+      tarif: '900 - 1000 Dh',
       avatar: '/images/sopihie.jpeg'
     },
     {
       firstName: 'Zahra',
       lastName: 'Idrissi',
       specialty: 'Méditation & Pleine Conscience',
-      expertise: 'Méditation guidée',
+      style: 'Méditation guidée',
       experience: '6 ans',
-      mode: 'En ligne',
-      availableSlots: ['Mercredi 15h', 'Dimanche 11h'],
+      location: 'En ligne',
+      tarif: '300 - 600 Dh',
       avatar: '/images/zahra.jpg'
     },
     {
       firstName: 'Kamal',
       lastName: 'Rhouzi',
       specialty: 'Méditation & Pleine Conscience',
-      expertise: 'Pleine conscience au travail',
+      style: 'Pleine conscience au travail',
       experience: '4 ans',
-      mode: 'Présentiel (Casablanca)',
-      availableSlots: ['Mardi 20h', 'Samedi 9h'],
+      location: 'Casablanca',
+      tarif: '400 - 600 Dh',
       avatar: '/images/sopihie.jpeg'
     }
   ];
 
   get filteredCoaches() {
-    return this.selectedSpecialty
-      ? this.coaches.filter(c => c.specialty === this.selectedSpecialty)
-      : this.coaches;
+    if (!this.selectedSpecialty) return this.coaches;
+    return this.coaches.filter(coach => coach.specialty === this.selectedSpecialty);
   }
 
   selectSpecialty(name: string) {
@@ -176,6 +168,6 @@ export class BienetreDomainComponent {
   }
 
   resetFilter() {
-    this.selectedSpecialty = null;
+    this.selectedSpecialty = '';
   }
 }

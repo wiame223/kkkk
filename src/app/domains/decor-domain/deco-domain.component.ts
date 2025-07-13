@@ -11,32 +11,15 @@ import { FormsModule } from '@angular/forms';
 })
 export class DecoDomainComponent {
   specialties = [
-    {
-      name: 'Décoration Résidentielle',
-      description: 'Aménagement intérieur pour maisons et appartements',
-      icon: 'bi bi-house-heart'
-    },
-    {
-      name: 'Décoration Événementielle', 
-      description: 'Mariages, fêtes et cérémonies',
-      icon: 'bi bi-balloon'
-    },
-    {
-      name: 'Design Commercial',
-      description: 'Boutiques, restaurants et espaces professionnels',
-      icon: 'bi bi-shop-window'
-    },
-    {
-      name: 'Staging Immobilier',
-      description: 'Mise en valeur de biens immobiliers',
-      icon: 'bi bi-house-up'
-    }
+    { name: 'Décoration Résidentielle', description: 'Aménagement intérieur pour maisons et appartements', icon: 'bi bi-house-heart' },
+    { name: 'Décoration Événementielle', description: 'Mariages, fêtes et cérémonies', icon: 'bi bi-balloon' },
+    { name: 'Design Commercial', description: 'Boutiques, restaurants et espaces professionnels', icon: 'bi bi-shop-window' },
+    { name: 'Staging Immobilier', description: 'Mise en valeur de biens immobiliers', icon: 'bi bi-house-up' }
   ];
 
-  selectedSpecialty: string | null = null;
+  selectedSpecialty: string = '';
 
   decorators = [
-    // Décoration Résidentielle
     {
       firstName: 'Leila',
       lastName: 'Benjelloun',
@@ -44,7 +27,7 @@ export class DecoDomainComponent {
       style: 'Style maroco-moderne',
       experience: '8 ans',
       location: 'Casablanca',
-      availableSlots: ['Lun 10h-12h', 'Mer 14h-16h', 'Ven 9h-11h'],
+      tarif: '400 - 800 DH',
       avatar: '/images/leila1.jpg',
       portfolio: '12 projets résidentiels'
     },
@@ -55,12 +38,10 @@ export class DecoDomainComponent {
       style: 'Minimaliste contemporain',
       experience: '5 ans',
       location: 'Rabat',
-      availableSlots: ['Mar 15h-17h', 'Jeu 10h-12h'],
+      tarif: '300 - 600 DH',
       avatar: '/images/sopihie.jpeg',
       portfolio: '8 villas haut de gamme'
     },
-
-    // Décoration Événementielle
     {
       firstName: 'Amina',
       lastName: 'Zahidi',
@@ -68,12 +49,10 @@ export class DecoDomainComponent {
       style: 'Mariages traditionnels',
       experience: '10 ans',
       location: 'Marrakech',
-      availableSlots: ['Lun 14h-17h', 'Mer 9h-12h'],
+      tarif: '500 - 900 DH',
       avatar: '/images/sopihie.jpeg',
       portfolio: '50+ événements'
     },
-
-    // Design Commercial
     {
       firstName: 'Youssef',
       lastName: 'Cherkaoui',
@@ -81,12 +60,10 @@ export class DecoDomainComponent {
       style: 'Espaces tendance',
       experience: '6 ans',
       location: 'Tanger',
-      availableSlots: ['Mar 9h-12h', 'Sam 10h-13h'],
+      tarif: '700 - 1200 DH',
       avatar: '/images/sopihie.jpeg',
       portfolio: '15 commerces'
     },
-
-    // Staging Immobilier
     {
       firstName: 'Zahra',
       lastName: 'Bennis',
@@ -94,19 +71,24 @@ export class DecoDomainComponent {
       style: 'Mise en valeur optimale',
       experience: '7 ans',
       location: 'Agadir',
-      availableSlots: ['Jeu 14h-18h', 'Ven 10h-15h'],
+      tarif: '400 - 800 DH',
       avatar: '/images/sopihie.jpeg',
       portfolio: '30+ biens valorisés'
     }
   ];
 
   get filteredDecorators() {
-    return this.selectedSpecialty
-      ? this.decorators.filter(d => d.specialty === this.selectedSpecialty)
-      : this.decorators;
+    if (!this.selectedSpecialty || this.selectedSpecialty === '') {
+      return this.decorators;
+    }
+    return this.decorators.filter(d => d.specialty === this.selectedSpecialty);
   }
 
   selectSpecialty(name: string) {
     this.selectedSpecialty = name;
+  }
+
+  resetFilter() {
+    this.selectedSpecialty = '';
   }
 }

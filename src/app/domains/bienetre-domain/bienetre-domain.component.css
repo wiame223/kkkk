@@ -96,6 +96,22 @@
   box-shadow: 0 0 0 3px rgba(26, 188, 156, 0.2);
 }
 
+.reset-btn {
+  margin-top: 1rem;
+  background: #f44336;
+  color: white;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.reset-btn:hover {
+  background-color: #d32f2f;
+}
+
 /* Grille des coachs */
 .coach-grid {
   display: grid;
@@ -172,34 +188,31 @@
   color: #1abc9c;
 }
 
-/* Disponibilités */
-.availability-section {
-  margin-top: 1rem;
-}
-
-.availability-title {
-  font-size: 1rem;
+/* Tarif */
+.tarif-section {
+  font-weight: 600;
   color: #2c3e50;
-  margin-bottom: 0.5rem;
+  margin-top: 0.75rem;
 }
 
-.availability-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  color: #7f8c8d;
-}
-
-.availability-list li {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 0.3rem;
-  gap: 0.5rem;
-}
-
-.availability-list i {
+.tarif-title {
+  font-size: 1rem;
+  margin-bottom: 0.25rem;
   color: #16a085;
+}
+
+.tarif-value {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.1rem;
+  gap: 0.5rem;
+  color: #2c3e50;
+}
+
+.tarif-value i {
+  color: #27ae60;
+  font-size: 1.3rem;
 }
 
 /* Actions */

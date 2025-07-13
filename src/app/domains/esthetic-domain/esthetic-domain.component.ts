@@ -33,23 +33,16 @@ export class EstheticDomainComponent {
     }
   ];
 
-  selectedSpecialty: string | null = null;
-
-  get filteredEstheticians() {
-    return this.selectedSpecialty
-      ? this.estheticians.filter(e => e.specialty === this.selectedSpecialty)
-      : this.estheticians;
-  }
+  selectedSpecialty: string = '';
 
   estheticians = [
-    // Soins Visage
     {
       firstName: 'Nadia',
       lastName: 'El Mansouri',
       specialty: 'Soins Visage',
       location: 'Casablanca - Institut de Beauté Nadia',
-      mode: 'Téléconsultation',
-      availableSlots: ['Lundi 10h', 'Mercredi 14h', 'Vendredi 9h'],
+      mode: 'Présentiel',
+      tarif: '300 - 700 Dh',
       avatar: '/images/nadia1.jpg'
     },
     {
@@ -57,43 +50,51 @@ export class EstheticDomainComponent {
       lastName: 'Benjelloun',
       specialty: 'Soins Visage',
       location: 'Rabat - Spa Leila',
-      mode: 'Téléconsultation',
-      availableSlots: ['Mardi 13h', 'Jeudi 10h'],
+      mode: 'Présentiel',
+      tarif: '250 - 550 Dh',
       avatar: '/images/sopihie.jpeg'
     },
-    // Épilation
     {
       firstName: 'Imane',
       lastName: 'El Amrani',
       specialty: 'Épilation',
       location: 'Rabat - Institut Imane',
-      mode: 'Téléconsultation',
-      availableSlots: ['Mardi 9h', 'Jeudi 15h'],
+      mode: 'Présentiel',
+      tarif: '200 - 500 Dh',
       avatar: '/images/imane.jpg'
     },
-    // Massage
     {
       firstName: 'Samira',
       lastName: 'Bennani',
       specialty: 'Massage',
       location: 'Tanger - Relax Center',
-      mode: 'Téléconsultation',
-      availableSlots: ['Mardi 15h', 'Jeudi 9h'],
+      mode: 'Présentiel',
+      tarif: '150 - 200 Dh',
       avatar: '/images/sopihie.jpeg'
     },
-    // Beauté Mains/Pieds
     {
       firstName: 'Fatima',
       lastName: 'El Khamlichi',
       specialty: 'Beauté Mains/Pieds',
       location: 'Rabat - Nail Palace',
-      mode: 'Téléconsultation',
-      availableSlots: ['Mardi 11h', 'Vendredi 16h'],
+      mode: 'Présentiel',
+      tarif: '150 - 200 Dh',
       avatar: '/images/sopihie.jpeg'
     }
   ];
 
+  get filteredEstheticians() {
+    if (!this.selectedSpecialty) return this.estheticians;
+    return this.estheticians.filter(e => e.specialty === this.selectedSpecialty);
+  }
+
   selectSpecialty(name: string) {
     this.selectedSpecialty = name;
   }
+
+  resetFilter() {
+    this.selectedSpecialty = '';
+  }
 }
+
+

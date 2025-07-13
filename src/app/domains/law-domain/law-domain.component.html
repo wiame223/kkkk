@@ -1,10 +1,14 @@
-<div class="law-container">
-  <!-- Section Spécialités -->
+<div class="education-container">
+  <!-- Spécialités -->
   <section class="specialties-section">
     <h2 class="section-title">Nos Spécialités Juridiques</h2>
     <div class="specialty-grid">
-    <div class="specialty-item" *ngFor="let specialty of specialties" (click)="selectSpecialty(specialty.name)">
-
+      <div
+        class="specialty-item"
+        *ngFor="let specialty of specialties"
+        (click)="selectSpecialty(specialty.name)"
+        style="cursor: pointer;"
+      >
         <div class="specialty-icon-wrapper">
           <i [class]="specialty.icon"></i>
         </div>
@@ -16,31 +20,56 @@
 
   <!-- Filtre -->
   <div class="filter-wrapper">
-    <label for="specialtyFilter">Rechercher par spécialité :</label>
-    <select id="specialtyFilter" [(ngModel)]="selectedSpecialty">
+    <label class="filter-label" for="specialtyFilter">Filtrer par spécialité :</label>
+    <select id="specialtyFilter" class="filter-select" [(ngModel)]="selectedSpecialty">
       <option value="">Toutes les spécialités</option>
-      <option *ngFor="let specialty of specialties" [value]="specialty.name">
-        {{ specialty.name }}
-      </option>
+      <option *ngFor="let specialty of specialties" [value]="specialty.name">{{ specialty.name }}</option>
     </select>
+    <button class="reset-btn" (click)="resetFilter()">Réinitialiser</button>
   </div>
 
-  <!-- Liste des avocats -->
-  <section class="lawyers-section">
-    <h2>Avocats {{ selectedSpecialty ? 'en ' + selectedSpecialty : 'disponibles' }}</h2>
-    <div class="lawyer-grid">
-      <div class="lawyer-card" *ngFor="let lawyer of filteredLawyers">
-        <img [src]="lawyer.avatar" alt="{{ lawyer.firstName }} {{ lawyer.lastName }}" class="lawyer-image" />
-        <h3>{{ lawyer.firstName }} {{ lawyer.lastName }}</h3>
-        <p><strong>Spécialité :</strong> {{ lawyer.specialty }}</p>
-        <p><strong>Lieu :</strong> {{ lawyer.location }}</p>
-        <p><strong>Mode :</strong> {{ lawyer.mode }}</p>
-        <p><strong>Disponibilités :</strong></p>
-        <ul>
-          <li *ngFor="let slot of lawyer.availableSlots">{{ slot }}</li>
-        </ul>
-        <button>Prendre RDV</button>
+  <!-- Debug optionnel -->
+  <p><strong>Spécialité sélectionnée :</strong> {{ selectedSpecialty || 'Aucune' }}</p>
+  <p><strong>Nombre d'avocats affichés :</strong> {{ filteredLawyers.length }}</p>
+
+  <!-- Avocats -->
+  <section class="professionals-section">
+    <h2 class="section-title">
+      Avocats {{ selectedSpecialty ? 'en ' + selectedSpecialty : 'disponibles' }}
+    </h2>
+    <div class="teacher-grid">
+      <div class="teacher-card" *ngFor="let lawyer of filteredLawyers">
+        <div class="teacher-image-container">
+          <img class="teacher-image" [src]="lawyer.avatar" alt="{{ lawyer.firstName }} {{ lawyer.lastName }}" />
+          <div class="teacher-specialty-badge">{{ lawyer.specialty }}</div>
+        </div>
+        <div class="teacher-name">
+          {{ lawyer.firstName }} {{ lawyer.lastName }}
+        </div>
+        <div class="teacher-detail">
+          <i class="bi bi-geo-alt"></i>
+          <span>{{ lawyer.location }}</span>
+        </div>
+        <div class="teacher-detail">
+          <i class="bi bi-laptop"></i>
+          <span>{{ lawyer.mode }}</span>
+        </div>
+
+        <div class="tarif-section">
+          <div class="tarif-title">Tarif :</div>
+          <div class="tarif-value">
+            <i class="bi bi-currency-dollar"></i> {{ lawyer.tarif }}
+          </div>
+        </div>
+
+        <div class="teacher-actions">
+          <button class="contact-btn">
+            <i class="bi bi-chat-dots"></i> Prendre Rdv
+          </button>
+        </div>
       </div>
     </div>
   </section>
 </div>
+
+

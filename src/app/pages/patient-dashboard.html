@@ -1,8 +1,15 @@
 <div class="dashboard-container">
- 
-<div class="logout-container">
-  <button (click)="confirmLogout()" class="btn-logout">Déconnexion</button>
+  <div class="logout-container">
+ <button class="btn-logout" (click)="confirmLogout()">
+  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="white" viewBox="0 0 24 24">
+    <path d="M16 13v-2H7V8l-5 4 5 4v-3zM20 3h-8v2h8v14h-8v2h8a2 2 0 002-2V5a2 2 0 00-2-2z"/>
+  </svg>
+  Déconnexion
+</button>
 
+
+  
+  <!-- Popup confirmation -->
   <div *ngIf="showLogoutConfirm" class="logout-confirm-popup">
     <div class="popup-arrow"></div>
     <p>Êtes-vous sûr de vouloir quitter ?</p>
@@ -14,77 +21,139 @@
 </div>
 
 
-
-
   <h1>Bienvenue <i class="fas fa-handshake"></i></h1>
   <p>Ceci est votre espace personnel patient.</p>
 
-
-  <div class="card-grid">
-    <div class="card" (click)="showSection('rendezvous')">
-      <i class="fas fa-calendar-check card-icon"></i>
-      <h3>Rendez-vous</h3>
-      <p>Voir et gérer vos rendez-vous à venir.</p>
-    </div>
-
-    <div class="card" (click)="showSection('documents')">
-      <i class="fas fa-file-medical card-icon"></i>
-      <h3>Documents</h3>
-      <p>Consulter vos ordonnances, résultats et factures.</p>
-    </div>
-
-    <div class="card" (click)="showSection('proches')">
-      <i class="fas fa-user-friends card-icon"></i>
-      <h3>Proches</h3>
-      <p>Ajouter ou gérer des proches sous votre compte.</p>
-    </div>
-
-    <div class="card" (click)="showSection('messagerie')">
-      <i class="fas fa-comments card-icon"></i>
-      <h3>Messagerie</h3>
-      <p>Discuter avec vos praticiens.</p>
-    </div>
+  <!-- Navigation -->
+ 
+<div class="card-grid">
+  <div class="card" (click)="showSection('agenda')">
+    <i class="fas fa-calendar-check card-icon"></i>
+    <h3>Rendez-vous</h3>
+    <p>Voir et gérer vos rendez-vous à venir.</p>
   </div>
 
-  <!-- Interface dynamique -->
+  <div class="card" (click)="showSection('documents')">
+    <i class="fas fa-file-medical card-icon"></i>
+    <h3>Documents</h3>
+    <p>Consulter vos ordonnances, résultats et factures.</p>
+  </div>
+
+  <div class="card" (click)="showSection('proches')">
+    <i class="fas fa-user-friends card-icon"></i>
+    <h3>Proches</h3>
+    <p>Ajouter ou gérer des proches sous votre compte.</p>
+  </div>
+
+  <div class="card" (click)="showSection('messagerie')">
+    <i class="fas fa-comments card-icon"></i>
+    <h3>Messagerie</h3>
+    <p>Discuter avec vos praticiens.</p>
+  </div>
+</div>
+
+
+  <!-- Sections dynamiques -->
   <div class="section-container mt-5">
     <ng-container [ngSwitch]="activeSection">
-      <div *ngSwitchCase="'rendezvous'">
-        <h2><i class="fas fa-calendar-day section-icon"></i> Mon Agenda</h2>
-        <p>(Affichage placeholder de l'agenda)</p>
-        <div class="calendar-placeholder">
-          <i class="far fa-calendar-alt placeholder-icon"></i>
-          <p>Ici s'affichera un calendrier avec vos rendez-vous.</p>
+
+      <!-- 📅 AGENDA -->
+   <!-- Section Agenda -->
+      <div *ngSwitchCase="'agenda'" class="agenda-section">
+        <div class="section-header">
+        <h2><i class="fas fa-calendar-week section-icon"></i> Agenda professionnel</h2>
+
+          <button class="btn-add" (click)="addAppointment()">
+            <i class="fas fa-plus"></i> Ajouter RDV
+          </button>
+        </div>
+        
+        <div class="calendar-view">
+          <div class="calendar-controls">
+            <button (click)="changeView('day')" [class.active]="calendarView === 'day'">Jour</button>
+            <button (click)="changeView('week')" [class.active]="calendarView === 'week'">Semaine</button>
+            <button (click)="changeView('month')" [class.active]="calendarView === 'month'">Mois</button>
+          </div>
+          
+          <div class="calendar-placeholder">
+            <div *ngIf="calendarView === 'day'">
+              <h4>Vue Jour</h4>
+              <p>Affichage des créneaux horaires pour aujourd'hui</p>
+            </div>
+            <div *ngIf="calendarView === 'week'">
+              <h4>Vue Semaine</h4>
+              <p>Affichage des rendez-vous sur 7 jours</p>
+            </div>
+            <div *ngIf="calendarView === 'month'">
+              <h4>Vue Mois</h4>
+              <p>Vue d'ensemble du mois avec indicateurs de disponibilité</p>
+            </div>
+          </div>
         </div>
       </div>
 
+      <!-- 📂 DOCUMENTS -->
       <div *ngSwitchCase="'documents'">
         <h2><i class="fas fa-folder-open section-icon"></i> Mes Documents</h2>
         <p>Ici s'afficheront vos ordonnances, résultats, etc.</p>
       </div>
 
+      <!-- 👨‍👩‍👧 PROCHES -->
       <div *ngSwitchCase="'proches'">
         <h2><i class="fas fa-users-cog section-icon"></i> Gérer mes proches</h2>
         <p>Liste ou formulaire pour ajouter/modifier un proche.</p>
       </div>
 
-      <div *ngSwitchCase="'messagerie'">
+      <!-- 💬 MESSAGERIE -->
+      <div *ngSwitchCase="'messagerie'" class="messagerie-section">
         <h2><i class="fas fa-comment-dots section-icon"></i> Messagerie</h2>
-        <div class="chat-box">
-          <div class="message from">
-            <i class="fas fa-user-circle message-icon"></i>
-            <div class="message-content">Bonjour Docteur, j'ai une question.</div>
+        <div class="messagerie-container">
+
+          <!-- Liste des contacts -->
+          <div class="contact-list">
+            <div
+              *ngFor="let contact of contacts"
+              class="contact"
+              [class.active]="activeContact === contact.id"
+              (click)="selectContact(contact.id)"
+            >
+              <img [src]="contact.avatar" class="avatar" />
+              <div>
+                <div class="name">{{ contact.name }}</div>
+                <div class="specialty">{{ contact.specialty }}</div>
+              </div>
+            </div>
           </div>
-          <div class="message to">
-            <i class="fas fa-user-md message-icon"></i>
-            <div class="message-content">Bonjour, je vous écoute</div>
+
+          <!-- Zone de chat -->
+          <div class="chat-box">
+            <div class="messages">
+              <div *ngFor="let msg of getMessagesForContact()" class="message" [class.sent]="msg.sent">
+                <div class="bubble">{{ msg.text }}</div>
+                <div class="time">{{ msg.time | date: 'shortTime' }}</div>
+              </div>
+            </div>
+            <div class="input-bar">
+              <input [(ngModel)]="newMessage" (keyup.enter)="sendMessage()" placeholder="Écrivez un message..." />
+              <button (click)="sendMessage()"><i class="fas fa-paper-plane"></i></button>
+            </div>
           </div>
         </div>
       </div>
 
+      <!-- Vue par défaut -->
       <div *ngSwitchDefault>
-        <p>Sélectionnez une section du tableau de bord.</p>
+        <div class="welcome-message">
+          <i class="fas fa-clinic-medical section-icon"></i>
+
+          <h3>Bienvenue dans votre espace patient</h3>
+          <p>Sélectionnez une section pour commencer</p>
+        </div>
       </div>
     </ng-container>
   </div>
-</div>
+
+
+    
+  </div>
+

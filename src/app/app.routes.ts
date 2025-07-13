@@ -11,6 +11,7 @@ import { EstheticDomainComponent } from './domains/esthetic-domain/esthetic-doma
 import { PractitionerRegisterComponent } from './auth/register/practitioner-register.component';
 import { LoginComponent } from './auth/login/login';
 import { PraticienDashboardComponent } from './pages/praticien-dashboard';
+import { AdminDashboardComponent } from './pages/admin-dashboard';
 
 export const routes: Routes = [
   { 
@@ -35,6 +36,11 @@ export const routes: Routes = [
 {
   path: 'dashboard-praticien',
   loadComponent: () => import('./pages/praticien-dashboard').then(m => m.PraticienDashboardComponent)
+},
+
+{
+  path: 'dashboard-admin',
+  loadComponent: () => import('./pages/admin-dashboard').then(m => m.AdminDashboardComponent)
 },
 
 {

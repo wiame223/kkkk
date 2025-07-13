@@ -64,7 +64,7 @@ onFileSelected(event: Event) {
         
         // Redirection après 2 secondes
         setTimeout(() => {
-          this.router.navigate(['/dashboard']);
+          this.router.navigate(['/dashboard-praticien']);
         }, 2000);
       }, 1500);
     } else {

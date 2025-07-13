@@ -1,0 +1,645 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+/* Styles de base */
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #f3f4f6;
+  margin: 0;
+  padding: 0;
+  color: #1f2937;
+}
+
+.dashboard-admin {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #f9fafb;
+  border-radius: 16px;
+  box-shadow: 0 20px 40px rgba(67, 56, 202, 0.1);
+  color: #1f2937;
+}
+
+/* En-tête */
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid #e0e7ff;
+}
+
+.dashboard-header h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #4338ca;
+  margin: 0;
+  text-align: center;
+  flex: 1;
+}
+
+.dashboard-header h1 i {
+  color: #6366f1;
+  margin-right: 0.5rem;
+}
+
+/* Cartes principales */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.card {
+  background-color: #ffffff;
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 6px 18px rgba(67, 56, 202, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  border: 1px solid #e0e7ff;
+  text-align: center;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 24px rgba(67, 56, 202, 0.2);
+}
+
+.card.active {
+  border: 1px solid #4338ca;
+  background-color: #eef2ff;
+}
+
+.card-icon {
+  font-size: 2.5rem;
+  color: #6366f1;
+  margin-bottom: 0.5rem;
+}
+
+.card h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0 0 0.25rem 0;
+  color: #4338ca;
+}
+
+.card p {
+  font-size: 0.95rem;
+  color: #4b5563;
+  margin: 0;
+}
+
+/* Conteneur des sections */
+.section-container {
+  background-color: #ffffff;
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  margin-top: 2rem;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.25rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #e0e7ff;
+}
+
+.section-header h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0;
+  color: #4338ca;
+}
+
+.section-header h2 i {
+  color: #6366f1;
+  margin-right: 0.5rem;
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+}
+
+.search-bar input {
+  padding: 0.5rem 1rem;
+  border: 1px solid #e0e7ff;
+  border-radius: 12px;
+  font-size: 0.95rem;
+  width: 250px;
+  margin-right: 0.75rem;
+  color: #1f2937;
+  background-color: #f9fafb;
+  transition: border-color 0.3s;
+}
+
+.search-bar input:focus {
+  outline: none;
+  border-color: #4338ca;
+  background-color: #eef2ff;
+}
+
+.search-bar button {
+  background-color: #6366f1;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.search-bar button:hover {
+  background-color: #4338ca;
+}
+
+/* Onglets */
+.tabs {
+  display: flex;
+  margin-bottom: 1.25rem;
+  border-bottom: 1px solid #e0e7ff;
+}
+
+.tabs button {
+  padding: 0.625rem 1.25rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #6b7280;
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.tabs button.active {
+  color: #4338ca;
+}
+
+.tabs button.active::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: #4338ca;
+  border-radius: 2px 2px 0 0;
+}
+
+/* Tableaux */
+.table-container {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid #e0e7ff;
+  color: #1f2937;
+}
+
+th {
+  font-weight: 600;
+  background-color: #f9fafb;
+  color: #4338ca;
+}
+
+tr:hover {
+  background-color: #eef2ff;
+}
+
+/* Badges */
+.badge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.badge-active {
+  background-color: #d1fae5;
+  color: #065f46;
+}
+
+.badge-pending {
+  background-color: #fef3c7;
+  color: #92400e;
+}
+
+.badge-inactive {
+  background-color: #fee2e2;
+  color: #991b1b;
+}
+
+/* Boutons d'action */
+.btn-edit, .btn-delete, .btn-validate, .btn-reject, .btn-warn, .btn-resolve, .btn-contact {
+  padding: 0.4rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  margin-right: 0.5rem;
+  transition: background-color 0.3s ease;
+}
+
+.btn-edit {
+  background-color: #6366f1;
+  color: white;
+}
+
+.btn-edit:hover {
+  background-color: #4338ca;
+}
+
+.btn-delete {
+  background-color: #ef4444;
+  color: white;
+}
+
+.btn-delete:hover {
+  background-color: #b91c1c;
+}
+
+.btn-validate {
+  background-color: #34d399;
+  color: white;
+}
+
+.btn-validate:hover {
+  background-color: #059669;
+}
+
+.btn-reject {
+  background-color: #ef4444;
+  color: white;
+}
+
+.btn-reject:hover {
+  background-color: #b91c1c;
+}
+
+.btn-warn {
+  background-color: #f97316;
+  color: white;
+}
+
+.btn-warn:hover {
+  background-color: #c2410c;
+}
+
+.btn-resolve {
+  background-color: #34d399;
+  color: white;
+}
+
+.btn-resolve:hover {
+  background-color: #059669;
+}
+
+.btn-contact {
+  background-color: #6366f1;
+  color: white;
+}
+
+.btn-contact:hover {
+  background-color: #4338ca;
+}
+
+/* Cartes de praticiens */
+.practitioners-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.practitioner-card {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 1.25rem;
+  box-shadow: 0 4px 8px rgba(67, 56, 202, 0.1);
+  border-left: 6px solid #6366f1;
+  display: flex;
+  flex-direction: column;
+}
+
+.practitioner-info h3 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.125rem;
+  color: #4338ca;
+  font-weight: 600;
+}
+
+.practitioner-info p {
+  margin: 0.25rem 0;
+  font-size: 0.9rem;
+  color: #4b5563;
+}
+
+.practitioner-actions {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* Messages */
+.messages-list {
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+.message-card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  border-left: 6px solid #e0e7ff;
+}
+
+.message-card.flagged {
+  border-left-color: #ef4444;
+}
+
+.message-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+  color: #6b7280;
+}
+
+.message-content {
+  font-size: 0.95rem;
+  color: #1f2937;
+  line-height: 1.5;
+}
+
+.message-actions {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* Statistiques */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.stat-card {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 1.25rem;
+  box-shadow: 0 4px 8px rgba(67, 56, 202, 0.1);
+  text-align: center;
+}
+
+.stat-value {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #4338ca;
+  margin-bottom: 0.25rem;
+}
+
+.stat-label {
+  font-size: 0.9rem;
+  color: #6b7280;
+}
+
+.charts-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.chart-wrapper {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 1.25rem;
+  box-shadow: 0 4px 8px rgba(67, 56, 202, 0.1);
+}
+
+.chart-wrapper h3 {
+  margin: 0 0 1.25rem 0;
+  font-size: 1rem;
+  color: #4338ca;
+}
+
+/* Réclamations */
+.reports-list {
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+.report-card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 1.25rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  border-left: 6px solid #e0e7ff;
+}
+
+.report-card.resolved {
+  border-left-color: #34d399;
+}
+
+.report-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.report-header h3 {
+  margin: 0;
+  font-size: 1rem;
+  color: #4338ca;
+}
+
+.report-status {
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+}
+
+.status-pending {
+  background-color: #fef3c7;
+  color: #92400e;
+}
+
+.status-resolved {
+  background-color: #d1fae5;
+  color: #065f46;
+}
+
+.report-meta {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+  color: #6b7280;
+}
+
+.report-content {
+  font-size: 0.95rem;
+  color: #1f2937;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+}
+
+.report-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+}
+
+/* Déconnexion */
+.logout-container {
+  display: flex;
+  justify-content: flex-end;
+  position: relative;
+}
+
+.btn-logout {
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  border: 1px solid #d32f2f;
+  background-color: #f44336;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color 0.3s ease;
+  position: relative;
+  z-index: 100;
+}
+
+.btn-logout:hover {
+  background-color: #b71c1c;
+}
+
+.btn-logout i {
+  font-size: 1.2rem;
+  margin-right: 0.5rem;
+}
+
+.logout-confirm-popup {
+  position: absolute;
+  top: 110%;
+  right: 0;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 6px 20px rgba(211, 47, 47, 0.3);
+  padding: 1rem 1.2rem;
+  font-size: 0.9rem;
+  color: #0a2540;
+  user-select: none;
+  min-width: 230px;
+  z-index: 1000;
+}
+
+.popup-arrow {
+  position: absolute;
+  top: -10px;
+  right: 15px;
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 10px solid white;
+}
+
+.popup-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.6rem;
+  margin-top: 0.8rem;
+}
+
+.popup-buttons button {
+  padding: 0.4rem 1rem;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  min-width: 60px;
+}
+
+.btn-yes {
+  background-color: #f44336;
+  color: white;
+}
+
+.btn-yes:hover {
+  background-color: #b71c1c;
+}
+
+.btn-no {
+  background-color: #eee;
+  color: #555;
+}
+
+.btn-no:hover {
+  background-color: #ccc;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .card-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  
+  .charts-container {
+    grid-template-columns: 1fr;
+  }
+  
+  .section-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  
+  .search-bar input {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .card-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .practitioner-actions, .message-actions, .report-actions {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .btn-edit, .btn-delete, .btn-validate, .btn-reject, .btn-warn, .btn-resolve, .btn-contact {
+    width: 100%;
+    margin-right: 0;
+  }
+}
+
+
+
+
+

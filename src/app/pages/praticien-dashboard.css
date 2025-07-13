@@ -239,3 +239,32 @@ body {
 .card-icon {
   color: #6366f1; /* violet clair par défaut */
 }
+
+
+
+.btn-logout {
+  position: relative;
+  padding-right: 2.5rem; /* espace pour la flèche à droite */
+}
+
+.btn-logout {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background-color: #f44336;
+  color: white;
+  border: 1px solid #d32f2f;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-logout:hover {
+  background-color: #b71c1c;
+}
+
+.btn-logout i {
+  font-size: 1.2rem;
+}

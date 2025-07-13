@@ -18,9 +18,11 @@ export class ChatbotComponent {
 
     this.messages.push({ text: this.userInput, fromUser: true });
 
-    // Simule une réponse simple du bot
     setTimeout(() => {
-      this.messages.push({ text: "Je suis un assistant virtuel, comment puis-je vous aider ?", fromUser: false });
+      this.messages.push({
+        text: "Je suis un assistant virtuel, comment puis-je vous aider ?",
+        fromUser: false
+      });
     }, 500);
 
     this.userInput = '';

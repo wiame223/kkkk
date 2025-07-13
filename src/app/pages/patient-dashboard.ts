@@ -183,18 +183,26 @@ export class PatientDashboardComponent {
 
   // ============================
   // Méthode pour simuler paiement
-  submitPayment() {
-    if (this.paymentAmount > 0 && this.cardNumber.length === 16) {
-      setTimeout(() => {
-        this.paymentStatus = 'success';
-        this.paymentMessage = `Paiement de ${this.paymentAmount} MAD effectué avec succès !`;
+submitPayment() {
+  if (this.paymentAmount > 0 && this.cardNumber.length === 16) {
+    setTimeout(() => {
+      this.paymentStatus = 'success';
+      this.paymentMessage = `Paiement de ${this.paymentAmount} MAD effectué avec succès !`;
 
-        this.paymentAmount = 0;
-        this.cardNumber = '';
-      }, 1000);
-    } else {
-      this.paymentStatus = 'error';
-      this.paymentMessage = 'Erreur dans les informations de paiement.';
-    }
+      this.paymentAmount = 0;
+      this.cardNumber = '';
+
+      // 🔁 Aller à la section appel vidéo
+      this.activeSection = 'appelVideo';
+    }, 1000);
+  } else {
+    this.paymentStatus = 'error';
+    this.paymentMessage = 'Erreur dans les informations de paiement.';
   }
+}
+
+// ✅ Ajouter ceci :
+endCall() {
+  this.activeSection = 'none';
+}
 }

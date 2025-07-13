@@ -3,78 +3,88 @@
 body {
   font-family: 'Poppins', sans-serif;
   background-color: #f3f4f6;
+  margin: 0;
+  padding: 0;
 }
 
-.dashboard-container {
+.dashboard-container,
+.dashboard-admin {
   max-width: 1200px;
   margin: 2rem auto;
   padding: 2rem;
-  background-color: #f9fafb;
+  background-color: #fff;
   border-radius: 16px;
-  box-shadow: 0 20px 40px rgba(67, 56, 202, 0.1);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
   color: #1f2937;
 }
 
-.dashboard-container h1 {
-  font-size: 2.5rem;
+.dashboard-header h1 {
+  font-size: 2rem;
   font-weight: 700;
   color: #4338ca;
   margin-bottom: 0.5rem;
-  text-align: center;
 }
 
-.dashboard-container p {
-  color: #6b7280;
-  margin-bottom: 2rem;
-  text-align: center;
+.dashboard-header p {
+  color: #4b5563;
+  margin-bottom: 1.5rem;
 }
 
 .card-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 1.5rem;
+  margin-top: 2rem;
 }
 
 .card {
   background-color: #ffffff;
   padding: 1.5rem;
-  border-radius: 16px;
-  box-shadow: 0 6px 18px rgba(67, 56, 202, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
   text-align: center;
+  transition: all 0.3s ease-in-out;
   cursor: pointer;
-  border: 1px solid #e0e7ff;
 }
 
 .card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 10px 24px rgba(67, 56, 202, 0.2);
+  transform: translateY(-5px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
 }
 
 .card-icon {
-  font-size: 2.5rem;
+  font-size: 2rem;
   color: #6366f1;
   margin-bottom: 0.5rem;
 }
 
 .card h3 {
-  font-size: 1.25rem;
-  font-weight: 600;
+  font-size: 1.2rem;
   color: #4338ca;
-  margin-bottom: 0.25rem;
+  margin-bottom: 0.3rem;
 }
 
 .card p {
-  color: #4b5563;
   font-size: 0.95rem;
+  color: #4b5563;
+}
+
+.card.active .card-icon {
+  color: #4338ca;
 }
 
 .section-container {
   margin-top: 2rem;
-  background-color: #ffffff;
   padding: 2rem;
-  border-radius: 16px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  border-radius: 12px;
+  background: #f9fafb;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+}
+
+.section-container h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  color: #1e3a8a;
 }
 
 .section-icon {
@@ -82,179 +92,14 @@ body {
   color: #6366f1;
 }
 
-.calendar-placeholder {
-  text-align: center;
-  margin-top: 2rem;
-  padding: 2rem;
-  border: 2px dashed #c7d2fe;
-  border-radius: 12px;
-  background-color: #eef2ff;
-  color: #4b5563;
-}
-
-.placeholder-icon {
-  font-size: 3rem;
-  color: #9ca3af;
-  margin-bottom: 1rem;
-}
-
-.chat-box {
-  background-color: #f3f4f6;
-  border: 1px solid #e5e7eb;
-  border-radius: 12px;
-  padding: 1rem;
-  max-height: 300px;
-  overflow-y: auto;
-}
-
-.message {
-  display: flex;
-  align-items: center;
-  margin-bottom: 1rem;
-}
-
-.message.from {
-  flex-direction: row;
-}
-
-.message.to {
-  flex-direction: row-reverse;
-}
-
-.message-icon {
-  font-size: 1.8rem;
-  margin: 0 0.75rem;
-  color: #4b5563;
-}
-
-.message-content {
-  background-color: #e0e7ff;
-  padding: 0.75rem 1rem;
-  border-radius: 16px;
-  max-width: 70%;
-  font-size: 0.95rem;
-  color: #1f2937;
-}
-
-.message.to .message-content {
-  background-color: #fce7f3;
-  color: #9d174d;
-}
-
-
-
-.logout-container {
-  display: flex;
-  justify-content: flex-end; /* bouton à droite */
-  position: relative;
-}
-
-/* Bouton Déconnexion */
-.btn-logout {
-  padding: 0.5rem 1rem;
-  border-radius: 6px;
-  border: 1px solid #d32f2f;
-  background-color: #f44336;
-  color: white;
-  font-weight: 600;
-  cursor: pointer;
-  white-space: nowrap;
-  transition: background-color 0.3s ease;
-  position: relative;
-  z-index: 100;
-}
-
-.btn-logout:hover {
-  background-color: #b71c1c;
-}
-
-/* Popup confirmation sous le bouton */
-.logout-confirm-popup {
-  position: absolute;
-  top: 110%;  /* juste en dessous du bouton */
-  right: 0;   /* aligné à droite */
-  background: white;
-  border-radius: 10px;
-  box-shadow: 0 6px 20px rgba(211, 47, 47, 0.3);
-  padding: 1rem 1.2rem;
-  font-size: 0.9rem;
-  color: #0a2540;
-  user-select: none;
-  min-width: 230px;
-  z-index: 1000;
-}
-
-/* Flèche au-dessus du popup qui pointe vers bouton (optionnel) */
-.popup-arrow {
-  position: absolute;
-  top: -10px; /* au-dessus */
-  right: 15px; /* à droite, alignée avec bouton */
-  width: 0;
-  height: 0;
-  border-left: 10px solid transparent;
-  border-right: 10px solid transparent;
-  border-bottom: 10px solid white; /* flèche vers le bas */
-}
-
-/* Boutons "Oui" et "Non" alignés horizontalement en bas */
-.popup-buttons {
-  display: flex;
-  justify-content: flex-end;
-  gap: 0.6rem;
-  margin-top: 0.8rem;
-}
-
-.popup-buttons button {
-  padding: 0.4rem 1rem;
-  border: none;
-  border-radius: 6px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  min-width: 60px;
-}
-
-.btn-yes {
-  background-color: #f44336;
-  color: white;
-}
-
-.btn-yes:hover {
-  background-color: #b71c1c;
-}
-
-.btn-no {
-  background-color: #eee;
-  color: #555;
-}
-
-.btn-no:hover {
-  background-color: #ccc;
-}
-
-/* Couleur violette pour les icônes des cartes actives */
-.card.active .card-icon {
-  color: #4338ca;
-}
-.card-icon {
-  color: #6366f1; /* violet clair par défaut */
-}
-
-
-
-.btn-logout {
-  position: relative;
-  padding-right: 2.5rem; /* espace pour la flèche à droite */
-}
-
 .btn-logout {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.5rem 1rem;
   background-color: #f44336;
-  color: white;
   border: 1px solid #d32f2f;
+  color: white;
+  padding: 0.5rem 1rem;
   border-radius: 6px;
   font-weight: 600;
   cursor: pointer;
@@ -265,6 +110,53 @@ body {
   background-color: #b71c1c;
 }
 
-.btn-logout i {
-  font-size: 1.2rem;
+.logout-container {
+  display: flex;
+  justify-content: flex-end;
+  position: relative;
+}
+
+.logout-confirm-popup {
+  position: absolute;
+  top: 110%;
+  right: 0;
+  background-color: white;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+  width: 250px;
+}
+
+.popup-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.popup-buttons button {
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.btn-confirm {
+  background-color: #4caf50;
+  color: white;
+}
+
+.btn-cancel {
+  background-color: #e5e7eb;
+  color: #1f2937;
+}
+
+.btn-confirm:hover {
+  background-color: #388e3c;
+}
+
+.btn-cancel:hover {
+  background-color: #cbd5e1;
 }

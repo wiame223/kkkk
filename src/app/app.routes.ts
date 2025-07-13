@@ -10,6 +10,7 @@ import { BienetreDomainComponent } from './domains/bienetre-domain/bienetre-doma
 import { EstheticDomainComponent } from './domains/esthetic-domain/esthetic-domain.component';
 import { PractitionerRegisterComponent } from './auth/register/practitioner-register.component';
 import { LoginComponent } from './auth/login/login';
+import { PraticienDashboardComponent } from './pages/praticien-dashboard';
 
 export const routes: Routes = [
   { 
@@ -29,6 +30,11 @@ export const routes: Routes = [
  {
   path: 'dashboard-patient',
   loadComponent: () => import('./pages/patient-dashboard').then(m => m.PatientDashboardComponent)
+},
+
+{
+  path: 'dashboard-praticien',
+  loadComponent: () => import('./pages/praticien-dashboard').then(m => m.PraticienDashboardComponent)
 },
 
 {

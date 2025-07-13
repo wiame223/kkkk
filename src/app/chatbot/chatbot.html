@@ -1,0 +1,14 @@
+<div class="chatbot-container shadow rounded p-3 bg-white">
+  <h5 class="mb-3">Assistant Virtuel</h5>
+  
+  <div class="chatbox mb-2">
+    <div *ngFor="let message of messages" [ngClass]="{'from-user': message.fromUser, 'from-bot': !message.fromUser}" class="chat-message">
+      {{ message.text }}
+    </div>
+  </div>
+
+  <form (submit)="sendMessage()" class="d-flex">
+    <input [(ngModel)]="userInput" name="message" class="form-control me-2" placeholder="Écrivez ici..." required>
+    <button class="btn btn-primary" type="submit">Envoyer</button>
+  </form>
+</div>

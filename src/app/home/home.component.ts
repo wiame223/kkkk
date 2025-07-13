@@ -2,15 +2,24 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { ChatbotComponent } from '../chatbot/chatbot'
+
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, RouterModule],
-  templateUrl: './home.component.html',
+  imports: [CommonModule, RouterModule, ChatbotComponent],
+templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
+
+   showChatbot = false;
+
+  toggleChatbot() {
+    this.showChatbot = !this.showChatbot;
+  }
+
 
   showDomains = false;
 

@@ -332,3 +332,12 @@
     </div>
   </footer>
 </div>
+
+<!-- Bouton Assistant -->
+<button class="btn btn-primary position-fixed bottom-0 end-0 m-4 rounded-circle p-3 shadow"
+        (click)="toggleChatbot()" style="z-index: 1050;">
+  🤖
+</button>
+
+<!-- Chatbot affiché -->
+<app-chatbot *ngIf="showChatbot"></app-chatbot>

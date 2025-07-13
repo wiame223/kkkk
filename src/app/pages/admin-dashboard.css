@@ -639,6 +639,12 @@ tr:hover {
   }
 }
 
+/* Couleur violette uniquement pour les icônes ciblées */
+.violet-icon {
+  color: #6c5ce7 !important; /* Violet */
+}
+
+
 
 
 

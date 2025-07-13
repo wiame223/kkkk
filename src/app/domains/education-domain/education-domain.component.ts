@@ -110,7 +110,11 @@ export class EducationDomainComponent {
     }
   ];
 
-  get filteredTeachers() {
+  showAgendaModal = false;
+selectedTeacherForAppointment: any = null;
+
+
+   get filteredTeachers() {
     if (!this.selectedSpecialty) return this.teachers;
     return this.teachers.filter(teacher => teacher.specialty === this.selectedSpecialty);
   }
@@ -121,5 +125,15 @@ export class EducationDomainComponent {
 
   resetFilter() {
     this.selectedSpecialty = '';
+  }
+
+  openAgendaModal(teacher: any) {
+    this.selectedTeacherForAppointment = teacher;
+    this.showAgendaModal = true;
+  }
+
+  closeAgendaModal() {
+    this.showAgendaModal = false;
+    this.selectedTeacherForAppointment = null;
   }
 }

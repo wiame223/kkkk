@@ -85,13 +85,31 @@
           </div>
 
           <div class="decorator-actions">
-            <button class="portfolio-btn">
-              <i class="bi bi-images"></i> Prendre Rdv
-            </button>
+            <button class="portfolio-btn" (click)="openAgendaModal(decorator)">
+  <i class="bi bi-images"></i> Prendre RDV
+</button>
+
             
           </div>
         </div>
       </div>
     </div>
   </section>
+
+
+
+  <!-- Modale consultation agenda (sans prise de rdv) -->
+<div *ngIf="showAgendaModal" class="modal-backdrop" (click)="closeAgendaModal()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <h3>Agenda de {{ selectedDecoratorForAppointment.firstName }} {{ selectedDecoratorForAppointment.lastName }}</h3>
+    
+    <p><em>Veuillez vous inscrire ou vous connecter pour consulter et prendre rendez-vous.</em></p>
+
+    <!-- Ici on pourrait afficher un message type "Agenda sera affiché après authentification" -->
+    <p>Cette fonctionnalité sera disponible une fois connecté(e).</p>
+
+    <button (click)="closeAgendaModal()">Fermer</button>
+  </div>
+  
+</div>
 </div>

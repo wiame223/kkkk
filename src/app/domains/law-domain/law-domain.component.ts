@@ -137,6 +137,9 @@ export class LawDomainComponent {
     }
   ];
 
+showAgendaModal = false;
+selectedTeacherForAppointment: any = null;
+
   get filteredLawyers() {
     return this.selectedSpecialty
       ? this.lawyers.filter(l => l.specialty === this.selectedSpecialty)
@@ -150,4 +153,15 @@ export class LawDomainComponent {
   resetFilter() {
     this.selectedSpecialty = '';
   }
+  
+  openAgendaModal(teacher: any) {
+    this.selectedTeacherForAppointment = teacher;
+    this.showAgendaModal = true;
+  }
+
+  closeAgendaModal() {
+    this.showAgendaModal = false;
+    this.selectedTeacherForAppointment = null;
+  }
 }
+

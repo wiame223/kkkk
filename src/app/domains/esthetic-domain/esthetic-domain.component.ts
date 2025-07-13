@@ -83,6 +83,10 @@ export class EstheticDomainComponent {
     }
   ];
 
+showAgendaModal = false;
+selectedTeacherForAppointment: any = null;
+
+
   get filteredEstheticians() {
     if (!this.selectedSpecialty) return this.estheticians;
     return this.estheticians.filter(e => e.specialty === this.selectedSpecialty);
@@ -95,6 +99,15 @@ export class EstheticDomainComponent {
   resetFilter() {
     this.selectedSpecialty = '';
   }
-}
 
+  openAgendaModal(teacher: any) {
+    this.selectedTeacherForAppointment = teacher;
+    this.showAgendaModal = true;
+  }
+
+  closeAgendaModal() {
+    this.showAgendaModal = false;
+    this.selectedTeacherForAppointment = null;
+  }
+}
 

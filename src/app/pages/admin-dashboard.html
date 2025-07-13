@@ -18,13 +18,12 @@
       </div>
     </div>
   </div>
-  
-  <!-- Titre en dessous -->
-  <h1 style="margin-top: 2.5rem;">
-    <i class="fas fa-user-shield"></i> Tableau de bord Administrateur
-  </h1>
-</div>
+ <!-- Titre en dessous -->
+<h1 style="margin-top: 2.5rem;">
+  <i class="fas fa-user-shield"></i> Tableau de bord Administrateur
+</h1>
 
+</div>
 
   <!-- Cartes principales -->
   <div class="card-grid">
@@ -117,7 +116,7 @@
 
     <!-- Section Validation -->
     <div *ngIf="activeSection === 'validation'" class="validation-section">
-      <h2><i class="fas fa-user-check"></i> Validation des praticiens</h2>
+   <h2><i class="fas fa-user-check violet-icon"></i> Validation des praticiens</h2>
       
       <div class="practitioners-list">
         <div *ngFor="let practitioner of practitioners" class="practitioner-card">
@@ -146,8 +145,8 @@
 
     <!-- Section Modération -->
     <div *ngIf="activeSection === 'moderation'" class="moderation-section">
-      <h2><i class="fas fa-comment-slash"></i> Modération des messages</h2>
-      
+     <h2><i class="fas fa-comment-slash violet-icon"></i> Modération des messages</h2>
+
       <div class="message-filters">
         <button [class.active]="filter === 'all'">Tous</button>
         <button [class.active]="filter === 'flagged'">Signalés</button>
@@ -181,8 +180,8 @@
 
     <!-- Section Statistiques -->
     <div *ngIf="activeSection === 'stats'" class="stats-section">
-      <h2><i class="fas fa-chart-line"></i> Statistiques de la plateforme</h2>
-      
+      <h2><i class="fas fa-chart-line violet-icon"></i> Statistiques de la plateforme</h2>
+ 
       <div class="stats-grid">
         <div class="stat-card">
           <div class="stat-value">{{stats.totalUsers}}</div>
@@ -220,8 +219,8 @@
 
     <!-- Section Réclamations -->
     <div *ngIf="activeSection === 'reports'" class="reports-section">
-      <h2><i class="fas fa-flag"></i> Gestion des réclamations</h2>
-      
+  <h2><i class="fas fa-flag violet-icon"></i> Gestion des réclamations</h2>
+
       <div class="reports-filters">
         <button [class.active]="reportFilter === 'all'">Toutes</button>
         <button [class.active]="reportFilter === 'pending'">En attente</button>

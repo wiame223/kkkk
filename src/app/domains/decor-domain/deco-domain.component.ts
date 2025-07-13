@@ -77,6 +77,7 @@ export class DecoDomainComponent {
     }
   ];
 
+  // Filtrage selon spécialité sélectionnée
   get filteredDecorators() {
     if (!this.selectedSpecialty || this.selectedSpecialty === '') {
       return this.decorators;
@@ -84,11 +85,27 @@ export class DecoDomainComponent {
     return this.decorators.filter(d => d.specialty === this.selectedSpecialty);
   }
 
+
   selectSpecialty(name: string) {
     this.selectedSpecialty = name;
   }
 
   resetFilter() {
     this.selectedSpecialty = '';
+  }
+  
+
+  // Modale agenda (consultation uniquement)
+  selectedDecoratorForAppointment: any = null;
+  showAgendaModal: boolean = false;
+
+  openAgendaModal(decorator: any) {
+    this.selectedDecoratorForAppointment = decorator;
+    this.showAgendaModal = true;
+  }
+
+  closeAgendaModal() {
+    this.showAgendaModal = false;
+    this.selectedDecoratorForAppointment = null;
   }
 }

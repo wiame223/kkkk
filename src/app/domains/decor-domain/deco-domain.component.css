@@ -124,7 +124,6 @@
 .decorator-card {
   background: white;
   border-radius: 12px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
   overflow: hidden;
   transition: all 0.3s ease;
   padding: 1rem 1.5rem 2rem;
@@ -220,16 +219,17 @@
 /* Actions */
 .decorator-actions {
   display: flex;
-  justify-content: space-between;
+  justify-content: center; /* centre horizontalement */
   gap: 1rem;
   margin-top: 1.5rem;
 }
 
 .portfolio-btn,
 .contact-btn {
-  flex: 1;
-  padding: 0.6rem;
-  border: none;
+  flex: none;           /* empêche l'étirement complet */
+  width: 100%;          /* occupe toute la largeur disponible */
+  max-width: 280px;     /* limite la largeur max */
+  padding: 0.6rem 1.2rem;
   border-radius: 8px;
   font-weight: 600;
   cursor: pointer;
@@ -238,20 +238,23 @@
   align-items: center;
   justify-content: center;
   transition: all 0.3s ease;
+  font-size: 1rem;
 }
 
 .portfolio-btn {
-  background: #44ad8f;
+  background: #05e2bd;
 }
 
 .contact-btn {
   background: #1abc9c;
+  
 }
 
 .portfolio-btn:hover,
 .contact-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+  background: #52e0e7;
+  box-shadow: 0 5px 15px rgba(62, 167, 202, 0.5);
 }
 
 .portfolio-btn i,
@@ -279,4 +282,54 @@
     font-size: 0.95rem;
     padding: 0.5rem;
   }
+}
+
+
+
+.modal-backdrop {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 400px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.modal-content h3 {
+  margin-top: 0;
+}
+
+.modal-content ul {
+  list-style: none;
+  padding: 0;
+}
+
+.modal-content li {
+  margin-bottom: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-content button {
+  background-color: #4338ca;
+  color: white;
+  border: none;
+  padding: 0.3rem 0.7rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.modal-content button:hover {
+  background-color: #635bff;
 }

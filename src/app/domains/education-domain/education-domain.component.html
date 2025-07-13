@@ -90,13 +90,28 @@
           </div>
 
           <div class="teacher-actions">
-            <button class="contact-btn">
-              <i class="bi bi-envelope-fill"></i> Prendre RDV
-            </button>
+            <button class="contact-btn" (click)="openAgendaModal(teacher)">
+  <i class="bi bi-envelope-fill"></i> Prendre RDV
+</button>
+
           </div>
         </div>
       </div>
     </div>
   </section>
+
+<!-- Modale consultation agenda (avec message de connexion) -->
+<div *ngIf="showAgendaModal" class="modal-backdrop" (click)="closeAgendaModal()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <h3>Agenda de {{ selectedTeacherForAppointment.firstName }} {{ selectedTeacherForAppointment.lastName }}</h3>
+    
+    <p><em>Veuillez vous inscrire ou vous connecter pour consulter et prendre rendez-vous.</em></p>
+    <p>Cette fonctionnalité sera disponible une fois connecté(e).</p>
+
+    <button (click)="closeAgendaModal()">Fermer</button>
+  </div>
+</div>
+
+  
 </div>
 

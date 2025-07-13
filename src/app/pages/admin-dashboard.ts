@@ -205,6 +205,14 @@ activeSection: 'users' | 'validation' | 'moderation' | 'stats' | 'reports' = 'us
   // Méthodes pour les sections
   showSection(section: 'users' | 'validation' | 'moderation' | 'stats' | 'reports') {
   this.activeSection = section;
+
+  // Après changement de section, scroll vers la div .section-container
+  setTimeout(() => {
+    const container = document.querySelector('.section-container');
+    if (container) {
+      container.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, 0);
 }
 
 

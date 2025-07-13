@@ -53,14 +53,23 @@ export class PraticienDashboardComponent {
     this.router.navigate(['']);
   }
 
-  // Navigation entre sections
   showSection(section: string) {
-    this.activeSection = section;
-    if (section === 'collaboration') {
-      this.commTab = 'messagerie'; // Reset à la messagerie par défaut
-    }
+  this.activeSection = section;
+  if (section === 'collaboration') {
+    this.commTab = 'messagerie'; // Reset à la messagerie par défaut
   }
+  
+  // Après changement de section, scroll vers la div .section-container
+  setTimeout(() => {
+    const container = document.querySelector('.section-container');
+    if (container) {
+      container.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, 0);
+}
 
+
+ 
   // Gestion des onglets de communication
   setCommTab(tab: string) {
     this.commTab = tab;

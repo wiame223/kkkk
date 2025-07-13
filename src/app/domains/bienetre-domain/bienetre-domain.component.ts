@@ -158,6 +158,10 @@ export class BienetreDomainComponent {
     }
   ];
 
+showAgendaModal = false;
+selectedTeacherForAppointment: any = null;
+
+
   get filteredCoaches() {
     if (!this.selectedSpecialty) return this.coaches;
     return this.coaches.filter(coach => coach.specialty === this.selectedSpecialty);
@@ -169,5 +173,15 @@ export class BienetreDomainComponent {
 
   resetFilter() {
     this.selectedSpecialty = '';
+  }
+
+   openAgendaModal(teacher: any) {
+    this.selectedTeacherForAppointment = teacher;
+    this.showAgendaModal = true;
+  }
+
+  closeAgendaModal() {
+    this.showAgendaModal = false;
+    this.selectedTeacherForAppointment = null;
   }
 }

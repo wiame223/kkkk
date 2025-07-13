@@ -122,16 +122,19 @@
 
 /* Carte médecin */
 .teacher-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* pousse le contenu en haut et le bouton en bas */
+  height: 100%;
   background: white;
   border-radius: 12px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
   overflow: hidden;
   transition: all 0.3s ease;
   padding: 1rem 1.5rem 2rem;
-  display: flex;
-  flex-direction: column;
   text-align: center;
 }
+
 
 .teacher-card:hover {
   transform: translateY(-5px);
@@ -229,7 +232,7 @@
   font-weight: 600;
   cursor: pointer;
   color: white;
-  background: #1abc9c;
+  background: #2ecc71;     
   display: flex;
   align-items: center;
   justify-content: center;
@@ -238,7 +241,8 @@
 
 .contact-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+  background: #836fff;      /* Lavender */
+  box-shadow: 0 5px 15px rgba(131, 111, 255, 0.5);
 }
 
 .contact-btn i {
@@ -267,3 +271,88 @@
 }
 
 
+
+
+
+
+.modal-backdrop {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 400px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.modal-content h3 {
+  margin-top: 0;
+}
+
+.modal-content ul {
+  list-style: none;
+  padding: 0;
+}
+
+.modal-content li {
+  margin-bottom: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-content button {
+  background-color: #4338ca;
+  color: white;
+  border: none;
+  padding: 0.3rem 0.7rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.modal-content button:hover {
+  background-color: #635bff;
+}
+
+
+.doctor-actions {
+  display: flex;
+  justify-content: center; /* centre horizontalement */
+  margin-top: 1.5rem;
+}
+
+.contact-btn {
+  width: 100%;          /* occupe toute la largeur possible */
+  max-width: 280px;     /* limite la largeur max */
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  color: rgb(12, 101, 31);
+  background: #2ecc71; /* couleur existante ou autre */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+}
+
+.contact-btn:hover {
+  background: #02fbb4; /* couleur hover existante ou autre */
+  box-shadow: 0 5px 15px rgba(4, 248, 163, 0.5);
+  transform: translateY(-2px);
+}
+
+.contact-btn i {
+  margin-right: 0.5rem;
+}

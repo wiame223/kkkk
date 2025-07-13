@@ -98,7 +98,7 @@ export class EducationDomainComponent {
     },
     {
       firstName: 'Fatima',
-      lastName: 'Zahra',
+      lastName: 'Zohra',
       specialty: 'Préparation Examens',
       subject: 'Philosophie',
       level: 'Baccalauréat',

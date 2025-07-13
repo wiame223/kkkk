@@ -205,4 +205,18 @@ submitPayment() {
 endCall() {
   this.activeSection = 'none';
 }
+
+
+
+startVideoCall() {
+  console.log("Démarrage d'un appel vidéo avec le contact ID:", this.activeContact);
+  // Ici tu pourras ajouter la logique réelle (intégration WebRTC, redirection, etc.)
+  alert('Appel vidéo démarré (simulation)');
+}
+
+startAudioCall() {
+  console.log("Démarrage d'un appel audio avec le contact ID:", this.activeContact);
+  alert('Appel audio démarré (simulation)');
+}
+
 }

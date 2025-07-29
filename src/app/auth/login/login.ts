@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Router } from '@angular/router';
+import { AuthService, LoginRequest } from '../../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +14,7 @@ import { RouterModule, Router } from '@angular/router';
 export class LoginComponent {
   loginForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private router: Router) {
+  constructor(private fb: FormBuilder, private router: Router, private authService: AuthService) {
     this.loginForm = this.fb.group({
       profile: ['', Validators.required],  // <- contrôle profil ajouté
       email: ['', [Validators.required, Validators.email]],
@@ -28,23 +29,38 @@ export class LoginComponent {
       console.log('Email:', email);
       console.log('Mot de passe:', password);
 
-      // TODO: appeler un service d'authentification ici
-
-      // Simuler redirection vers dashboard en fonction du profil choisi
-      switch (profile) {
-        case 'admin':
-          this.router.navigate(['/admin-dashboard']);
-          break;
-        case 'patient':
-          this.router.navigate(['/patient-dashboard']);
-          break;
-        case 'praticien':
-          this.router.navigate(['/praticien-dashboard']);
-          break;
-        default:
-          this.router.navigate(['/']);
-          break;
-      }
+      // Appeler le service d'authentification
+      const loginRequest: LoginRequest = { email, password };
+      
+      this.authService.login(loginRequest).subscribe({
+        next: (response) => {
+          console.log('Login successful:', response);
+          // Stocker le token si nécessaire
+          localStorage.setItem('token', response.token);
+          localStorage.setItem('userRole', profile);
+          
+          // Redirection vers dashboard en fonction du profil choisi
+          switch (profile) {
+            case 'admin':
+              this.router.navigate(['/dashboard-admin']);
+              break;
+            case 'patient':
+              this.router.navigate(['/dashboard-patient']);
+              break;
+            case 'praticien':
+              this.router.navigate(['/dashboard-praticien']);
+              break;
+            default:
+              this.router.navigate(['/']);
+              break;
+          }
+        },
+        error: (error) => {
+          console.error('Login failed:', error);
+          // Gérer les erreurs d'authentification ici
+          alert('Échec de la connexion. Veuillez vérifier vos identifiants.');
+        }
+      });
     } else {
       this.loginForm.markAllAsTouched();
     }

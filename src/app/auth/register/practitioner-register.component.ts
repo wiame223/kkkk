@@ -84,3 +84,4 @@ onFileSelected(event: Event) {
 
   get f() { return this.registerForm.controls; }
 }
+

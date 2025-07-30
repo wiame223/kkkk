@@ -1,5 +1,5 @@
 <div class="container">
-  <h2><i class="fas fa-user-plus"></i> Inscription Patient</h2>
+  <h2><i class="fas fa-user-plus"></i> Inscription Client</h2>
 
  <!-- Formulaire affiché seulement si registerForm est bien créé -->
   <form *ngIf="registerForm" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
@@ -101,14 +101,6 @@
       </div>
     </div>
 
-    <!-- Remarque -->
-    <div class="mb-3 input-icon">
-      <label><i class="fas fa-comment"></i> Remarque</label>
-      <div class="input-wrapper">
-        <i class="fas fa-pencil-alt"></i>
-        <textarea class="form-control" rows="3" formControlName="note"></textarea>
-      </div>
-    </div>
 
     <!-- Region -->
     <div class="mb-3 input-icon">
@@ -183,6 +175,15 @@
       </div>
       <div *ngIf="fileError" class="error">
         <small>{{ fileError }}</small>
+      </div>
+    </div>
+
+     <!-- Remarque -->
+    <div class="mb-3 input-icon">
+      <label><i class="fas fa-comment"></i> Remarque</label>
+      <div class="input-wrapper">
+        <i class="fas fa-pencil-alt"></i>
+        <textarea class="form-control" rows="3" formControlName="note"></textarea>
       </div>
     </div>
 

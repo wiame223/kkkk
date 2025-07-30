@@ -1,15 +1,316 @@
-<div class="dashboard-container">
-  <div class="logout-container">
- <button class="btn-logout" (click)="confirmLogout()">
-  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="white" viewBox="0 0 24 24">
-    <path d="M16 13v-2H7V8l-5 4 5 4v-3zM20 3h-8v2h8v14h-8v2h8a2 2 0 002-2V5a2 2 0 00-2-2z"/>
-  </svg>
-  Déconnexion
-</button>
+<div class="dashboard-layout">
+  <!-- ✅ Sidebar cliquable -->
+  <div class="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-header">
+  <div class="logo-circle">
+    <i class="fas fa-user"></i> <!-- Icône client -->
+  </div>
+   <span class="sidebar-title">Client</span>
+</div>
 
 
-  
-  <!-- Popup confirmation -->
+    </div>
+    
+    <nav class="sidebar-nav">
+      <a (click)="showSection('none')" class="nav-item" [class.active]="activeSection === 'none'">
+        <i class="fas fa-th-large"></i>
+        <span>Accueil</span>
+      </a>
+      <a (click)="showSection('agenda')" class="nav-item" [class.active]="activeSection === 'agenda'">
+        <i class="fas fa-calendar-check"></i>
+        <span>Agenda</span>
+      </a>
+      <a (click)="showSection('documents')" class="nav-item" [class.active]="activeSection === 'documents'">
+        <i class="fas fa-file-medical"></i>
+        <span>Documents</span>
+      </a>
+      <a (click)="showSection('proches')" class="nav-item" [class.active]="activeSection === 'proches'">
+        <i class="fas fa-user-friends"></i>
+        <span>Proches</span>
+      </a>
+      <a (click)="showSection('messagerie')" class="nav-item" [class.active]="activeSection === 'messagerie'">
+        <i class="fas fa-comments"></i>
+        <span>Messagerie</span>
+      </a>
+      <a (click)="showSection('paiement')" class="nav-item" [class.active]="activeSection === 'paiement'">
+        <i class="fas fa-credit-card"></i>
+        <span>Paiement</span>
+      </a>
+    </nav>
+    
+    <div class="sidebar-footer">
+      <a class="nav-item" (click)="confirmLogout()">
+        <i class="fas fa-sign-out-alt"></i>
+        <span>Déconnexion</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- ✅ Contenu principal avec votre code existant -->
+  <div class="main-content">
+    <div class="dashboard-container">
+      
+      <!-- ✅ Page d'accueil avec vos cartes originales -->
+      <div *ngIf="activeSection === 'none'" class="home-section">
+        <h1>Bienvenue <i class="fas fa-handshake"></i></h1>
+        <p>Ceci est votre espace personnel client.</p>
+        
+        <!-- Navigation avec vos cartes originales -->
+        <div class="card-grid">
+          <div class="card" (click)="showSection('agenda')">
+            <i class="fas fa-calendar-check card-icon"></i>
+            <h3>Rendez-vous</h3>
+            <p>Voir et gérer vos rendez-vous à venir.</p>
+          </div>
+          <div class="card" (click)="showSection('documents')">
+            <i class="fas fa-file-medical card-icon"></i>
+            <h3>Documents</h3>
+            <p>Consulter vos ordonnances, résultats et factures.</p>
+          </div>
+          <div class="card" (click)="showSection('proches')">
+            <i class="fas fa-user-friends card-icon"></i>
+            <h3>Proches</h3>
+            <p>Ajouter ou gérer des proches sous votre compte.</p>
+          </div>
+          <div class="card" (click)="showSection('messagerie')">
+            <i class="fas fa-comments card-icon"></i>
+            <h3>Messagerie</h3>
+            <p>Discuter avec vos praticiens.</p>
+          </div>
+          <div class="card" (click)="showSection('paiement')">
+            <i class="fas fa-credit-card card-icon"></i>
+            <h3>Paiement</h3>
+            <p>Effectuer un paiement en ligne</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ✅ Sections dynamiques - Votre code existant -->
+      <div class="section-container" *ngIf="activeSection !== 'none'">
+        <ng-container [ngSwitch]="activeSection">
+          
+          <!-- 📅 AGENDA -->
+          <div *ngSwitchCase="'agenda'" class="agenda-section">
+  <!-- Layout à deux panneaux comme dans le screenshot -->
+  <div class="agenda-layout">
+    
+    <!-- Panel gauche - Today's Visits -->
+    <div class="visits-panel">
+      <div class="visits-header">
+        <h2>Today's visits</h2>
+        <p>{{ getCurrentDate() }}</p>
+      </div>
+      
+      <div class="visits-list">
+        <div *ngFor="let visit of todaysVisits" class="visit-item">
+          <img [src]="visit.avatar" class="patient-avatar" [alt]="visit.patientName" />
+          <div class="visit-details">
+            <div class="visit-time">{{ visit.time }}</div>
+            <div class="patient-name">{{ visit.patientName }}</div>
+          </div>
+          <div class="visit-status" [class]="'status-' + visit.type"></div>
+        </div>
+      </div>
+      
+      <!-- Visit Planner Promo Card -->
+      <div class="planner-promo">
+        <h3>Try our visit planner!</h3>
+        <p>Planner will schedule calls and visits based on the history. You will only need to confirm!</p>
+        <a href="#" class="promo-link">Try now →</a>
+        <div class="promo-illustration">
+          <i class="fas fa-calendar-alt"></i>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Panel droit - Calendar -->
+    <div class="calendar-main">
+      <!-- Header avec profil patient -->
+      <div class="calendar-header">
+        <h1>Calendar</h1>
+        <div class="header-actions">
+          <div class="patient-profile">
+            <img src="/placeholder.svg?height=32&width=32&text=JD" class="patient-avatar" alt="Patient" />
+            <div class="patient-info">
+              <div class="patient-name">John Doe</div>
+              <div class="patient-status">Patient</div>
+            </div>
+          </div>
+          <button class="schedule-btn" (click)="addAppointment()">
+            <i class="fas fa-plus"></i> Schedule a visit
+          </button>
+        </div>
+      </div>
+      
+      <!-- Navigation du calendrier -->
+      <div class="calendar-nav">
+        <div class="view-tabs">
+          <button (click)="changeView('day')" [class.active]="calendarView === 'day'">Day</button>
+          <button (click)="changeView('week')" [class.active]="calendarView === 'week'">Week</button>
+          <button (click)="changeView('month')" [class.active]="calendarView === 'month'" class="active-tab">Month</button>
+          <button (click)="changeView('year')" [class.active]="calendarView === 'year'">Year</button>
+        </div>
+        
+        <div class="month-nav">
+          <button class="nav-arrow" (click)="previousMonth()">
+            <i class="fas fa-chevron-left"></i>
+          </button>
+          <span class="current-period">{{ getMonthYear() }}</span>
+          <button class="nav-arrow" (click)="nextMonth()">
+            <i class="fas fa-chevron-right"></i>
+          </button>
+        </div>
+      </div>
+      
+      <!-- Grille du calendrier -->
+      <div class="calendar-container">
+        <div class="calendar-weekdays">
+          <div class="weekday" *ngFor="let day of weekDays">{{ day }}</div>
+        </div>
+        
+        <div class="calendar-grid">
+          <div 
+            *ngFor="let day of calendarDays" 
+            class="calendar-cell"
+            [class.today]="day.isToday"
+            [class.prev-month]="day.isPrevMonth"
+            [class.next-month]="day.isNextMonth"
+          >
+            <span class="date-number">{{ day.date }}</span>
+            <div class="cell-events" *ngIf="day.events && day.events.length > 0">
+              <span 
+                *ngFor="let event of day.events" 
+                class="event-badge"
+                [class]="'badge-' + event.type"
+              >
+                {{ event.label }} {{ event.count > 0 ? event.count : '' }}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+</div>
+          
+          <!-- 📂 DOCUMENTS -->
+          <div *ngSwitchCase="'documents'">
+            <h2><i class="fas fa-folder-open section-icon"></i> Mes Documents</h2>
+            <p>Ici s'afficheront vos ordonnances, résultats, etc.</p>
+            
+            <!-- Upload fichiers -->
+            <input type="file" (change)="onFileSelected($event)" multiple accept=".pdf,.jpg,.jpeg,.png" />
+            
+            <!-- Liste des documents -->
+            <div class="documents-list">
+              <div *ngFor="let doc of documents; let i = index" class="document-preview">
+                <ng-container *ngIf="doc.type === 'pdf'; else imageBlock">
+                  <embed [src]="doc.url" type="application/pdf" width="100%" height="400px" />
+                </ng-container>
+                <ng-template #imageBlock>
+                  <img [src]="doc.url" alt="document image" width="100%" />
+                </ng-template>
+                <div class="doc-info">
+                  <p>{{ doc.name }}</p>
+                  <button (click)="removeDocument(i)">Supprimer</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- 👨‍👩‍👧 PROCHES -->
+          <div *ngSwitchCase="'proches'">
+            <h2><i class="fas fa-users-cog section-icon"></i> Gérer mes proches</h2>
+            <p>Liste ou formulaire pour ajouter/modifier un proche.</p>
+          </div>
+          
+          <!-- 💬 MESSAGERIE -->
+          <div *ngSwitchCase="'messagerie'" class="messagerie-section">
+            <h2><i class="fas fa-comment-dots section-icon"></i> Messagerie</h2>
+            
+            <div class="call-buttons" style="margin-bottom: 1rem;">
+              <button (click)="startVideoCall()" class="btn-call">
+                <i class="fas fa-video"></i> Appel Vidéo
+              </button>
+              <button (click)="startAudioCall()" class="btn-call">
+                <i class="fas fa-phone"></i> Appel Audio
+              </button>
+            </div>
+            
+            <div class="messagerie-container">
+              <!-- Liste des contacts -->
+              <div class="contact-list">
+                <div
+                  *ngFor="let contact of contacts"
+                  class="contact"
+                  [class.active]="activeContact === contact.id"
+                  (click)="selectContact(contact.id)"
+                >
+                  <img [src]="contact.avatar" class="avatar" />
+                  <div>
+                    <div class="name">{{ contact.name }}</div>
+                    <div class="specialty">{{ contact.specialty }}</div>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Zone de chat -->
+              <div class="chat-box">
+                <div class="messages">
+                  <div *ngFor="let msg of getMessagesForContact()" class="message" [class.sent]="msg.sent">
+                    <div class="bubble">{{ msg.text }}</div>
+                    <div class="time">{{ msg.time | date: 'shortTime' }}</div>
+                  </div>
+                </div>
+                <div class="input-bar">
+                  <input [(ngModel)]="newMessage" (keyup.enter)="sendMessage()" placeholder="Écrivez un message..." />
+                  <button (click)="sendMessage()"><i class="fas fa-paper-plane"></i></button>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- 💳 PAIEMENT -->
+          <div *ngSwitchCase="'paiement'">
+            <h2><i class="fas fa-credit-card section-icon"></i> Paiement en ligne</h2>
+            <form (ngSubmit)="submitPayment()" #paymentForm="ngForm" class="payment-form">
+              <label>Montant (MAD) :</label>
+              <input
+                type="number"
+                [(ngModel)]="paymentAmount"
+                name="amount"
+                required
+                min="1"
+                placeholder="Montant en dirhams marocains"
+              />
+              
+              <label>Numéro de carte (simulation) :</label>
+              <input
+                type="text"
+                [(ngModel)]="cardNumber"
+                name="card"
+                required
+                minlength="16"
+                maxlength="16"
+                placeholder="16 chiffres"
+              />
+              
+              <button type="submit" [disabled]="paymentForm.invalid">Payer</button>
+            </form>
+            <div *ngIf="paymentStatus" [ngClass]="{'success-msg': paymentStatus === 'success', 'error-msg': paymentStatus === 'error'}">
+              {{ paymentMessage }}
+            </div>
+          </div>
+          
+        </ng-container>
+      </div>
+      
+    </div>
+  </div>
+
+  <!-- ✅ Popup de déconnexion -->
   <div *ngIf="showLogoutConfirm" class="logout-confirm-popup">
     <div class="popup-arrow"></div>
     <p>Êtes-vous sûr de vouloir quitter ?</p>
@@ -19,231 +320,3 @@
     </div>
   </div>
 </div>
-
-
-  <h1>Bienvenue <i class="fas fa-handshake"></i></h1>
-  <p>Ceci est votre espace personnel patient.</p>
-
-  <!-- Navigation -->
- 
-<div class="card-grid">
-  <div class="card" (click)="showSection('agenda')">
-    <i class="fas fa-calendar-check card-icon"></i>
-    <h3>Rendez-vous</h3>
-    <p>Voir et gérer vos rendez-vous à venir.</p>
-  </div>
-
-  <div class="card" (click)="showSection('documents')">
-    <i class="fas fa-file-medical card-icon"></i>
-    <h3>Documents</h3>
-    <p>Consulter vos ordonnances, résultats et factures.</p>
-  </div>
-
-  <div class="card" (click)="showSection('proches')">
-    <i class="fas fa-user-friends card-icon"></i>
-    <h3>Proches</h3>
-    <p>Ajouter ou gérer des proches sous votre compte.</p>
-  </div>
-
-  <div class="card" (click)="showSection('messagerie')">
-    <i class="fas fa-comments card-icon"></i>
-    <h3>Messagerie</h3>
-    <p>Discuter avec vos praticiens.</p>
- 
-</div>
-
-
-<!-- Carte Paiement intégrée ici -->
-  <div class="card" (click)="showSection('paiement')">
-    <i class="fas fa-credit-card card-icon"></i>
-    <h3>Paiement</h3>
-    <p>Effectuer un paiement en ligne</p>
-  </div>
-</div>
-
-  <!-- Sections dynamiques -->
-  <div class="section-container mt-5">
-    <ng-container [ngSwitch]="activeSection">
-
-      <!-- 📅 AGENDA -->
-   <div *ngSwitchCase="'agenda'" class="agenda-section">
-  <div class="section-header">
-    <h2><i class="fas fa-calendar-week section-icon"></i> Agenda professionnel</h2>
-
-    <button class="btn-add" (click)="addAppointment()">
-      <i class="fas fa-plus"></i> Ajouter RDV
-    </button>
-  </div>
-  
- <div class="calendar-view">
-  <div class="calendar-controls">
-    <button (click)="changeView('day')" [class.active]="calendarView === 'day'">Jour</button>
-    <button (click)="changeView('week')" [class.active]="calendarView === 'week'">Semaine</button>
-    <button (click)="changeView('month')" [class.active]="calendarView === 'month'">Mois</button>
-  </div>
-
-  <div class="calendar-placeholder">
-    <div *ngIf="calendarView === 'day'">
-      <h4>Vue Jour</h4>
-      <p>Affichage des créneaux horaires pour aujourd'hui</p>
-    </div>
-    <div *ngIf="calendarView === 'week'">
-      <h4>Vue Semaine</h4>
-      <p>Affichage des rendez-vous sur 7 jours</p>
-    </div>
-    <div *ngIf="calendarView === 'month'">
-      <h4>Vue Mois</h4>
-      <p>Vue d'ensemble du mois avec indicateurs de disponibilité</p>
-    </div>
-  </div>
-
-  <!-- Liste des rendez-vous **en dehors** de la zone calendrier -->
-  <div class="appointments-list mt-4">
-    <h3>Mes rendez-vous à venir</h3>
-    <ul>
-      <li *ngFor="let appt of appointments">
-        <strong>{{ appt.title }}</strong> — {{ appt.date | date:'fullDate' }} à {{ appt.date | date:'shortTime' }} — <em>{{ appt.status }}</em>
-        <button (click)="cancelAppointment(appt.id)" [disabled]="appt.status !== 'confirmé'" style="margin-left: 1rem;">Annuler</button>
-      </li>
-    </ul>
-  </div>
-</div>
-
-</div>
-
-     <!-- 📂 DOCUMENTS -->
-<div *ngSwitchCase="'documents'">
-  <h2><i class="fas fa-folder-open section-icon"></i> Mes Documents</h2>
-  <p>Ici s'afficheront vos ordonnances, résultats, etc.</p>
-
-  <!-- Upload fichiers -->
-  <input type="file" (change)="onFileSelected($event)" multiple accept=".pdf,.jpg,.jpeg,.png" />
-
-  <!-- Liste des documents -->
-  <div class="documents-list">
-   <div *ngFor="let doc of documents; let i = index" class="document-preview">
-  <ng-container *ngIf="doc.type === 'pdf'; else imageBlock">
-    <embed [src]="doc.url" type="application/pdf" width="100%" height="400px" />
-  </ng-container>
-  <ng-template #imageBlock>
-    <img [src]="doc.url" alt="document image" width="100%" />
-  </ng-template>
-  <div class="doc-info">
-    <p>{{ doc.name }}</p>
-    <button (click)="removeDocument(i)">Supprimer</button>
-  </div>
-</div>
-  </div>
-    </div>
-
-
-      <!-- 👨‍👩‍👧 PROCHES -->
-      <div *ngSwitchCase="'proches'">
-        <h2><i class="fas fa-users-cog section-icon"></i> Gérer mes proches</h2>
-        <p>Liste ou formulaire pour ajouter/modifier un proche.</p>
-      </div>
-
-      <!-- 💬 MESSAGERIE -->
-      <div *ngSwitchCase="'messagerie'" class="messagerie-section">
-        <h2><i class="fas fa-comment-dots section-icon"></i> Messagerie</h2>
-
-        <!-- Dans la div .messagerie-section, par exemple juste avant ou après la .messagerie-container -->
-
-<div class="call-buttons" style="margin-bottom: 1rem;">
-  <button (click)="startVideoCall()" class="btn-call">
-    <i class="fas fa-video"></i> Appel Vidéo
-  </button>
-  <button (click)="startAudioCall()" class="btn-call">
-    <i class="fas fa-phone"></i> Appel Audio
-  </button>
-</div>
-
-        <div class="messagerie-container">
-
-
-
-
-          <!-- Liste des contacts -->
-          <div class="contact-list">
-            <div
-              *ngFor="let contact of contacts"
-              class="contact"
-              [class.active]="activeContact === contact.id"
-              (click)="selectContact(contact.id)"
-            >
-              <img [src]="contact.avatar" class="avatar" />
-              <div>
-                <div class="name">{{ contact.name }}</div>
-                <div class="specialty">{{ contact.specialty }}</div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Zone de chat -->
-          <div class="chat-box">
-            <div class="messages">
-              <div *ngFor="let msg of getMessagesForContact()" class="message" [class.sent]="msg.sent">
-                <div class="bubble">{{ msg.text }}</div>
-                <div class="time">{{ msg.time | date: 'shortTime' }}</div>
-              </div>
-            </div>
-            <div class="input-bar">
-              <input [(ngModel)]="newMessage" (keyup.enter)="sendMessage()" placeholder="Écrivez un message..." />
-              <button (click)="sendMessage()"><i class="fas fa-paper-plane"></i></button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-
-<!-- Dans la partie switch -->
-   
-<div *ngSwitchCase="'paiement'">
-  <h2><i class="fas fa-credit-card section-icon"></i> Paiement en ligne</h2>
-  <form (ngSubmit)="submitPayment()" #paymentForm="ngForm" class="payment-form">
-    <label>Montant (MAD) :</label>
-<input
-  type="number"
-  [(ngModel)]="paymentAmount"
-  name="amount"
-  required
-  min="1"
-  placeholder="Montant en dirhams marocains"
-/>
-
-
-    <label>Numéro de carte (simulation) :</label>
-    <input
-      type="text"
-      [(ngModel)]="cardNumber"
-      name="card"
-      required
-      minlength="16"
-      maxlength="16"
-      placeholder="16 chiffres"
-    />
-
-    <button type="submit" [disabled]="paymentForm.invalid">Payer</button>
-  </form>
-
-  <div *ngIf="paymentStatus" [ngClass]="{'success-msg': paymentStatus === 'success', 'error-msg': paymentStatus === 'error'}">
-    {{ paymentMessage }}
-  </div>
-</div>
-
-
-      <!-- Vue par défaut -->
-      <div *ngSwitchDefault>
-        <div class="welcome-message">
-          <i class="fas fa-clinic-medical section-icon"></i>
-
-          <h3>Bienvenue dans votre espace patient</h3>
-          <p>Sélectionnez une section pour commencer</p>
-        </div>
-      </div>
-</ng-container>
-
-
-    
-  </div>
-

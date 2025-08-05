@@ -30,15 +30,15 @@ export interface Contact {
   selector: "app-patient-dashboard",
   standalone: true,
   imports: [CommonModule, FormsModule],
-  templateUrl: "./patient-dashboard.html",
-  styleUrls: ["./patient-dashboard.css"],
+  templateUrl: "./client-dashboard.html",
+  styleUrls: ["./client-dashboard.css"],
 })
-export class PatientDashboardComponent {
+export class ClientDashboardComponent {
   activeSection = "none"
   showLogoutConfirm = false
   newMessage = ""
   activeContact = 1
-  calendarView = "week"
+  calendarView = "month"
 
   // Documents upload
   documents: { name: string; url: string; type: "pdf" | "image" }[] = []
@@ -62,11 +62,11 @@ export class PatientDashboardComponent {
     status: "Patient",
     id: "P001",
   }
-  currentDate = new Date(2022, 5, 10) // June 10, 2022 comme dans le screenshot
-  weekDays = ["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"]
+  currentDate = new Date(2022, 5, 10); // 10 juin 2022 comme dans le screenshot
+joursSemaine = ["LUN", "MAR", "MER", "JEU", "VEN", "SAM", "DIM"];
 
   // Visites d'aujourd'hui
-  todaysVisits = [
+ visitesDuJour = [
     {
       id: 1,
       time: "12:00-12:45",
@@ -91,7 +91,7 @@ export class PatientDashboardComponent {
   ]
 
   // Événements du calendrier
-  calendarEvents = [
+  evenementsCalendrier = [
     {
       date: 1,
       events: [
@@ -314,101 +314,100 @@ export class PatientDashboardComponent {
 
   // Ajoutez ces méthodes après les méthodes existantes
 
-  getCurrentDate(): string {
-    const options: Intl.DateTimeFormatOptions = {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-      weekday: "long",
-    }
-    return new Date().toLocaleDateString("fr-FR", options)
+ getCurrentDate(): string {
+  const options: Intl.DateTimeFormatOptions = {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    weekday: "long",
+  };
+  return this.currentDate.toLocaleDateString("fr-FR", options);
+}
+
+getMonthYear(): string {
+  const nomsMois = [
+    "Janvier", "Février", "Mars", "Avril", "Mai", "Juin",
+    "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"
+  ];
+  return `${nomsMois[this.currentDate.getMonth()]} ${this.currentDate.getFullYear()}`;
+}
+
+get joursCalendrier() {
+  const annee = this.currentDate.getFullYear();
+  const mois = this.currentDate.getMonth();
+
+  // Premier jour du mois et nombre de jours
+  const premierJour = new Date(annee, mois, 1);
+  const dernierJour = new Date(annee, mois + 1, 0);
+  const joursDansMois = dernierJour.getDate();
+
+  // Jour de la semaine du premier jour (0 = dimanche, 1 = lundi, etc.)
+  let jourDebut = premierJour.getDay();
+  jourDebut = jourDebut === 0 ? 6 : jourDebut - 1; // Convertir pour que lundi = 0
+
+  const jours = [];
+
+  // Jours du mois précédent
+  const moisPrecedent = new Date(annee, mois - 1, 0);
+  const joursMoisPrecedent = moisPrecedent.getDate();
+
+  for (let i = jourDebut - 1; i >= 0; i--) {
+    const date = joursMoisPrecedent - i;
+    jours.push({
+      date: date,
+      estMoisPrecedent: true,
+      estMoisSuivant: false,
+      estAujourdhui: false,
+      evenements: [],
+    });
   }
 
-  getMonthYear(): string {
-    const monthNames = [
-      "January",
-      "February",
-      "March",
-      "April",
-      "May",
-      "June",
-      "July",
-      "August",
-      "September",
-      "October",
-      "November",
-      "December",
-    ]
-    return `${monthNames[this.currentDate.getMonth()]} ${this.currentDate.getFullYear()}`
+  // Jours du mois actuel
+  for (let date = 1; date <= joursDansMois; date++) {
+    const estAujourdhui = date === 10 && mois === 5 && annee === 2022; // 10 juin 2022
+    const evenementsJour = this.evenementsCalendrier.find((evt) => evt.date === date);
+
+    jours.push({
+      date: date,
+      estMoisPrecedent: false,
+      estMoisSuivant: false,
+      estAujourdhui: estAujourdhui,
+   // Dans la méthode joursCalendrier, modifiez cette ligne :
+evenements: evenementsJour ? evenementsJour.events : [],
+    });
   }
 
-  get calendarDays() {
-    const year = this.currentDate.getFullYear()
-    const month = this.currentDate.getMonth()
+  // Jours du mois suivant pour compléter la grille
+  const totalCases = Math.ceil(jours.length / 7) * 7;
+  let dateMoisSuivant = 1;
 
-    // Premier jour du mois et nombre de jours
-    const firstDay = new Date(year, month, 1)
-    const lastDay = new Date(year, month + 1, 0)
-    const daysInMonth = lastDay.getDate()
-
-    // Jour de la semaine du premier jour (0 = dimanche, 1 = lundi, etc.)
-    let startDay = firstDay.getDay()
-    startDay = startDay === 0 ? 6 : startDay - 1 // Convertir pour que lundi = 0
-
-    const days = []
-
-    // Jours du mois précédent
-    const prevMonth = new Date(year, month - 1, 0)
-    const daysInPrevMonth = prevMonth.getDate()
-
-    for (let i = startDay - 1; i >= 0; i--) {
-      const date = daysInPrevMonth - i
-      days.push({
-        date: date,
-        isPrevMonth: true,
-        isNextMonth: false,
-        isToday: false,
-        events: [],
-      })
-    }
-
-    // Jours du mois actuel
-    for (let date = 1; date <= daysInMonth; date++) {
-      const isToday = date === 10 && month === 5 && year === 2022 // 10 juin 2022
-      const dayEvents = this.calendarEvents.find((event) => event.date === date)
-
-      days.push({
-        date: date,
-        isPrevMonth: false,
-        isNextMonth: false,
-        isToday: isToday,
-        events: dayEvents ? dayEvents.events : [],
-      })
-    }
-
-    // Jours du mois suivant pour compléter la grille
-    const totalCells = Math.ceil(days.length / 7) * 7
-    let nextMonthDate = 1
-
-    while (days.length < totalCells) {
-      days.push({
-        date: nextMonthDate,
-        isPrevMonth: false,
-        isNextMonth: true,
-        isToday: false,
-        events: [],
-      })
-      nextMonthDate++
-    }
-
-    return days
+  while (jours.length < totalCases) {
+    jours.push({
+      date: dateMoisSuivant,
+      estMoisPrecedent: false,
+      estMoisSuivant: true,
+      estAujourdhui: false,
+      evenements: [],
+    });
+    dateMoisSuivant++;
   }
 
-  previousMonth() {
-    this.currentDate = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth() - 1, 1)
-  }
+  return jours;
+}
 
-  nextMonth() {
-    this.currentDate = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth() + 1, 1)
-  }
+moisPrecedent() {
+  this.currentDate = new Date(
+    this.currentDate.getFullYear(),
+    this.currentDate.getMonth() - 1,
+    1
+  );
+}
+
+moisSuivant() {
+  this.currentDate = new Date(
+    this.currentDate.getFullYear(),
+    this.currentDate.getMonth() + 1,
+    1
+  );
+}
 }

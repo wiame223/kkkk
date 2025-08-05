@@ -1,9 +1,9 @@
 import { Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
-import { RegisterPatientComponent } from './auth/register/register-patient.component';
+import { RegisterClientComponent } from './auth/register/register-client.component';
 import { HealthDomainComponent } from './domains/health-domain/health-domain.component';
 import { LawDomainComponent } from './domains/law-domain/law-domain.component';
-import { PatientDashboardComponent } from './pages/patient-dashboard';
+import { ClientDashboardComponent } from './pages/client-dashboard';
 import { DecoDomainComponent } from './domains/decor-domain/deco-domain.component';
 import { EducationDomainComponent } from './domains/education-domain/education-domain.component';
 import { BienetreDomainComponent } from './domains/bienetre-domain/bienetre-domain.component';
@@ -19,7 +19,7 @@ export const routes: Routes = [
     component: HomeComponent,
     title: 'Accueil - Téléconsultation'
   },
-  { path: 'auth/register', loadComponent: () => import('./auth/register/register-patient.component').then(m => m.RegisterPatientComponent) },
+  { path: 'auth/register', loadComponent: () => import('./auth/register/register-client.component').then(m => m.RegisterClientComponent) },
 
     { path: 'domains/health-domain', component: HealthDomainComponent },
   { path: 'domains/law-domain', component: LawDomainComponent },
@@ -29,8 +29,8 @@ export const routes: Routes = [
   { path: 'domains/esthetic-domain', component: EstheticDomainComponent },
   { path : 'auth/login' , component: LoginComponent},
  {
-  path: 'dashboard-patient',
-  loadComponent: () => import('./pages/patient-dashboard').then(m => m.PatientDashboardComponent)
+  path: 'dashboard-client',
+  loadComponent: () => import('./pages/client-dashboard').then(m => m.ClientDashboardComponent)
 },
 
 {

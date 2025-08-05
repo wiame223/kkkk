@@ -4,13 +4,13 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Router } from '@angular/router';
 
 @Component({
-  selector: 'app-register-patient',
+  selector: 'app-register-client',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, RouterModule],
-  templateUrl: './register-patient.component.html',
-  styleUrls: ['./register-patient.component.css']
+  templateUrl: './register-client.component.html',
+  styleUrls: ['./register-client.component.css']
 })
-export class RegisterPatientComponent implements OnInit {
+export class RegisterClientComponent implements OnInit {
   registerForm!: FormGroup;
   errorMessage = '';
   fileError: string = '';
@@ -81,7 +81,7 @@ export class RegisterPatientComponent implements OnInit {
 
     // TODO : appel API backend ici
 
-    this.router.navigate(['/dashboard-patient']);
+    this.router.navigate(['/dashboard-client']);
   } else {
     if (!this.selectedFile) {
       this.fileError = 'La carte professionnelle est requise.';

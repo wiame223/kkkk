@@ -91,113 +91,113 @@
         </div>
       </div>
 
-      <!-- ✅ Sections dynamiques - Votre code existant -->
-      <div class="section-container" *ngIf="activeSection !== 'home'">
+         <!-- ✅ Sections dynamiques - Votre code existant -->
+      <div class="section-container" *ngIf="activeSection !== 'none'">
         <ng-container [ngSwitch]="activeSection">
-          <!-- 📅 AGENDA (Copie de la section agenda du patient) -->
-          <div *ngSwitchCase="'agenda'" class="agenda-section">
-            <!-- Layout à deux panneaux comme dans le screenshot -->
-            <div class="agenda-layout">
-              <!-- Panel gauche - Today's Visits -->
-              <div class="visits-panel">
-                <div class="visits-header">
-                  <h2>Today's visits</h2>
-                  <p>{{ getCurrentDate() }}</p>
-                </div>
-
-                <div class="visits-list">
-                  <div *ngFor="let visit of todaysVisits" class="visit-item">
-                    <img [src]="visit.avatar" class="patient-avatar" [alt]="visit.patientName" />
-                    <div class="visit-details">
-                      <div class="visit-time">{{ visit.time }}</div>
-                      <div class="patient-name">{{ visit.patientName }}</div>
-                    </div>
-                    <div class="visit-status" [class]="'status-' + visit.type"></div>
-                  </div>
-                </div>
-
-                <!-- Visit Planner Promo Card -->
-                <div class="planner-promo">
-                  <h3>Try our visit planner!</h3>
-                  <p>
-                    Planner will schedule calls and visits based on the history. You will only need to confirm!
-                  </p>
-                  <a href="#" class="promo-link">Try now →</a>
-                  <div class="promo-illustration">
-                    <i class="fas fa-calendar-alt"></i>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Panel droit - Calendar -->
-              <div class="calendar-main">
-                <!-- Header avec profil praticien (adapté) -->
-                <div class="calendar-header">
-                  <h1>Calendar</h1>
-                  <div class="header-actions">
-                    <div class="patient-profile">
-                      <div class="patient-info">
-                        <div class="patient-name">John Doe</div>
+          
+          <!-- 📅 AGENDA -->
+<div *ngSwitchCase="'agenda'" class="agenda-section">
+  <!-- Disposition à deux panneaux -->
+  <div class="agenda-layout">
+    
+    <!-- Panneau gauche - Visites du jour -->
+    <div class="visits-panel">
+      <div class="visits-header">
+        <h2>Visites du jour</h2>
+        <p>{{ getCurrentDate() }}</p>
+      </div>
+      
+      <div class="visits-list">
+       <div *ngFor="let visit of visitesDuJour" class="visit-item">
+  <img [src]="visit.avatar" class="patient-avatar" [alt]="visit.patientName" />
+  <div class="visit-details">
+    <div class="visit-time">{{ visit.time }}</div>
+    <div class="patient-name">{{ visit.patientName }}</div>
+  </div>
+  <div class="visit-status" [class]="'status-' + visit.type"></div>
+</div>
+      </div>
+      
+      <!-- Carte promotionnelle du planificateur -->
+      <div class="planner-promo">
+        <h3>Essayez notre planificateur de visites !</h3>
+        <p>Le planificateur organise automatiquement les appels et visites selon l'historique. Vous n'aurez qu'à confirmer !</p>
+        <a href="#" class="promo-link">Essayer maintenant →</a>
+        <div class="promo-illustration">
+          <i class="fas fa-calendar-alt"></i>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Panel droit - Calendar -->
+    <div class="calendar-main">
+      <!-- Header avec profil patient -->
+      <div class="calendar-header">
+        <h1>Calendrier</h1>
+        <div class="header-actions">
+          <div class="patient-profile">
+            <div class="patient-info">
+              <div class="patient-name">John Doe</div>
               <div class="patient-status">Praticien</div>
-                      </div>
-                    </div>
-                    <button class="schedule-btn" (click)="addAppointment()">
-                      <i class="fas fa-plus"></i> Schedule a visit
-                    </button>
-                  </div>
-                </div>
-
-                <!-- Navigation du calendrier -->
-                <div class="calendar-nav">
-                  <div class="view-tabs">
-                    <button (click)="changeView('day')" [class.active]="calendarView === 'day'">Day</button>
-                    <button (click)="changeView('week')" [class.active]="calendarView === 'week'">Week</button>
-                    <button (click)="changeView('month')" [class.active]="calendarView === 'month'">Month</button>
-                    <button (click)="changeView('year')" [class.active]="calendarView === 'year'">Year</button>
-                  </div>
-
-                  <div class="month-nav">
-                    <button class="nav-arrow" (click)="previousMonth()">
-                      <i class="fas fa-chevron-left"></i>
-                    </button>
-                    <span class="current-period">{{ getMonthYear() }}</span>
-                    <button class="nav-arrow" (click)="nextMonth()">
-                      <i class="fas fa-chevron-right"></i>
-                    </button>
-                  </div>
-                </div>
-
-                <!-- Grille du calendrier -->
-                <div class="calendar-container">
-                  <div class="calendar-weekdays">
-                    <div class="weekday" *ngFor="let day of weekDays">{{ day }}</div>
-                  </div>
-
-                  <div class="calendar-grid">
-                    <div
-                      *ngFor="let day of calendarDays"
-                      class="calendar-cell"
-                      [class.today]="day.isToday"
-                      [class.prev-month]="day.isPrevMonth"
-                      [class.next-month]="day.isNextMonth"
-                    >
-                      <span class="date-number">{{ day.date }}</span>
-                      <div class="cell-events" *ngIf="day.events.length > 0">
-                        <span
-                          *ngFor="let event of day.events"
-                          class="event-badge"
-                          [class]="'badge-' + event.type"
-                        >
-                          {{ event.label }} {{ event.count > 0 ? event.count : '' }}
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
-
+        <button class="schedule-btn" (click)="addAppointment()">
+    <i class="fas fa-plus"></i> Planifier une visite
+</button>
+        </div>
+      </div>
+      
+    <!-- Navigation du calendrier -->
+<div class="calendar-nav">
+  <div class="view-tabs">
+    <button (click)="changeView('day')" [class.active]="calendarView === 'day'">Jour</button>
+    <button (click)="changeView('week')" [class.active]="calendarView === 'week'">Semaine</button>
+    <button (click)="changeView('month')" [class.active]="calendarView === 'month'">Mois</button>
+    <button (click)="changeView('year')" [class.active]="calendarView === 'year'">Année</button>
+  </div>
+  
+ <div class="month-nav">
+  <button class="nav-arrow" (click)="moisPrecedent()">
+    <i class="fas fa-chevron-left"></i>
+  </button>
+  <span class="current-period">{{ getMonthYear() }}</span>
+  <button class="nav-arrow" (click)="moisSuivant()">
+    <i class="fas fa-chevron-right"></i>
+  </button>
+</div>
+</div>
+      
+      <!-- Grille du calendrier -->
+      <div class="calendar-container">
+        <div class="calendar-weekdays">
+          <div class="weekday" *ngFor="let day of joursSemaine">{{ day }}</div>
+        </div>
+        
+        <div class="calendar-grid">
+  <div 
+    *ngFor="let jour of joursCalendrier" 
+    class="calendar-cell"
+    [class.today]="jour.estAujourdhui"
+    [class.prev-month]="jour.estMoisPrecedent"
+    [class.next-month]="jour.estMoisSuivant"
+  >
+    <span class="date-number">{{ jour.date }}</span>
+    <div class="cell-events" *ngIf="jour.evenements && jour.evenements.length > 0">
+      <span 
+        *ngFor="let event of jour.evenements" 
+        class="event-badge"
+        [class]="'badge-' + event.type"
+      >
+        {{ event.label }} {{ event.count > 0 ? event.count : '' }}
+      </span>
+    </div>
+  </div>
+</div>
+      </div>
+    </div>
+    
+  </div>
+</div>
           <!-- Section Collaboration entre praticiens -->
           <div *ngSwitchCase="'collaboration'" class="collaboration-section">
             <h2><i class="fas fa-comments section-icon"></i> Espace collaboratif</h2>

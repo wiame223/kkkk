@@ -58,6 +58,10 @@ export class RegisterPatientComponent implements OnInit {
     this.fileError = '';
     this.selectedFile = file;
   }
+  
+  goToHome() {
+    this.router.navigate(['/']); // Redirige vers la page d'accueil
+  }
 
   onSubmit(): void {
   if (this.registerForm.valid) {

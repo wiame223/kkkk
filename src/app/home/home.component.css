@@ -57,14 +57,22 @@
   z-index: 2;
 }
 
+
+
+
 .hero-subtitle {
-  font-size: 1.25rem;
-  color: rgba(10, 37, 64, 0.7);
-  margin-bottom: 2.5rem;
-  max-width: 36rem;
+  font-size: 2rem; /* ⇦ Tu peux ajuster ici : 1.8rem, 2.2rem, etc. */
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+  background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
   position: relative;
   z-index: 2;
 }
+
 
 /* Bouton Praticien Flottant */
 .practitioner-top-right {

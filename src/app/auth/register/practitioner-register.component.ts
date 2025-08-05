@@ -73,6 +73,12 @@ onFileSelected(event: Event) {
     }
   }
 
+
+  goToHome() {
+    this.router.navigate(['/']); // Redirige vers la page d'accueil
+  }
+
+
   private markFormGroupTouched(formGroup: FormGroup) {
     Object.values(formGroup.controls).forEach(control => {
       control.markAsTouched();

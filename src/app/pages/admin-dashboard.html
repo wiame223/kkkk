@@ -1,259 +1,324 @@
-<div class="dashboard-admin">
-  
-  <div class="dashboard-header" style="position: relative; padding: 1rem 2rem;">
-  
-  <!-- Bouton déconnexion en haut à droite -->
-  <div class="logout-container" style="position: absolute; top: 1rem; right: 2rem;">
-    <button (click)="confirmLogout()" class="btn-logout" style="display: flex; align-items: center; gap: 8px;">
-      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="white" viewBox="0 0 24 24">
-        <path d="M16 13v-2H7V8l-5 4 5 4v-3zM20 3h-8v2h8v14h-8v2h8a2 2 0 002-2V5a2 2 0 00-2-2z"/>
-      </svg>
-      Déconnexion
-    </button>
-    <div *ngIf="showLogoutConfirm" class="logout-confirm-popup">
-      <p>Êtes-vous sûr de vouloir vous déconnecter ?</p>
-      <div class="popup-buttons">
-        <button (click)="logout()" class="btn-confirm">Oui</button>
-        <button (click)="cancelLogout()" class="btn-cancel">Non</button>
+<div class="dashboard-layout">
+  <!-- ✅ Sidebar -->
+  <div class="sidebar">
+    <div class="sidebar-header">
+      <div class="logo-circle">
+        <i class="fas fa-user-shield"></i>
       </div>
-    </div>
-  </div>
- <!-- Titre en dessous -->
-<h1 style="margin-top: 2.5rem;">
-  <i class="fas fa-user-shield"></i> Tableau de bord Administrateur
-</h1>
-
-</div>
-
-  <!-- Cartes principales -->
-  <div class="card-grid">
-    <div class="card" (click)="showSection('users')" [class.active]="activeSection === 'users'">
-      <i class="fas fa-users card-icon"></i>
-      <h3>Gestion des comptes</h3>
-      <p>Utilisateurs et praticiens</p>
+      <span class="sidebar-title">Admin</span>
     </div>
 
-    <div class="card" (click)="showSection('validation')" [class.active]="activeSection === 'validation'">
-      <i class="fas fa-user-check card-icon"></i>
-      <h3>Validation</h3>
-      <p>Activer/désactiver comptes</p>
-    </div>
+    <nav class="sidebar-nav">
+      <a (click)="showSection('home')" class="nav-item" [class.active]="activeSection === 'home'">
+        <i class="fas fa-home"></i>
+        <span>Accueil</span>
+      </a>
+      <a (click)="showSection('users')" class="nav-item" [class.active]="activeSection === 'users'">
+        <i class="fas fa-users"></i>
+        <span>Gestion des comptes</span>
+      </a>
+      <a (click)="showSection('validation')" class="nav-item" [class.active]="activeSection === 'validation'">
+        <i class="fas fa-user-check"></i>
+        <span>Validation</span>
+      </a>
+      <a (click)="showSection('moderation')" class="nav-item" [class.active]="activeSection === 'moderation'">
+        <i class="fas fa-comment-slash"></i>
+        <span>Modération</span>
+      </a>
+      <a (click)="showSection('stats')" class="nav-item" [class.active]="activeSection === 'stats'">
+        <i class="fas fa-chart-line"></i>
+        <span>Statistiques</span>
+      </a>
+      <a (click)="showSection('reports')" class="nav-item" [class.active]="activeSection === 'reports'">
+        <i class="fas fa-flag"></i>
+        <span>Réclamations</span>
+      </a>
+    </nav>
 
-    <div class="card" (click)="showSection('moderation')" [class.active]="activeSection === 'moderation'">
-      <i class="fas fa-comment-slash card-icon"></i>
-      <h3>Modération</h3>
-      <p>Messages et discussions</p>
-    </div>
-
-    <div class="card" (click)="showSection('stats')" [class.active]="activeSection === 'stats'">
-      <i class="fas fa-chart-line card-icon"></i>
-      <h3>Statistiques</h3>
-      <p>Indicateurs clés</p>
-    </div>
-
-    <div class="card" (click)="showSection('reports')" [class.active]="activeSection === 'reports'">
-      <i class="fas fa-flag card-icon"></i>
-      <h3>Réclamations</h3>
-      <p>Gestion des signalements</p>
+    <div class="sidebar-footer">
+      <a class="nav-item" (click)="confirmLogout()">
+        <i class="fas fa-sign-out-alt"></i>
+        <span>Déconnexion</span>
+      </a>
     </div>
   </div>
 
-  <!-- Section dynamique -->
-  <div class="section-container">
-    <!-- Section Utilisateurs -->
-    <div *ngIf="activeSection === 'users'" class="users-section">
-      <div class="section-header">
-        <h2><i class="fas fa-user-friends"></i> Liste des utilisateurs</h2>
-        <div class="search-bar">
-          <input type="text" placeholder="Rechercher...">
-          <button><i class="fas fa-search"></i></button>
+  <!-- ✅ Main Content -->
+  <div class="main-content">
+    <!-- ✅ Section dynamique (Accueil ou contenu spécifique) -->
+    <ng-container [ngSwitch]="activeSection">
+      <!-- ✅ Section d'accueil par défaut -->
+      <div *ngSwitchCase="'home'">
+        <!-- Header du contenu principal, maintenant visible uniquement sur la page d'accueil -->
+        <div class="main-content-header">
+          <h1>
+            <i class="fas fa-user-shield"></i> Espace Administrateur
+          </h1>
+
         </div>
-      </div>
 
-      <div class="tabs">
-        <button [class.active]="userTab === 'patients'">Patients</button>
-        <button [class.active]="userTab === 'practitioners'">Praticiens</button>
-      </div>
-
-      <div class="table-container">
-        <table>
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Nom</th>
-              <th>Email</th>
-              <th>Type</th>
-              <th>Statut</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let user of users">
-              <td>{{user.id}}</td>
-              <td>
-                {{user.fullName}}
-
-                <span *ngIf="user.type === 'practitioner'"> (Dr.)</span>
-              </td>
-              <td>{{user.email}}</td>
-              <td>{{user.type === 'patient' ? 'Patient' : 'Praticien'}}</td>
-              <td>
-                <span [class.badge-active]="user.status === 'active'" 
-                      [class.badge-pending]="user.status === 'pending'"
-                      [class.badge-inactive]="user.status === 'inactive'">
-                  {{getStatusLabel(user.status)}}
-                </span>
-              </td>
-              <td>
-                <button class="btn-edit"><i class="fas fa-edit"></i></button>
-                <button class="btn-delete"><i class="fas fa-trash"></i></button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-    <!-- Section Validation -->
-    <div *ngIf="activeSection === 'validation'" class="validation-section">
-   <h2><i class="fas fa-user-check violet-icon"></i> Validation des praticiens</h2>
-      
-      <div class="practitioners-list">
-        <div *ngFor="let practitioner of practitioners" class="practitioner-card">
-          <div class="practitioner-info">
-            <h3>{{practitioner.name}}</h3>
-            <p><strong>Spécialité:</strong> {{practitioner.specialty}}</p>
-            <p><strong>Consultations:</strong> {{practitioner.consultations}}</p>
-            <p><strong>Statut:</strong> 
-              <span [class.text-success]="practitioner.status === 'active'"
-                    [class.text-warning]="practitioner.status === 'pending'">
-                {{practitioner.status === 'active' ? 'Actif' : 'En attente'}}
-              </span>
-            </p>
+        <!-- Cartes principales, maintenant visibles uniquement sur la page d'accueil -->
+        <div class="card-grid">
+          <div class="card" (click)="showSection('users')" [class.active]="activeSection === 'users'">
+            <i class="fas fa-users card-icon"></i>
+            <h3>Gestion des comptes</h3>
+            <p>Utilisateurs et praticiens</p>
           </div>
-          <div class="practitioner-actions">
-            <button *ngIf="practitioner.status === 'pending'" class="btn-validate" (click)="validatePractitioner(practitioner.id)">
-              <i class="fas fa-check"></i> Valider
-            </button>
-            <button class="btn-reject" (click)="rejectPractitioner(practitioner.id)">
-              <i class="fas fa-times"></i> Rejeter
-            </button>
+          <div class="card" (click)="showSection('validation')" [class.active]="activeSection === 'validation'">
+            <i class="fas fa-user-check card-icon"></i>
+            <h3>Validation</h3>
+            <p>Activer/désactiver comptes</p>
+          </div>
+          <div class="card" (click)="showSection('moderation')" [class.active]="activeSection === 'moderation'">
+            <i class="fas fa-comment-slash card-icon"></i>
+            <h3>Modération</h3>
+            <p>Messages et discussions</p>
+          </div>
+          <div class="card" (click)="showSection('stats')" [class.active]="activeSection === 'stats'">
+            <i class="fas fa-chart-line card-icon"></i>
+            <h3>Statistiques</h3>
+            <p>Indicateurs clés</p>
+          </div>
+          <div class="card" (click)="showSection('reports')" [class.active]="activeSection === 'reports'">
+            <i class="fas fa-flag card-icon"></i>
+            <h3>Réclamations</h3>
+            <p>Gestion des signalements</p>
+          </div>
+        </div>
+
+        <div class="section-container">
+          <div class="welcome-message">
+            <i class="fas fa-clinic-medical section-icon"></i>
+            <h3>Bienvenue dans votre espace administrateur</h3>
+            <p>Sélectionnez une section dans la barre latérale ou cliquez sur une carte pour commencer.</p>
           </div>
         </div>
       </div>
-    </div>
 
-    <!-- Section Modération -->
-    <div *ngIf="activeSection === 'moderation'" class="moderation-section">
-     <h2><i class="fas fa-comment-slash violet-icon"></i> Modération des messages</h2>
-
-      <div class="message-filters">
-        <button [class.active]="filter === 'all'">Tous</button>
-        <button [class.active]="filter === 'flagged'">Signalés</button>
-        <button [class.active]="filter === 'deleted'">Supprimés</button>
-      </div>
-
-      <div class="messages-list">
-        <div *ngFor="let message of messages" class="message-card" [class.flagged]="message.flagged">
-          <div class="message-header">
-            <span><strong>De:</strong> {{message.sender}}</span>
-            <span><strong>À:</strong> {{message.receiver}}</span>
-            <span class="message-date">{{message.date}}</span>
-          </div>
-          <div class="message-content">
-            {{message.content}}
-          </div>
-          <div class="message-actions">
-            <button *ngIf="!message.deleted" class="btn-warn" (click)="warnUser(message.id)">
-              <i class="fas fa-exclamation-triangle"></i> Avertir
-            </button>
-            <button *ngIf="!message.deleted" class="btn-delete" (click)="deleteMessage(message.id)">
-              <i class="fas fa-trash"></i> Supprimer
-            </button>
-            <button *ngIf="message.deleted" class="btn-restore" (click)="restoreMessage(message.id)">
-              <i class="fas fa-undo"></i> Restaurer
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Section Statistiques -->
-    <div *ngIf="activeSection === 'stats'" class="stats-section">
-      <h2><i class="fas fa-chart-line violet-icon"></i> Statistiques de la plateforme</h2>
- 
-      <div class="stats-grid">
-        <div class="stat-card">
-          <div class="stat-value">{{stats.totalUsers}}</div>
-          <div class="stat-label">Utilisateurs total</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-value">{{stats.activePractitioners}}</div>
-          <div class="stat-label">Praticiens actifs</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-value">{{stats.pendingPractitioners}}</div>
-          <div class="stat-label">Praticiens en attente</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-value">{{stats.consultationsToday}}</div>
-          <div class="stat-label">Consultations aujourd'hui</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-value">{{stats.unresolvedReports}}</div>
-          <div class="stat-label">Réclamations non résolues</div>
-        </div>
-      </div>
-
-      <div class="charts-container">
-        <div class="chart-wrapper">
-          <h3>Nouveaux utilisateurs (30 jours)</h3>
-          <canvas id="usersChart"></canvas>
-        </div>
-        <div class="chart-wrapper">
-          <h3>Consultations par spécialité</h3>
-          <canvas id="consultationsChart"></canvas>
-        </div>
-      </div>
-    </div>
-
-    <!-- Section Réclamations -->
-    <div *ngIf="activeSection === 'reports'" class="reports-section">
-  <h2><i class="fas fa-flag violet-icon"></i> Gestion des réclamations</h2>
-
-      <div class="reports-filters">
-        <button [class.active]="reportFilter === 'all'">Toutes</button>
-        <button [class.active]="reportFilter === 'pending'">En attente</button>
-        <button [class.active]="reportFilter === 'resolved'">Résolues</button>
-      </div>
-
-      <div class="reports-list">
-        <div *ngFor="let report of reports" class="report-card" [class.resolved]="report.status === 'resolved'">
-          <div class="report-header">
-            <h3>Réclamation #{{report.id}}</h3>
-            <span class="report-status" [class.status-pending]="report.status === 'pending'"
-                  [class.status-resolved]="report.status === 'resolved'">
-              {{report.status === 'pending' ? 'EN ATTENTE' : 'RÉSOLUE'}}
-            </span>
-          </div>
-          <div class="report-meta">
-            <span><strong>Utilisateur:</strong> {{report.user}}</span>
-            <span><strong>Type:</strong> {{report.type}}</span>
-            <span><strong>Date:</strong> {{report.date}}</span>
-          </div>
-          <div class="report-content">
-            {{report.content}}
-          </div>
-          <div class="report-actions">
-            <button *ngIf="report.status === 'pending'" class="btn-resolve" (click)="resolveReport(report.id)">
-              <i class="fas fa-check-circle"></i> Marquer comme résolu
-            </button>
-            <button class="btn-contact" (click)="contactUser(report.id)">
-              <i class="fas fa-envelope"></i> Contacter l'utilisateur
-            </button>
+      <!-- Section Utilisateurs -->
+      <div *ngSwitchCase="'users'">
+        <div class="section-container">
+          <div class="users-section">
+            <div class="section-header">
+              <h2><i class="fas fa-user-friends"></i> Liste des utilisateurs</h2>
+              <div class="search-bar">
+                <input type="text" placeholder="Rechercher..." />
+                <button><i class="fas fa-search"></i></button>
+              </div>
+            </div>
+            <div class="tabs">
+              <button (click)="userTab = 'patients'" [class.active]="userTab === 'patients'">Patients</button>
+              <button (click)="userTab = 'practitioners'" [class.active]="userTab === 'practitioners'">
+                Praticiens
+              </button>
+            </div>
+            <div class="table-container">
+              <table>
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Nom</th>
+                    <th>Email</th>
+                    <th>Type</th>
+                    <th>Statut</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let user of users">
+                    <td>{{ user.id }}</td>
+                    <td>
+                      {{ user.fullName }}
+                      <span *ngIf="user.type === 'practitioner'"> (Dr.)</span>
+                    </td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.type === 'patient' ? 'Patient' : 'Praticien' }}</td>
+                    <td>
+                      <span
+                        [class.badge-active]="user.status === 'active'"
+                        [class.badge-pending]="user.status === 'pending'"
+                        [class.badge-inactive]="user.status === 'inactive'"
+                      >
+                        {{ getStatusLabel(user.status) }}
+                      </span>
+                    </td>
+                    <td>
+                      <button class="btn-edit"><i class="fas fa-edit"></i></button>
+                      <button class="btn-delete"><i class="fas fa-trash"></i></button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>
+      <!-- Section Validation -->
+      <div *ngSwitchCase="'validation'">
+        <div class="section-container">
+          <div class="validation-section">
+            <h2><i class="fas fa-user-check violet-icon"></i> Validation des praticiens</h2>
+            <div class="practitioners-list">
+              <div *ngFor="let practitioner of practitioners" class="practitioner-card">
+                <div class="practitioner-info">
+                  <h3>{{ practitioner.name }}</h3>
+                  <p><strong>Spécialité:</strong> {{ practitioner.specialty }}</p>
+                  <p><strong>Consultations:</strong> {{ practitioner.consultations }}</p>
+                  <p>
+                    <strong>Statut:</strong>
+                    <span
+                      [class.text-success]="practitioner.status === 'active'"
+                      [class.text-warning]="practitioner.status === 'pending'"
+                    >
+                      {{ practitioner.status === 'active' ? 'Actif' : 'En attente' }}
+                    </span>
+                  </p>
+                </div>
+                <div class="practitioner-actions">
+                  <button
+                    *ngIf="practitioner.status === 'pending'"
+                    class="btn-validate"
+                    (click)="validatePractitioner(practitioner.id)"
+                  >
+                    <i class="fas fa-check"></i> Valider
+                  </button>
+                  <button class="btn-reject" (click)="rejectPractitioner(practitioner.id)">
+                    <i class="fas fa-times"></i> Rejeter
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Section Modération -->
+      <div *ngSwitchCase="'moderation'">
+        <div class="section-container">
+          <div class="moderation-section">
+            <h2><i class="fas fa-comment-slash violet-icon"></i> Modération des messages</h2>
+            <div class="message-filters">
+              <button (click)="filter = 'all'" [class.active]="filter === 'all'">Tous</button>
+              <button (click)="filter = 'flagged'" [class.active]="filter === 'flagged'">Signalés</button>
+              <button (click)="filter = 'deleted'" [class.active]="filter === 'deleted'">Supprimés</button>
+            </div>
+            <div class="messages-list">
+              <div *ngFor="let message of messages" class="message-card" [class.flagged]="message.flagged">
+                <div class="message-header">
+                  <span><strong>De:</strong> {{ message.sender }}</span>
+                  <span><strong>À:</strong> {{ message.receiver }}</span>
+                  <span class="message-date">{{ message.date }}</span>
+                </div>
+                <div class="message-content">
+                  {{ message.content }}
+                </div>
+                <div class="message-actions">
+                  <button *ngIf="!message.deleted" class="btn-warn" (click)="warnUser(message.id)">
+                    <i class="fas fa-exclamation-triangle"></i> Avertir
+                  </button>
+                  <button *ngIf="!message.deleted" class="btn-delete" (click)="deleteMessage(message.id)">
+                    <i class="fas fa-trash"></i> Supprimer
+                  </button>
+                  <button *ngIf="message.deleted" class="btn-restore" (click)="restoreMessage(message.id)">
+                    <i class="fas fa-undo"></i> Restaurer
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Section Statistiques -->
+      <div *ngSwitchCase="'stats'">
+        <div class="section-container">
+          <div class="stats-section">
+            <h2><i class="fas fa-chart-line violet-icon"></i> Statistiques de la plateforme</h2>
+            <div class="stats-grid">
+              <div class="stat-card">
+                <div class="stat-value">{{ stats.totalUsers }}</div>
+                <div class="stat-label">Utilisateurs total</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-value">{{ stats.activePractitioners }}</div>
+                <div class="stat-label">Praticiens actifs</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-value">{{ stats.pendingPractitioners }}</div>
+                <div class="stat-label">Praticiens en attente</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-value">{{ stats.consultationsToday }}</div>
+                <div class="stat-label">Consultations aujourd'hui</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-value">{{ stats.unresolvedReports }}</div>
+                <div class="stat-label">Réclamations non résolues</div>
+              </div>
+            </div>
+            <div class="charts-container">
+              <div class="chart-wrapper">
+                <h3>Nouveaux utilisateurs (30 jours)</h3>
+                <canvas id="usersChart"></canvas>
+              </div>
+              <div class="chart-wrapper">
+                <h3>Consultations par spécialité</h3>
+                <canvas id="consultationsChart"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Section Réclamations -->
+      <div *ngSwitchCase="'reports'">
+        <div class="section-container">
+          <div class="reports-section">
+            <h2><i class="fas fa-flag violet-icon"></i> Gestion des réclamations</h2>
+            <div class="reports-filters">
+              <button (click)="reportFilter = 'all'" [class.active]="reportFilter === 'all'">Toutes</button>
+              <button (click)="reportFilter = 'pending'" [class.active]="reportFilter === 'pending'">En attente</button>
+              <button (click)="reportFilter = 'resolved'" [class.active]="reportFilter === 'resolved'">Résolues</button>
+            </div>
+            <div class="reports-list">
+              <div *ngFor="let report of reports" class="report-card" [class.resolved]="report.status === 'resolved'">
+                <div class="report-header">
+                  <h3>Réclamation #{{ report.id }}</h3>
+                  <span
+                    class="report-status"
+                    [class.status-pending]="report.status === 'pending'"
+                    [class.status-resolved]="report.status === 'resolved'"
+                  >
+                    {{ report.status === 'pending' ? 'EN ATTENTE' : 'RÉSOLUE' }}
+                  </span>
+                </div>
+                <div class="report-meta">
+                  <span><strong>Utilisateur:</strong> {{ report.user }}</span>
+                  <span><strong>Type:</strong> {{ report.type }}</span>
+                  <span><strong>Date:</strong> {{ report.date }}</span>
+                </div>
+                <div class="report-content">
+                  {{ report.content }}
+                </div>
+                <div class="report-actions">
+                  <button *ngIf="report.status === 'pending'" class="btn-resolve" (click)="resolveReport(report.id)">
+                    <i class="fas fa-check-circle"></i> Marquer comme résolu
+                  </button>
+                  <button class="btn-contact" (click)="contactUser(report.id)">
+                    <i class="fas fa-envelope"></i> Contacter l'utilisateur
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+  <!-- ✅ Popup de déconnexion -->
+  <div *ngIf="showLogoutConfirm" class="logout-confirm-popup">
+    <div class="popup-arrow"></div>
+    <p>Êtes-vous sûr de vouloir quitter ?</p>
+    <div class="popup-buttons">
+      <button (click)="logout()" class="btn-yes">Oui</button>
+      <button (click)="cancelLogout()" class="btn-no">Non</button>
     </div>
   </div>
 </div>

@@ -1,13 +1,324 @@
-<div class="dashboard-container">
- 
-<div class="logout-container">
-    <button class="btn-logout" (click)="confirmLogout()">
-  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="white" viewBox="0 0 24 24">
-    <path d="M16 13v-2H7V8l-5 4 5 4v-3zM20 3h-8v2h8v14h-8v2h8a2 2 0 002-2V5a2 2 0 00-2-2z"/>
-  </svg>
-  Déconnexion
-</button>
+<div class="dashboard-layout">
+  <!-- ✅ Sidebar cliquable -->
+  <div class="sidebar">
+    <div class="sidebar-header">
+      <div class="logo-circle">
+        <i class="fas fa-user-tie"></i>
+      </div>
+      <span class="sidebar-title">Praticien</span>
+    </div>
 
+    <nav class="sidebar-nav">
+      <a (click)="showSection('home')" class="nav-item" [class.active]="activeSection === 'home'">
+        <i class="fas fa-th-large"></i>
+        <span>Accueil</span>
+      </a>
+      <a (click)="showSection('agenda')" class="nav-item" [class.active]="activeSection === 'agenda'">
+        <i class="fas fa-calendar-check"></i>
+        <span>Mon Agenda</span>
+      </a>
+      <a (click)="showSection('clients')" class="nav-item" [class.active]="activeSection === 'clients'">
+        <i class="fas fa-user section-icon" style="color: white;"></i>
+
+        <span>Mes Clients</span>
+      </a>
+      <a (click)="showSection('creneaux')" class="nav-item" [class.active]="activeSection === 'creneaux'">
+        <i class="fas fa-clock"></i>
+        <span>Mes créneaux</span>
+      </a>
+      <a (click)="showSection('remplacants')" class="nav-item" [class.active]="activeSection === 'remplacants'">
+       <i class="fas fa-user-clock section-icon"style="color: white;"></i>
+        <span>Mes remplaçants</span>
+      </a>
+      <a (click)="showSection('collaboration')" class="nav-item" [class.active]="activeSection === 'collaboration'">
+        <i class="fas fa-users"></i>
+        <span>Collaboration</span>
+      </a>
+      <a (click)="showSection('documents')" class="nav-item" [class.active]="activeSection === 'documents'">
+        <i class="fas fa-file-medical"></i>
+        <span>Documents</span>
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <a class="nav-item" (click)="confirmLogout()">
+        <i class="fas fa-sign-out-alt"></i>
+        <span>Déconnexion</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- ✅ Contenu principal avec votre code existant -->
+  <div class="main-content">
+    <div class="dashboard-container">
+      <!-- ✅ Page d'accueil avec vos cartes originales -->
+      <div *ngIf="activeSection === 'home'" class="home-section">
+        <h1>Bienvenue <i class="fas fa-handshake"></i></h1>
+        <p>Ceci est votre espace personnel praticien.</p>
+
+        <!-- Navigation avec vos cartes originales -->
+        <div class="card-grid">
+          <div class="card" (click)="showSection('agenda')">
+            <i class="fas fa-calendar-alt card-icon"></i>
+            <h3>Mon Agenda</h3>
+            <p>Gérez vos rendez-vous et disponibilités</p>
+          </div>
+          <div class="card" (click)="showSection('clients')">
+            <i class="fas fa-user card-icon"></i>
+            <h3>Mes Clients</h3>
+            <p>Dossiers clients et historiques</p>
+          </div>
+          <div class="card" (click)="showSection('creneaux')">
+            <i class="fas fa-clock card-icon"></i>
+            <h3>Mes créneaux</h3>
+            <p>Gérez vos disponibilités horaires</p>
+          </div>
+          <div class="card" (click)="showSection('remplacants')">
+            <i class="fas fa-user-clock card-icon"></i>
+            <h3>Mes remplaçants</h3>
+            <p>Ajoutez et gérez vos remplaçants</p>
+          </div>
+          <div class="card" (click)="showSection('collaboration')">
+            <i class="fas fa-users card-icon"></i>
+            <h3>Collaboration</h3>
+            <p>Communication avec autres praticiens</p>
+          </div>
+          <div class="card" (click)="showSection('documents')">
+            <i class="fas fa-file-medical card-icon"></i>
+            <h3>Documents</h3>
+            <p>Ordonnances et comptes-rendus</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ✅ Sections dynamiques - Votre code existant -->
+      <div class="section-container" *ngIf="activeSection !== 'home'">
+        <ng-container [ngSwitch]="activeSection">
+          <!-- 📅 AGENDA (Copie de la section agenda du patient) -->
+          <div *ngSwitchCase="'agenda'" class="agenda-section">
+            <!-- Layout à deux panneaux comme dans le screenshot -->
+            <div class="agenda-layout">
+              <!-- Panel gauche - Today's Visits -->
+              <div class="visits-panel">
+                <div class="visits-header">
+                  <h2>Today's visits</h2>
+                  <p>{{ getCurrentDate() }}</p>
+                </div>
+
+                <div class="visits-list">
+                  <div *ngFor="let visit of todaysVisits" class="visit-item">
+                    <img [src]="visit.avatar" class="patient-avatar" [alt]="visit.patientName" />
+                    <div class="visit-details">
+                      <div class="visit-time">{{ visit.time }}</div>
+                      <div class="patient-name">{{ visit.patientName }}</div>
+                    </div>
+                    <div class="visit-status" [class]="'status-' + visit.type"></div>
+                  </div>
+                </div>
+
+                <!-- Visit Planner Promo Card -->
+                <div class="planner-promo">
+                  <h3>Try our visit planner!</h3>
+                  <p>
+                    Planner will schedule calls and visits based on the history. You will only need to confirm!
+                  </p>
+                  <a href="#" class="promo-link">Try now →</a>
+                  <div class="promo-illustration">
+                    <i class="fas fa-calendar-alt"></i>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Panel droit - Calendar -->
+              <div class="calendar-main">
+                <!-- Header avec profil praticien (adapté) -->
+                <div class="calendar-header">
+                  <h1>Calendar</h1>
+                  <div class="header-actions">
+                    <div class="patient-profile">
+                      <div class="patient-info">
+                        <div class="patient-name">John Doe</div>
+              <div class="patient-status">Praticien</div>
+                      </div>
+                    </div>
+                    <button class="schedule-btn" (click)="addAppointment()">
+                      <i class="fas fa-plus"></i> Schedule a visit
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Navigation du calendrier -->
+                <div class="calendar-nav">
+                  <div class="view-tabs">
+                    <button (click)="changeView('day')" [class.active]="calendarView === 'day'">Day</button>
+                    <button (click)="changeView('week')" [class.active]="calendarView === 'week'">Week</button>
+                    <button (click)="changeView('month')" [class.active]="calendarView === 'month'">Month</button>
+                    <button (click)="changeView('year')" [class.active]="calendarView === 'year'">Year</button>
+                  </div>
+
+                  <div class="month-nav">
+                    <button class="nav-arrow" (click)="previousMonth()">
+                      <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <span class="current-period">{{ getMonthYear() }}</span>
+                    <button class="nav-arrow" (click)="nextMonth()">
+                      <i class="fas fa-chevron-right"></i>
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Grille du calendrier -->
+                <div class="calendar-container">
+                  <div class="calendar-weekdays">
+                    <div class="weekday" *ngFor="let day of weekDays">{{ day }}</div>
+                  </div>
+
+                  <div class="calendar-grid">
+                    <div
+                      *ngFor="let day of calendarDays"
+                      class="calendar-cell"
+                      [class.today]="day.isToday"
+                      [class.prev-month]="day.isPrevMonth"
+                      [class.next-month]="day.isNextMonth"
+                    >
+                      <span class="date-number">{{ day.date }}</span>
+                      <div class="cell-events" *ngIf="day.events.length > 0">
+                        <span
+                          *ngFor="let event of day.events"
+                          class="event-badge"
+                          [class]="'badge-' + event.type"
+                        >
+                          {{ event.label }} {{ event.count > 0 ? event.count : '' }}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Section Collaboration entre praticiens -->
+          <div *ngSwitchCase="'collaboration'" class="collaboration-section">
+            <h2><i class="fas fa-comments section-icon"></i> Espace collaboratif</h2>
+
+            <div class="communication-tabs">
+              <button (click)="setCommTab('messagerie')" [class.active]="commTab === 'messagerie'">
+                <i class="fas fa-comment-dots"></i> Messagerie
+              </button>
+              <button (click)="setCommTab('video')" [class.active]="commTab === 'video'">
+                <i class="fas fa-video"></i> Visio-conférence
+              </button>
+              <button (click)="setCommTab('forum')" [class.active]="commTab === 'forum'">
+                <i class="fas fa-users"></i> Forum spécialisé
+              </button>
+            </div>
+            <div class="communication-content">
+              <!-- Messagerie instantanée -->
+              <div *ngIf="commTab === 'messagerie'" class="messagerie">
+                <div class="contact-list">
+                  <div
+                    class="contact"
+                    *ngFor="let contact of contacts"
+                    [class.active]="activeContact === contact.id"
+                    (click)="selectContact(contact.id)"
+                  >
+                    <img [src]="contact.avatar" alt="Photo" class="contact-avatar" />
+                    <div class="contact-info">
+                      <span class="contact-name">{{ contact.name }}</span>
+                      <span class="contact-specialty">{{ contact.specialty }}</span>
+                    </div>
+                    <!-- CORRECTION ICI : Utilisation de *ngIf avec 'as' pour 'unread' -->
+                   <span class="badge" *ngIf="(contact.unread || 0) > 0">{{ contact.unread }}</span>
+                </div>
+                </div>
+
+                <div class="chat-area">
+                  <div class="chat-messages">
+                    <div *ngFor="let msg of messages" class="message" [class.sent]="msg.sent">
+                      <div class="message-content">{{ msg.text }}</div>
+                      <div class="message-time">{{ msg.time | date: 'HH:mm' }}</div>
+                    </div>
+                  </div>
+
+                  <div class="message-input">
+                    <input
+                      type="text"
+                      [(ngModel)]="newMessage"
+                      placeholder="Écrivez un message..."
+                      (keyup.enter)="sendMessage()"
+                    />
+                    <button (click)="sendMessage()"><i class="fas fa-paper-plane"></i></button>
+                  </div>
+                </div>
+              </div>
+              <!-- Appel vidéo/audio -->
+              <div *ngIf="commTab === 'video'" class="video-call">
+                <div class="call-controls">
+                  <button class="btn-call" (click)="startVideoCall()">
+                    <i class="fas fa-video"></i> Nouvel appel vidéo
+                  </button>
+                  <button class="btn-call" (click)="startAudioCall()">
+                    <i class="fas fa-phone"></i> Appel audio
+                  </button>
+                </div>
+
+                <div class="call-placeholder">
+                  <i class="fas fa-video-slash"></i>
+                  <p>Prêt à démarrer une consultation à distance</p>
+                  <p>Fonctionnalités : partage d'écran, tableau blanc collaboratif</p>
+                </div>
+              </div>
+              <!-- Forum spécialisé -->
+              <div *ngIf="commTab === 'forum'" class="forum">
+                <div class="forum-topics">
+                  <div class="topic" *ngFor="let topic of forumTopics">
+                    <h4>{{ topic.title }}</h4>
+                    <p>{{ topic.lastMessage }}</p>
+                    <div class="topic-meta">
+                      <span>{{ topic.replies }} réponses</span>
+                      <span>Dernier message : {{ topic.lastDate | date: 'dd/MM/yyyy' }}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Section Créneaux -->
+          <div *ngSwitchCase="'creneaux'">
+            <h2><i class="fas fa-clock section-icon"></i> Mes créneaux</h2>
+            <p>Ici, affiche la gestion des créneaux horaires</p>
+            <!-- TODO : ajoute ton contenu réel ici -->
+          </div>
+          <!-- Section Remplaçants -->
+          <div *ngSwitchCase="'remplacants'">
+            <h2><i class="fas fa-user-tie "></i> Mes remplaçants</h2>
+            <p>Ici, affiche la liste des remplaçants et leurs infos</p>
+            <!-- TODO : ajoute ton contenu réel ici -->
+          </div>
+          <!-- Section Patients -->
+          <div *ngSwitchCase="'clients'">
+            <h2><i class="fas fa-user-tag section-icon"></i> Dossiers clients</h2>
+            <p>Liste des clients avec fonctionnalités de recherche et filtres</p>
+          </div>
+          <!-- Section Documents -->
+          <div *ngSwitchCase="'documents'">
+            <h2><i class="fas fa-file-signature section-icon"></i> Documents médicaux</h2>
+            <p>Gestion des ordonnances, comptes-rendus et certificats</p>
+          </div>
+          <!-- Vue par défaut -->
+          <div *ngSwitchDefault>
+            <div class="welcome-message">
+              <i class="fas fa-clinic-medical section-icon"></i>
+              <h3>Bienvenue dans votre espace praticien</h3>
+              <p>Sélectionnez une section pour commencer</p>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+  <!-- ✅ Popup de déconnexion -->
   <div *ngIf="showLogoutConfirm" class="logout-confirm-popup">
     <div class="popup-arrow"></div>
     <p>Êtes-vous sûr de vouloir quitter ?</p>
@@ -17,209 +328,3 @@
     </div>
   </div>
 </div>
-
-
-
-
-  <h1>Bienvenue <i class="fas fa-handshake"></i></h1>
-  <p>Ceci est votre espace personnel praticien.</p>
-
-  <!-- Cartes principales -->
-  <div class="card-grid">
-    <div class="card" (click)="showSection('agenda')" [class.active]="activeSection === 'agenda'">
-  <i class="fas fa-calendar-alt card-icon"></i>
-  <h3>Mon Agenda</h3>
-      <p>Gérez vos rendez-vous et disponibilités</p>
-    </div>
-
-    <div class="card" (click)="showSection('patients')" [class.active]="activeSection === 'patients'">
-      <i class="fas fa-procedures card-icon"></i>
-      <h3>Mes Patients</h3>
-      <p>Dossiers patients et historiques</p>
-    </div>
-
-     <div class="card" (click)="showSection('creneaux')" [class.active]="activeSection === 'creneaux'">
-      <i class="fas fa-clock card-icon"></i>
-      <h3>Mes créneaux</h3>
-      <p>Gérez vos disponibilités horaires</p>
-    </div>
-
-    <div class="card" (click)="showSection('remplacants')" [class.active]="activeSection === 'remplacants'">
-      <i class="fas fa-user-md card-icon"></i>
-      <h3>Mes remplaçants</h3>
-      <p>Ajoutez et gérez vos remplaçants</p>
-    </div>
-
-    <div class="card" (click)="showSection('collaboration')" [class.active]="activeSection === 'collaboration'">
-      <i class="fas fa-users card-icon"></i>
-      <h3>Collaboration</h3>
-      <p>Communication avec autres praticiens</p>
-    </div>
-
-    <div class="card" (click)="showSection('documents')" [class.active]="activeSection === 'documents'">
-      <i class="fas fa-file-medical card-icon"></i>
-      <h3>Documents</h3>
-      <p>Ordonnances et comptes-rendus</p>
-    </div>
-  </div>
-
-  <!-- Section dynamique -->
-  <div class="section-container">
-    <ng-container [ngSwitch]="activeSection">
-      
-      <!-- Section Agenda -->
-      <div *ngSwitchCase="'agenda'" class="agenda-section">
-        <div class="section-header">
-         <h2><i class="fas fa-calendar-week section-icon"></i> Agenda professionnel</h2>
-          <button class="btn-add" (click)="addAppointment()">
-            <i class="fas fa-plus"></i> Ajouter RDV
-          </button>
-        </div>
-        
-        <div class="calendar-view">
-          <div class="calendar-controls">
-            <button (click)="changeView('day')" [class.active]="calendarView === 'day'">Jour</button>
-            <button (click)="changeView('week')" [class.active]="calendarView === 'week'">Semaine</button>
-            <button (click)="changeView('month')" [class.active]="calendarView === 'month'">Mois</button>
-          </div>
-          
-          <div class="calendar-placeholder">
-            <div *ngIf="calendarView === 'day'">
-              <h4>Vue Jour</h4>
-              <p>Affichage des créneaux horaires pour aujourd'hui</p>
-            </div>
-            <div *ngIf="calendarView === 'week'">
-              <h4>Vue Semaine</h4>
-              <p>Affichage des rendez-vous sur 7 jours</p>
-            </div>
-            <div *ngIf="calendarView === 'month'">
-              <h4>Vue Mois</h4>
-              <p>Vue d'ensemble du mois avec indicateurs de disponibilité</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Section Collaboration entre praticiens -->
-      <div *ngSwitchCase="'collaboration'" class="collaboration-section">
-      <h2><i class="fas fa-comments section-icon"></i> Espace collaboratif</h2>
-
-        
-        <div class="communication-tabs">
-          <button (click)="setCommTab('messagerie')" [class.active]="commTab === 'messagerie'">
-            <i class="fas fa-comment-dots"></i> Messagerie
-          </button>
-          <button (click)="setCommTab('video')" [class.active]="commTab === 'video'">
-            <i class="fas fa-video"></i> Visio-conférence
-          </button>
-          <button (click)="setCommTab('forum')" [class.active]="commTab === 'forum'">
-            <i class="fas fa-users"></i> Forum spécialisé
-          </button>
-        </div>
-
-        <div class="communication-content">
-          <!-- Messagerie instantanée -->
-          <div *ngIf="commTab === 'messagerie'" class="messagerie">
-            <div class="contact-list">
-              <div class="contact" *ngFor="let contact of contacts" 
-                   [class.active]="activeContact === contact.id"
-                   (click)="selectContact(contact.id)">
-                <img [src]="contact.avatar" alt="Photo" class="contact-avatar">
-                <div class="contact-info">
-                  <span class="contact-name">{{contact.name}}</span>
-                  <span class="contact-specialty">{{contact.specialty}}</span>
-                </div>
-                <span class="badge" *ngIf="contact.unread > 0">{{contact.unread}}</span>
-              </div>
-            </div>
-            
-            <div class="chat-area">
-              <div class="chat-messages">
-                <div *ngFor="let msg of messages" class="message" [class.sent]="msg.sent">
-                  <div class="message-content">{{msg.text}}</div>
-                  <div class="message-time">{{msg.time | date:'HH:mm'}}</div>
-                </div>
-              </div>
-              
-              <div class="message-input">
-                <input type="text" [(ngModel)]="newMessage" placeholder="Écrivez un message..." (keyup.enter)="sendMessage()">
-                <button (click)="sendMessage()"><i class="fas fa-paper-plane"></i></button>
-              </div>
-            </div>
-          </div>
-
-          <!-- Appel vidéo/audio -->
-          <div *ngIf="commTab === 'video'" class="video-call">
-            <div class="call-controls">
-              <button class="btn-call" (click)="startVideoCall()">
-                <i class="fas fa-video"></i> Nouvel appel vidéo
-              </button>
-              <button class="btn-call" (click)="startAudioCall()">
-                <i class="fas fa-phone"></i> Appel audio
-              </button>
-            </div>
-            
-            <div class="call-placeholder">
-              <i class="fas fa-video-slash"></i>
-              <p>Prêt à démarrer une consultation à distance</p>
-              <p>Fonctionnalités : partage d'écran, tableau blanc collaboratif</p>
-            </div>
-          </div>
-
-          <!-- Forum spécialisé -->
-          <div *ngIf="commTab === 'forum'" class="forum">
-            <div class="forum-topics">
-              <div class="topic" *ngFor="let topic of forumTopics">
-                <h4>{{topic.title}}</h4>
-                <p>{{topic.lastMessage}}</p>
-                <div class="topic-meta">
-                  <span>{{topic.replies}} réponses</span>
-                  <span>Dernier message : {{topic.lastDate | date:'dd/MM/yyyy'}}</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-
-      <!-- Section Créneaux -->
-<div *ngSwitchCase="'creneaux'">
-  <h2><i class="fas fa-clock section-icon"></i> Mes créneaux</h2>
-  <p>Ici, affiche la gestion des créneaux horaires</p>
-  <!-- TODO : ajoute ton contenu réel ici -->
-</div>
-
-<!-- Section Remplaçants -->
-<div *ngSwitchCase="'remplacants'">
-  <h2><i class="fas fa-user-md section-icon"></i> Mes remplaçants</h2>
-  <p>Ici, affiche la liste des remplaçants et leurs infos</p>
-  <!-- TODO : ajoute ton contenu réel ici -->
-</div>
-
-
-      <!-- Section Patients -->
-      <div *ngSwitchCase="'patients'">
-        <h2><i class="fas fa-procedures section-icon"></i> Dossiers patients</h2>
-
-        <p>Liste des patients avec fonctionnalités de recherche et filtres</p>
-      </div>
-
-      <!-- Section Documents -->
-      <div *ngSwitchCase="'documents'">
-        <h2><i class="fas fa-file-signature section-icon"></i> Documents médicaux</h2>
-
-        <p>Gestion des ordonnances, comptes-rendus et certificats</p>
-      </div>
-
-      <!-- Vue par défaut -->
-      <div *ngSwitchDefault>
-        <div class="welcome-message">
-          <i class="fas fa-clinic-medical section-icon"></i>
-
-          <h3>Bienvenue dans votre espace praticien</h3>
-          <p>Sélectionnez une section pour commencer</p>
-        </div>
-      </div>
-    </ng-container>
-  </div>

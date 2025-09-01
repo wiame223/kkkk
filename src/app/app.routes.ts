@@ -13,6 +13,7 @@ import { LoginComponent } from './auth/login/login';
 import { PraticienDashboardComponent } from './pages/praticien-dashboard';
 import { AdminDashboardComponent } from './pages/admin-dashboard';
 
+
 export const routes: Routes = [
   { 
     path: '', 
@@ -27,6 +28,7 @@ export const routes: Routes = [
   { path: 'domains/education-domain', component: EducationDomainComponent },
   { path: 'domains/bienetre-domain', component: BienetreDomainComponent },
   { path: 'domains/esthetic-domain', component: EstheticDomainComponent },
+   
   { path : 'auth/login' , component: LoginComponent},
  {
   path: 'dashboard-client',
@@ -49,4 +51,3 @@ export const routes: Routes = [
 }
 
 ];
-
